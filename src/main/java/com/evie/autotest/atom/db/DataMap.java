@@ -1,0 +1,56 @@
+package com.evie.autotest.atom.db;
+
+import cn.hutool.core.util.StrUtil;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+
+/**
+ * @author ryw@xinyi
+ */
+public class DataMap extends HashMap<String, Object> {
+
+    private static final long serialVersionUID = 9164967756576939731L;
+
+    public String getStringValue(String key) {
+        key = convertKey(key);
+        String value = null;
+        if (this.containsKey(key)) {
+            Object obj = this.get(key);
+            if (null == obj) {
+                return null;
+            } else if (obj instanceof BigDecimal) {
+                value = ((BigDecimal) obj).toString();
+            } else {
+                value = String.valueOf(obj);
+            }
+        }
+        return value;
+    }
+
+    public int getIntValue(String key) {
+        key = convertKey(key);
+        String stringValue = this.getStringValue(key);
+        int value = Integer.parseInt(stringValue);
+        return value;
+    }
+
+    public long getLongValue(String key) {
+        key = convertKey(key);
+        String stringValue = this.getStringValue(key);
+        long value = Long.parseLong(stringValue);
+        return value;
+    }
+
+    public static String convertKey(String key) {
+        return StrUtil.isBlank(key) ? null : key.toUpperCase();
+    }
+
+    public Object get(String key) {
+        String k = convertKey((String) key);
+        return super.get(k);
+    }
+}
+
+
+

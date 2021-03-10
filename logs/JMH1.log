@@ -1,0 +1,110 @@
+# JMH version: 1.27
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=57629:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# JMH blackhole mode: full blackhole + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 10 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.evie.autotest.TestJunit5Example.test_123718
+
+# Run progress: 0.00% complete, ETA 00:03:00
+# Fork: 1 of 1
+# Warmup Iteration   1: 10162889.087 ops/ms
+Iteration   1: 10192806.129 ops/ms
+Iteration   2: 10680342.799 ops/ms
+Iteration   3: 10624215.734 ops/ms
+Iteration   4: 10815249.282 ops/ms
+Iteration   5: 10819477.955 ops/ms
+
+
+Result "com.evie.autotest.TestJunit5Example.test_123718":
+  10626418.380 ±(99.9%) 988988.602 ops/ms [Average]
+  (min, avg, max) = (10192806.129, 10626418.380, 10819477.955), stdev = 256837.199
+  CI (99.9%): [9637429.777, 11615406.982] (assumes normal distribution)
+
+
+# JMH version: 1.27
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=57629:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# JMH blackhole mode: full blackhole + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 10 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.evie.autotest.TestJunit5Example.test_123718
+
+# Run progress: 33.33% complete, ETA 00:02:05
+# Fork: 1 of 1
+# Warmup Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   1: ≈ 10⁻⁶ ms/op
+Iteration   2: ≈ 10⁻⁶ ms/op
+Iteration   3: ≈ 10⁻⁶ ms/op
+Iteration   4: ≈ 10⁻⁶ ms/op
+Iteration   5: ≈ 10⁻⁶ ms/op
+
+
+Result "com.evie.autotest.TestJunit5Example.test_123718":
+  ≈ 10⁻⁶ ms/op
+
+
+# JMH version: 1.27
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=57629:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# JMH blackhole mode: full blackhole + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 5 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 10 threads, will synchronize iterations
+# Benchmark mode: Sampling time
+# Benchmark: com.evie.autotest.TestJunit5Example.test_123718
+
+# Run progress: 66.66% complete, ETA 00:01:02
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.001 ±(99.9%) 0.001 ms/op
+Iteration   1: ≈ 10⁻³ ms/op
+                 test_123718·p0.00:   ≈ 0 ms/op
+                 test_123718·p0.50:   ≈ 0 ms/op
+                 test_123718·p0.90:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.95:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.99:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.999:  ≈ 10⁻⁴ ms/op
+                 test_123718·p0.9999: 0.024 ms/op
+                 test_123718·p1.00:   64.946 ms/op
+
+Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
+                 test_123718·p0.00:   ≈ 0 ms/op
+                 test_123718·p0.50:   ≈ 0 ms/op
+                 test_123718·p0.90:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.95:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.99:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.999:  ≈ 10⁻⁴ ms/op
+                 test_123718·p0.9999: 0.037 ms/op
+                 test_123718·p1.00:   64.160 ms/op
+
+Iteration   3: ≈ 10⁻³ ms/op
+                 test_123718·p0.00:   ≈ 0 ms/op
+                 test_123718·p0.50:   ≈ 0 ms/op
+                 test_123718·p0.90:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.95:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.99:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.999:  ≈ 10⁻⁴ ms/op
+                 test_123718·p0.9999: 0.011 ms/op
+                 test_123718·p1.00:   54.002 ms/op
+
+Iteration   4: ≈ 10⁻³ ms/op
+                 test_123718·p0.00:   ≈ 0 ms/op
+                 test_123718·p0.50:   ≈ 0 ms/op
+                 test_123718·p0.90:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.95:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.99:   ≈ 10⁻⁴ ms/op
+                 test_123718·p0.999:  ≈ 10⁻⁴ ms/op
+                 test_123718·p0.9999: 0.011 ms/op
+                 test_123718·p1.00:   63.963 ms/op
+
+Iteration   5: 
