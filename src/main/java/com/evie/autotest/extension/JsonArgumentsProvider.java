@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 public class JsonArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<JsonSource> {
 
     private String value;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
@@ -29,7 +31,6 @@ public class JsonArgumentsProvider implements ArgumentsProvider, AnnotationConsu
     }
 
     private Stream<Object> getArguments(String value) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
         Object jsonObject = objectMapper.readValue(value,Object.class);
         return getObjectStream(jsonObject);
     }

@@ -9,8 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.support.AnnotationConsumer;
 import org.junit.platform.commons.util.Preconditions;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +21,9 @@ import java.util.stream.Stream;
 public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<JsonFileSource> {
 
     private final BiFunction<Class, String, InputStream> inputStreamProvider;
+
+    private static final ObjectMapper mapper = new ObjectMapper();
+
 
     private String[] resources;
 
@@ -37,7 +38,6 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
     private static Stream<Object> values(InputStream inputStream) {
         Object jsonObject = null;
         try {
-            ObjectMapper mapper = new ObjectMapper();
             //为了处理Date属性，需要调用 findAndRegisterModules 方法
             mapper.findAndRegisterModules();
             jsonObject = mapper.readValue(IOUtils.toString(inputStream, StandardCharsets.UTF_8), Object.class);
