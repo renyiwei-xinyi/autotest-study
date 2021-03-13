@@ -19,7 +19,7 @@ public class LogUtils {
     public static void printJsonString(Object obj) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-        LOGGER.info(json);
+        LOGGER.info("\n"+json);
     }
 
 

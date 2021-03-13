@@ -372,7 +372,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         String a = "fail";
         String f = i + 2 >= 3 ?
                 s : a;
-        System.out.println(f);
+        LOGGER.info(f);
     }
 
     @ParameterizedTest
@@ -402,7 +402,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
         for (int i = 0; i<arguments.size();i=i+1){
             Object o = arguments.get(i);
-            System.out.println(o);
+            LOGGER.info(o);
         }
     }
 
@@ -428,7 +428,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     // 是否多线程执行用例
     @Execution(ExecutionMode.CONCURRENT)
     void test_1273812987(Object test)  {
-        System.out.println(test);
+        LOGGER.info(test);
         RetryHandler.retryTillNoError(() -> {
             assertEquals(1, 2);
         }, 5);
@@ -439,7 +439,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ValueSource(strings = {"test"})
     @Execution(ExecutionMode.CONCURRENT)
     void test_skip(Object test)  {
-        System.out.println(test);
+        LOGGER.info(test);
         RetryHandler.retryTillNoError(() -> {
 
         }, 5);
@@ -449,7 +449,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @Disabled
     @Test
     void test_skip_test(){
-        System.out.println("test");
+        LOGGER.info("test");
     }
 
     @Test
@@ -474,7 +474,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @RepeatedTest(20)
     @ValueSource(strings = "12")
     void test(String s){
-        System.out.println(s);
+        LOGGER.info(s);
 
     }
 
