@@ -1,12 +1,17 @@
 package com.evie.autotest.util;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AssertUtil {
+
+    private static final Logger LOGGER = LogManager.getLogger(AssertUtil.class);
+
 
     /*
      * 判断送入的字符串是否为数值（包括正数，负数，含小数位的数）

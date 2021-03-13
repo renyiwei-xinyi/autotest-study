@@ -1,8 +1,14 @@
 package com.evie.autotest.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.*;
 
 public class RandomStringUtil {
+
+    private static final Logger LOGGER = LogManager.getLogger(RandomStringUtil.class);
+
 
     private static final String[] telFirst="134,135,136,137,138,139,150,151,152,157,158,159,130,131,132,155,156,133,153,185,186".split(",");
 
