@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestOkhttp3 {
 
-    final static String url = "https://www.oschina.net/action/ajax/get_more_news_list?newsType=&p=2";
+    final static String url = "http://127.0.0.1:6868/task";
 
     /**
      * 同步get请求
@@ -29,7 +29,9 @@ public class TestOkhttp3 {
                     .url(url)
                     .build();
             // 得到返回Response
-            Response response = client.newCall(request).execute();
+            Response response = client
+                    .newCall(request)
+                    .execute();
             if (response.isSuccessful()) { // 判断是否成功
                 System.out.println(response.body().string()); // 打印数据
             } else {
