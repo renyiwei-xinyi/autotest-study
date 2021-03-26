@@ -16,13 +16,11 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <junit.version>5.8.0-M1</junit.version>
         <!--hutool无敌 Java语法糖        -->
         <hutool.version>5.5.9</hutool.version>
         <!--JMH 基准测试套件 性能测试工具-->
         <jmh.version>1.27</jmh.version>
-        <!--testNG 测试框架-->
-        <testNG.version>7.4.0</testNG.version>
+
     </properties>
 
     <dependencies>
@@ -38,13 +36,11 @@
             </exclusions>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-openfeign-core -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-openfeign-core</artifactId>
             <version>3.0.1</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -67,28 +63,37 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-reporting</artifactId>
+        </dependency>
+
+
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -115,9 +120,6 @@
             <artifactId>snakeyaml</artifactId>
         </dependency>
 
-
-
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -130,14 +132,12 @@
             <version>0.3.4</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core -->
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
             <version>${jmh.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-generator-annprocess -->
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-generator-annprocess</artifactId>
@@ -150,12 +150,7 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testNG.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -171,7 +166,10 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -180,6 +178,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

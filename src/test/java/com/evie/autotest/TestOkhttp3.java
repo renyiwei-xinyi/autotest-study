@@ -4,8 +4,6 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpUtil;
 import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -63,12 +61,12 @@ public class TestOkhttp3 {
 
         okHttpClient.newCall(request).enqueue(new Callback() {// 回调
 
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException {
                 String responseData = response.body().string();
                 System.out.println(responseData);//成功后的回调
             }
 
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+            public void onFailure(Call call, IOException e) {
                 System.out.println(e.getMessage());//失败后的回调
             }
         });

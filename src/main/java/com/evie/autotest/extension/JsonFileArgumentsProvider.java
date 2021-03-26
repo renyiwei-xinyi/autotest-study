@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 
 public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<JsonFileSource> {

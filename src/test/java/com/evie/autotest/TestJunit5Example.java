@@ -297,6 +297,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         new Stack<>();
     }
 
+    // Nested
     @Nested
     @DisplayName("when new")
     class WhenNew {
@@ -408,7 +409,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
 
     @ParameterizedTest
-    @JsonFileSource(files = "/test/json.json")
+    @JsonFileSource(files = {"/test/json.json","/test/json2.json"})
     void test_127381273987(Object test) throws JsonProcessingException {
         LogUtils.printJsonString(test);
     }
@@ -422,16 +423,17 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
     @ParameterizedTest
-    @YamlFileSource(files = {"/test/moreYaml.yaml",
+    @YamlFileSource(files = {
+            "/test/moreYaml.yaml",
             "/test/yaml.yaml"
     })
     // 是否多线程执行用例
-    @Execution(ExecutionMode.CONCURRENT)
+    @Execution(ExecutionMode.SAME_THREAD)
     void test_1273812987(Object test)  {
         LOGGER.info(test);
-        RetryHandler.retryTillNoError(() -> {
-            assertEquals(1, 2);
-        }, 5);
+//        RetryHandler.retryTillNoError(() -> {
+//            assertEquals(1, 2);
+//        }, 5);
     }
 
     @Disabled
@@ -475,7 +477,23 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ValueSource(strings = "12")
     void test(String s){
         LOGGER.info(s);
+        LOGGER.info(s);
 
+    }
+    //======================================重复执行==============================
+
+    StringBuilder s = new StringBuilder("nihao");
+
+    @RepeatedTest(10)
+    void test_1273917(){
+        LOGGER.info("我是一个重复执行的测试方法，我会执行好多次。。。");
+        LOGGER.info(s);
+    }
+
+    @BeforeEach
+    void beforeEach(){
+        s.append("*");
+        LOGGER.error("在重复测试中 我每次都要执行么？");
     }
 
 
