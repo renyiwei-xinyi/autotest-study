@@ -1,8 +1,5 @@
 package com.evie.autotest;
 
-import cn.hutool.core.lang.Console;
-import cn.hutool.core.util.ReUtil;
-import cn.hutool.http.HttpUtil;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;

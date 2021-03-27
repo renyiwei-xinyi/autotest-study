@@ -3,8 +3,12 @@ package com.evie.autotest;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpUtil;
+import com.evie.autotest.annotation.JsonFileSource;
+import com.evie.autotest.util.HttpUtils;
 import okhttp3.*;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import java.io.IOException;
 import java.util.List;
@@ -85,6 +89,21 @@ public class TestOkhttp3 {
             //打印标题
             Console.log(title);
         }
+    }
+
+    @Test
+    void test_12123(){
+
+    }
+
+    @ParameterizedTest
+    @JsonFileSource(files = "/test/demo.json")
+    void test_1231(Object data) {
+        String url = "https://qyapi.weixin.qq.com/cgi-bin/message/send";
+        HttpUrl httpUrl = HttpUtils.getUrl(url).addQueryParameter("access_token", "5-xVk5M-v57BtQE93Wr_17m6Kt9QHOtWr30qZQP8GdyoBeM-e9oS9xdBeKZhtnsG1Wsa5ua-Yxm5w4ri6rWsxtfkHk0qPLkyY8WFe5s15YsMugBOZWG1dx11_H9-477kcbsxwjQCnuTiY4Y0nNxJdQxcc965RQkFRi_VGyssRFF0A7bIzhCWvAozQpCrebPXzV-AlH87QiyTDgo5s0gilw")
+                .build();
+        HttpUtils.post(httpUrl, data);
+
     }
 
     public static void main(String[] args) {
