@@ -11,17 +11,16 @@ import java.io.IOException;
 public class HttpUtils {
     private static final Logger LOGGER = LogManager.getLogger(HttpUtils.class.getName());
 
-    HttpUtils() {
-    }
+    static HttpUtils httpUtils;
 
-    static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    static final OkHttpClient client = new OkHttpClient();
+    public static final OkHttpClient client = new OkHttpClient();
 
-    static final MediaType jsonParse = MediaType.parse("application/json");
+    public static final MediaType jsonParse = MediaType.parse("application/json");
 
-    public static ResponseBody post(HttpUrl baseUrl, Headers headers, Object bodyParameter) {
+    public static String post(HttpUrl baseUrl, Headers headers, Object bodyParameter) {
 
         String jsonString = printJsonString(bodyParameter);
 
@@ -32,17 +31,23 @@ public class HttpUtils {
                 .headers(headers).url(baseUrl).post(body)
                 .build();
 
-        LOGGER.info("HTTP:" + request);
+        LOGGER.info("start send HTTP:" + request);
         printJsonString(bodyParameter);
         //发送请求，输出日志
         try {
             Response response = client
                     .newCall(request)
                     .execute();
-            LOGGER.info("end send HTTP:" + response);
-            assert response.body() != null;
-            LOGGER.info(response.body().string());
-            return response.body();
+            if (response.isSuccessful()){
+                LOGGER.info("end send HTTP success:" + response);
+                assert response.body() != null;
+                String responseBody = response.body().string();
+                LOGGER.info(responseBody);
+                return responseBody;
+            }else {
+                LOGGER.info("end send HTTP fail:" + response);
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +56,7 @@ public class HttpUtils {
 
     }
 
-    public static ResponseBody post(HttpUrl baseUrl, Object bodyParameter) {
+    public static String post(HttpUrl baseUrl, Object bodyParameter) {
 
         String jsonString = printJsonString(bodyParameter);
 
@@ -62,17 +67,21 @@ public class HttpUtils {
                 .url(baseUrl).post(body)
                 .build();
 
-        LOGGER.info("HTTP:" + request);
+        LOGGER.info("start send HTTP:" + request);
         //发送请求，输出日志
         try {
             Response response = client
                     .newCall(request)
                     .execute();
-            LOGGER.info("end send HTTP:" + response);
-            assert response.body() != null;
-            LOGGER.info(response.body().string());
-
-            return response.body();
+            if (response.isSuccessful()){
+                LOGGER.info("end send HTTP success:" + response);
+                assert response.body() != null;
+                String responseBody = response.body().string();
+                LOGGER.info(responseBody);
+                return responseBody;
+            }else {
+                LOGGER.info("end send HTTP fail:" + response);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,15 +90,75 @@ public class HttpUtils {
 
     }
 
-    public static HttpUrl.Builder getUrl(String baseUrl) {
+    public static String get(HttpUrl baseUrl, Headers headers){
+
+        //构造请求参数，输出日志
+        Request request = new Request.Builder()
+                .headers(headers).url(baseUrl).get()
+                .build();
+
+        LOGGER.info("start send HTTP:" + request);
+        //发送请求，输出日志
+        try {
+            Response response = client
+                    .newCall(request)
+                    .execute();
+            if (response.isSuccessful()){
+                LOGGER.info("end send HTTP success:" + response);
+                assert response.body() != null;
+                String responseBody = response.body().string();
+                LOGGER.info(responseBody);
+                return responseBody;
+            }else {
+                LOGGER.info("end send HTTP fail:" + response);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String get(HttpUrl baseUrl){
+
+        //构造请求参数，输出日志
+        Request request = new Request.Builder()
+                .url(baseUrl).get()
+                .build();
+
+        LOGGER.info("start send HTTP:" + request);
+        //发送请求，输出日志
+        try {
+            Response response = client
+                    .newCall(request)
+                    .execute();
+            if (response.isSuccessful()){
+                LOGGER.info("end send HTTP success:" + response);
+                assert response.body() != null;
+                String responseBody = response.body().string();
+                LOGGER.info(responseBody);
+                return responseBody;
+            }else {
+                LOGGER.info("end send HTTP fail:" + response);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static HttpUrl.Builder getBaseUrl(String baseUrl) {
         return HttpUrl.get(baseUrl).newBuilder();
     }
 
     /**
-     * 输出JSON信息
+     * 解析为json格式 并格式化输出
      *
-     * @param obj
-     * @throws Exception
+     * @param obj 被解析对象
+     * @throws Exception 解析错误
      */
     public static String printJsonString(Object obj) {
         String json = null;
