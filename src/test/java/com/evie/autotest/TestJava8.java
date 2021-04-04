@@ -5,7 +5,9 @@ import com.evie.autotest.interfaces.TestLifecycleLogger;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
@@ -52,4 +54,57 @@ public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
         Consumer<String> methodParam = TestJava8::printValur; //方法参数
         al.forEach(methodParam);//方法执行accept
     }
+
+    /**
+     * 5 stream forEach 遍历的是entry 所以是一个参数
+     * stream forEach java8 lambda
+     * @param map
+     */
+    public void streamForEachTest(Map<Integer, Integer> map){
+        long before = System.currentTimeMillis();
+        //map.entrySet().stream().forEach( (entry) -> {System.out.println("Key = " + entry.getKey()+ ", Value = "+ entry.getValue());} );
+        //map.entrySet().stream().forEach( System.out::println);
+        map.entrySet().stream().forEach( (entry) -> {} );
+        long after = System.currentTimeMillis();
+        System.out.println("map.entrySet().stream().forEach time=\t"  + (after - before));
+
+        // 一个参数可以省略()  一条语句可以省略{}
+        //map.entrySet().stream().forEach(entry -> System.out.println("Key = " + entry.getKey()+ ", Value = "+ entry.getValue()) );
+    }
+
+    /**
+     * 4 forEach 遍历的是键值，所以是两个参数
+     * forEach java8 lambda
+     * @param map
+     */
+    public void forEachTest(Map<Integer, Integer> map){
+        long before = System.currentTimeMillis();
+        //map.forEach( (key,value) -> {System.out.println("Key = " + key+ ", Value = "+ value);} );
+        map.forEach( (key,value) -> {} );
+        long after = System.currentTimeMillis();
+        System.out.println("map.forEach time=\t"  + (after - before));
+
+        // 一条语句可以省略{}
+        //map.forEach( (key,value) -> System.out.println("Key = " + key+ ", Value = "+ value) );
+    }
+
+    /**
+     * 3（1）iterator type
+     * 迭代器 带泛型
+     * @param map
+     */
+    public void iteratorTypeTest(Map<Integer, Integer> map){
+        long before = System.currentTimeMillis();
+        Iterator<Map.Entry<Integer, Integer>> entries = map.entrySet().iterator();
+        while (entries.hasNext()) {
+            Map.Entry<Integer, Integer> entry = entries.next();
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+            //System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
+        long after = System.currentTimeMillis();
+        System.out.println("map.entrySet().iterator() time=\t"  + (after - before));
+    }
+
+
 }

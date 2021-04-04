@@ -366,6 +366,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
     @Test
+    @Tag("example")
     void test_127389172() {
         //三元运算符
         int i = 1;
@@ -374,6 +375,8 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         String f = i + 2 >= 3 ?
                 s : a;
         LOGGER.info(f);
+
+        System.out.println();
     }
 
     @ParameterizedTest

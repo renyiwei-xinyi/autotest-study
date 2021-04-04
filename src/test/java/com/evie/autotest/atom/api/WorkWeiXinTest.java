@@ -8,6 +8,10 @@ class WorkWeiXinTest {
 
     @Test
     void getInstance() {
-        System.out.println(WorkWeiXin.getInstance().accessToken);
+        assertNotNull(WorkWeiXin.getInstance().getAccessToken());
+        System.out.println(WorkWeiXin.getInstance().getAccessToken());
+        System.out.println(WorkWeiXin.getInstance().getAccessToken());
+        System.out.println(WorkWeiXin.getInstance().getAccessToken());
+
     }
 }

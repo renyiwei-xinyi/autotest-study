@@ -1,29 +1,47 @@
 package com.evie.autotest.atom.api;
 
 import com.evie.autotest.util.HttpUtils;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.HttpUrl;
 
 import java.io.IOException;
 
+// 单例模式
 public class WorkWeiXin {
-    static WorkWeiXin workWeiXin;
+    // 同步源语 表示易于改变的 在多线程范文的时候 会被jvm刷新 多线程是可以看到实例的变化
+    private static volatile WorkWeiXin workWeiXin;
 
-    public String corpId = "ww56a0dac84fe980f3";
+    public static final String corpId = "ww56a0dac84fe980f3";
 
-    public String secretDemo = "_89HY84tEe5RFe4rYjW5acrEbYPZ-PZjr3X9WGgn65Y";
+    public static final String secretDemo = "_89HY84tEe5RFe4rYjW5acrEbYPZ-PZjr3X9WGgn65Y";
 
-    public String agentId = "1000002";
+    public static final String agentId = "1000002";
 
-    public String accessToken = "";
+    private String accessToken = "";
 
     public static WorkWeiXin getInstance() {
+
+        //双检锁 作用域越小越好 性能会好一点
         if (workWeiXin == null) {
-            workWeiXin = new WorkWeiXin();
-            workWeiXin.setToken();
+            synchronized (WorkWeiXin.class) {
+
+                if (workWeiXin == null) {
+                    workWeiXin = new WorkWeiXin();
+                    workWeiXin.setToken();
+                }
+            }
+
         }
         return workWeiXin;
+    }
+
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     private void setToken() {

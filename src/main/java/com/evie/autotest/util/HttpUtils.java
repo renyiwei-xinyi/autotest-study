@@ -15,7 +15,6 @@ public class HttpUtils {
 
     public static final ObjectMapper objectMapper = new ObjectMapper();
 
-
     public static final OkHttpClient client = new OkHttpClient();
 
     public static final MediaType jsonParse = MediaType.parse("application/json");

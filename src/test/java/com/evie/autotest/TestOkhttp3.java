@@ -103,7 +103,7 @@ public class TestOkhttp3 {
         String url = "https://qyapi.weixin.qq.com/cgi-bin/message/send";
         HttpUrl httpUrl = HttpUtils
                 .getBaseUrl(url)
-                .addQueryParameter("access_token", WorkWeiXin.getInstance().accessToken)
+                .addQueryParameter("access_token", WorkWeiXin.getInstance().getAccessToken())
                 .build();
         HttpUtils.post(httpUrl, data);
 
