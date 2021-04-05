@@ -12,12 +12,12 @@ public interface TestLifecycleLogger {
 
     @BeforeAll
     static void Before() {
-        logger.info("================ Before all tests ================");
+        //logger.info("================ Before all tests ================");
     }
 
     @AfterAll
     static void After() {
-        logger.info("================ After all tests ================");
+        //logger.info("================ After all tests ================");
 
     }
 

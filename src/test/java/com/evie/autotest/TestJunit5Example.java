@@ -9,6 +9,7 @@ import com.evie.autotest.atom.db.DataMap;
 import com.evie.autotest.atom.db.PrintTable;
 import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.RandomParameters;
+import com.evie.autotest.extension.TimingExtension;
 import com.evie.autotest.interfaces.TestLifecycleLogger;
 import com.evie.autotest.interfaces.TimeExecutionLogger;
 import com.evie.autotest.util.LogUtils;
@@ -25,9 +26,6 @@ import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
 import org.junit.jupiter.params.provider.*;
 import org.junit.platform.commons.util.StringUtils;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -439,9 +437,9 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 //        }, 5);
     }
 
-    @Disabled
+    //@Disabled
     @ParameterizedTest
-    @ValueSource(strings = {"test"})
+    @ValueSource(strings = {"test","121","1212","21233"})
     @Execution(ExecutionMode.CONCURRENT)
     void test_skip(Object test)  {
         LOGGER.info(test);

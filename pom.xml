@@ -55,7 +55,7 @@
                         </exclude>
                     </excludes>
                     <!--组包含测试 -->
-                    <groups>!example</groups>
+                    <groups></groups>
                     <!--组排除测试 -->
                     <excludedGroups></excludedGroups>
                 </configuration>
