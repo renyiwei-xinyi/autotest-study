@@ -1,7 +1,13 @@
 package com.evie.autotest;
 
+import com.evie.autotest.atom.db.DataMap;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 public class TestANest {
 
@@ -35,5 +41,12 @@ public class TestANest {
             System.out.println("我是第四个执行么？");
         }
 
+    }
+    final static String s = "{\"test\": 123}" ;
+
+    @Test
+    public void testGson(){
+        Gson gson = new Gson();
+        gson.fromJson(s, JsonObject.class).get("test");
     }
 }

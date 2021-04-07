@@ -20,7 +20,7 @@ public class DataMap extends HashMap<String, Object> {
             if (null == obj) {
                 return null;
             } else if (obj instanceof BigDecimal) {
-                value = ((BigDecimal) obj).toString();
+                value = obj.toString();
             } else {
                 value = String.valueOf(obj);
             }
@@ -47,7 +47,7 @@ public class DataMap extends HashMap<String, Object> {
     }
 
     public Object get(String key) {
-        String k = convertKey((String) key);
+        String k = convertKey(key);
         return super.get(k);
     }
 }

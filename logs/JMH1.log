@@ -1,0 +1,450 @@
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+
+# Run progress: 0.00% complete, ETA 00:04:30
+# Fork: 1 of 1
+# Warmup Iteration   1: 543.226 ops/ms
+Iteration   1: 1926.680 ops/ms
+Iteration   2: 1924.713 ops/ms
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testGson":
+  1925.697 ops/ms
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+
+# Run progress: 11.11% complete, ETA 00:04:14
+# Fork: 1 of 1
+# Warmup Iteration   1: 6655.525 ops/ms
+Iteration   1: 7892.033 ops/ms
+Iteration   2: 8003.101 ops/ms
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
+  7947.567 ops/ms
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+
+# Run progress: 22.22% complete, ETA 00:03:43
+# Fork: 1 of 1
+# Warmup Iteration   1: 9559.126 ops/ms
+Iteration   1: 10095.840 ops/ms
+Iteration   2: 10079.244 ops/ms
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
+  10087.542 ops/ms
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+
+# Run progress: 33.33% complete, ETA 00:03:11
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.008 ±(99.9%) 0.001 ms/op
+Iteration   1: 0.003 ±(99.9%) 0.001 ms/op
+Iteration   2: 0.003 ±(99.9%) 0.001 ms/op
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testGson":
+  0.003 ms/op
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+
+# Run progress: 44.44% complete, ETA 00:02:39
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.001 ±(99.9%) 0.001 ms/op
+Iteration   1: 0.001 ±(99.9%) 0.001 ms/op
+Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
+  0.001 ms/op
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+
+# Run progress: 55.55% complete, ETA 00:02:07
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.001 ±(99.9%) 0.001 ms/op
+Iteration   1: ≈ 10⁻³ ms/op
+Iteration   2: ≈ 10⁻³ ms/op
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
+  ≈ 10⁻³ ms/op
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Sampling time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+
+# Run progress: 66.66% complete, ETA 00:01:35
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.011 ±(99.9%) 0.001 ms/op
+Iteration   1: 0.004 ±(99.9%) 0.001 ms/op
+                 testGson·p0.00:   0.001 ms/op
+                 testGson·p0.50:   0.002 ms/op
+                 testGson·p0.90:   0.002 ms/op
+                 testGson·p0.95:   0.003 ms/op
+                 testGson·p0.99:   0.007 ms/op
+                 testGson·p0.999:  0.053 ms/op
+                 testGson·p0.9999: 9.560 ms/op
+                 testGson·p1.00:   42.926 ms/op
+
+Iteration   2: 0.004 ±(99.9%) 0.001 ms/op
+                 testGson·p0.00:   0.001 ms/op
+                 testGson·p0.50:   0.002 ms/op
+                 testGson·p0.90:   0.002 ms/op
+                 testGson·p0.95:   0.003 ms/op
+                 testGson·p0.99:   0.007 ms/op
+                 testGson·p0.999:  0.046 ms/op
+                 testGson·p0.9999: 8.145 ms/op
+                 testGson·p1.00:   47.055 ms/op
+
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testGson":
+  N = 2404322
+  mean =      0.004 ±(99.9%) 0.001 ms/op
+
+  Histogram, ms/op:
+    [ 0.000,  5.000) = 2404015 
+    [ 5.000, 10.000) = 80 
+    [10.000, 15.000) = 98 
+    [15.000, 20.000) = 65 
+    [20.000, 25.000) = 34 
+    [25.000, 30.000) = 10 
+    [30.000, 35.000) = 14 
+    [35.000, 40.000) = 4 
+    [40.000, 45.000) = 1 
+
+  Percentiles, ms/op:
+      p(0.0000) =      0.001 ms/op
+     p(50.0000) =      0.002 ms/op
+     p(90.0000) =      0.002 ms/op
+     p(95.0000) =      0.003 ms/op
+     p(99.0000) =      0.007 ms/op
+     p(99.9000) =      0.049 ms/op
+     p(99.9900) =      8.905 ms/op
+     p(99.9990) =     28.471 ms/op
+     p(99.9999) =     41.151 ms/op
+    p(100.0000) =     47.055 ms/op
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Sampling time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+
+# Run progress: 77.78% complete, ETA 00:01:03
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.002 ±(99.9%) 0.001 ms/op
+Iteration   1: 0.002 ±(99.9%) 0.001 ms/op
+                 testHutoolJson·p0.00:   0.001 ms/op
+                 testHutoolJson·p0.50:   0.001 ms/op
+                 testHutoolJson·p0.90:   0.001 ms/op
+                 testHutoolJson·p0.95:   0.001 ms/op
+                 testHutoolJson·p0.99:   0.001 ms/op
+                 testHutoolJson·p0.999:  0.008 ms/op
+                 testHutoolJson·p0.9999: 0.833 ms/op
+                 testHutoolJson·p1.00:   37.749 ms/op
+
+Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
+                 testHutoolJson·p0.00:   0.001 ms/op
+                 testHutoolJson·p0.50:   0.001 ms/op
+                 testHutoolJson·p0.90:   0.001 ms/op
+                 testHutoolJson·p0.95:   0.001 ms/op
+                 testHutoolJson·p0.99:   0.001 ms/op
+                 testHutoolJson·p0.999:  0.007 ms/op
+                 testHutoolJson·p0.9999: 0.755 ms/op
+                 testHutoolJson·p1.00:   36.110 ms/op
+
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
+  N = 2156042
+  mean =      0.002 ±(99.9%) 0.001 ms/op
+
+  Histogram, ms/op:
+    [ 0.000,  2.500) = 2155888 
+    [ 2.500,  5.000) = 12 
+    [ 5.000,  7.500) = 11 
+    [ 7.500, 10.000) = 15 
+    [10.000, 12.500) = 41 
+    [12.500, 15.000) = 16 
+    [15.000, 17.500) = 11 
+    [17.500, 20.000) = 10 
+    [20.000, 22.500) = 15 
+    [22.500, 25.000) = 6 
+    [25.000, 27.500) = 1 
+    [27.500, 30.000) = 5 
+    [30.000, 32.500) = 8 
+    [32.500, 35.000) = 0 
+    [35.000, 37.500) = 2 
+
+  Percentiles, ms/op:
+      p(0.0000) =      0.001 ms/op
+     p(50.0000) =      0.001 ms/op
+     p(90.0000) =      0.001 ms/op
+     p(95.0000) =      0.001 ms/op
+     p(99.0000) =      0.001 ms/op
+     p(99.9000) =      0.008 ms/op
+     p(99.9900) =      0.786 ms/op
+     p(99.9990) =     23.715 ms/op
+     p(99.9999) =     36.608 ms/op
+    p(100.0000) =     37.749 ms/op
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, 10 s each
+# Measurement: 2 iterations, 10 s each
+# Timeout: 3 min per iteration
+# Threads: 5 threads, will synchronize iterations
+# Benchmark mode: Sampling time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+
+# Run progress: 88.89% complete, ETA 00:00:31
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.002 ±(99.9%) 0.001 ms/op
+Iteration   1: 0.001 ±(99.9%) 0.001 ms/op
+                 testJsonLog·p0.00:   ≈ 10⁻⁴ ms/op
+                 testJsonLog·p0.50:   ≈ 10⁻⁴ ms/op
+                 testJsonLog·p0.90:   0.001 ms/op
+                 testJsonLog·p0.95:   0.001 ms/op
+                 testJsonLog·p0.99:   0.001 ms/op
+                 testJsonLog·p0.999:  0.005 ms/op
+                 testJsonLog·p0.9999: 0.179 ms/op
+                 testJsonLog·p1.00:   34.275 ms/op
+
+Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
+                 testJsonLog·p0.00:   ≈ 10⁻⁴ ms/op
+                 testJsonLog·p0.50:   ≈ 10⁻⁴ ms/op
+                 testJsonLog·p0.90:   0.001 ms/op
+                 testJsonLog·p0.95:   0.001 ms/op
+                 testJsonLog·p0.99:   0.001 ms/op
+                 testJsonLog·p0.999:  0.005 ms/op
+                 testJsonLog·p0.9999: 0.172 ms/op
+                 testJsonLog·p1.00:   39.518 ms/op
+
+
+
+Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
+  N = 3141626
+  mean =      0.001 ±(99.9%) 0.001 ms/op
+
+  Histogram, ms/op:
+    [ 0.000,  2.500) = 3141542 
+    [ 2.500,  5.000) = 5 
+    [ 5.000,  7.500) = 9 
+    [ 7.500, 10.000) = 8 
+    [10.000, 12.500) = 15 
+    [12.500, 15.000) = 6 
+    [15.000, 17.500) = 13 
+    [17.500, 20.000) = 2 
+    [20.000, 22.500) = 4 
+    [22.500, 25.000) = 4 
+    [25.000, 27.500) = 5 
+    [27.500, 30.000) = 4 
+    [30.000, 32.500) = 6 
+    [32.500, 35.000) = 1 
+    [35.000, 37.500) = 0 
+
+  Percentiles, ms/op:
+      p(0.0000) =     ≈ 10⁻⁴ ms/op
+     p(50.0000) =     ≈ 10⁻⁴ ms/op
+     p(90.0000) =      0.001 ms/op
+     p(95.0000) =      0.001 ms/op
+     p(99.0000) =      0.001 ms/op
+     p(99.9000) =      0.005 ms/op
+     p(99.9900) =      0.175 ms/op
+     p(99.9990) =     16.535 ms/op
+     p(99.9999) =     33.974 ms/op
+    p(100.0000) =     39.518 ms/op
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, single-shot each
+# Measurement: 2 iterations, single-shot each
+# Timeout: 3 min per iteration
+# Threads: 5 threads
+# Benchmark mode: Single shot invocation time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+
+# Run progress: 100.00% complete, ETA 00:00:00
+# Fork: 1 of 1
+# Warmup Iteration   1: 122.922 ±(99.9%) 0.176 ms/op
+Iteration   1: 0.066 ±(99.9%) 0.161 ms/op
+Iteration   2: 0.098 ±(99.9%) 0.116 ms/op
+
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, single-shot each
+# Measurement: 2 iterations, single-shot each
+# Timeout: 3 min per iteration
+# Threads: 5 threads
+# Benchmark mode: Single shot invocation time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+
+# Run progress: 100.00% complete, ETA 00:00:00
+# Fork: 1 of 1
+# Warmup Iteration   1: 45.076 ±(99.9%) 0.326 ms/op
+Iteration   1: 0.061 ±(99.9%) 0.129 ms/op
+Iteration   2: 0.031 ±(99.9%) 0.076 ms/op
+
+
+
+# JMH version: 1.29
+# VM version: JDK 1.8.0_121, Java HotSpot(TM) 64-Bit Server VM, 25.121-b13
+# VM invoker: C:\Program Files\Java\jdk1.8.0_121\jre\bin\java.exe
+# VM options: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\lib\idea_rt.jar=56278:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.1\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint
+# Warmup: 1 iterations, single-shot each
+# Measurement: 2 iterations, single-shot each
+# Timeout: 3 min per iteration
+# Threads: 5 threads
+# Benchmark mode: Single shot invocation time
+# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+
+# Run progress: 100.00% complete, ETA 00:00:00
+# Fork: 1 of 1
+# Warmup Iteration   1: 485.284 ±(99.9%) 0.649 ms/op
+Iteration   1: 0.048 ±(99.9%) 0.098 ms/op
+Iteration   2: 0.049 ±(99.9%) 0.061 ms/op
+
+
+
+# Run complete. Total time: 00:04:53
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                                Mode      Cnt      Score    Error   Units
+TestJMH.JMHTest.testGson                                thrpt        2   1925.697           ops/ms
+TestJMH.JMHTest.testHutoolJson                          thrpt        2   7947.567           ops/ms
+TestJMH.JMHTest.testJsonLog                             thrpt        2  10087.542           ops/ms
+TestJMH.JMHTest.testGson                                 avgt        2      0.003            ms/op
+TestJMH.JMHTest.testHutoolJson                           avgt        2      0.001            ms/op
+TestJMH.JMHTest.testJsonLog                              avgt        2     ≈ 10⁻³            ms/op
+TestJMH.JMHTest.testGson                               sample  2404322      0.004 ±  0.001   ms/op
+TestJMH.JMHTest.testGson:testGson·p0.00                sample               0.001            ms/op
+TestJMH.JMHTest.testGson:testGson·p0.50                sample               0.002            ms/op
+TestJMH.JMHTest.testGson:testGson·p0.90                sample               0.002            ms/op
+TestJMH.JMHTest.testGson:testGson·p0.95                sample               0.003            ms/op
+TestJMH.JMHTest.testGson:testGson·p0.99                sample               0.007            ms/op
+TestJMH.JMHTest.testGson:testGson·p0.999               sample               0.049            ms/op
+TestJMH.JMHTest.testGson:testGson·p0.9999              sample               8.905            ms/op
+TestJMH.JMHTest.testGson:testGson·p1.00                sample              47.055            ms/op
+TestJMH.JMHTest.testHutoolJson                         sample  2156042      0.002 ±  0.001   ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.00    sample               0.001            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.50    sample               0.001            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.90    sample               0.001            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.95    sample               0.001            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.99    sample               0.001            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.999   sample               0.008            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p0.9999  sample               0.786            ms/op
+TestJMH.JMHTest.testHutoolJson:testHutoolJson·p1.00    sample              37.749            ms/op
+TestJMH.JMHTest.testJsonLog                            sample  3141626      0.001 ±  0.001   ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.00          sample              ≈ 10⁻⁴            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.50          sample              ≈ 10⁻⁴            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.90          sample               0.001            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.95          sample               0.001            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.99          sample               0.001            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.999         sample               0.005            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p0.9999        sample               0.175            ms/op
+TestJMH.JMHTest.testJsonLog:testJsonLog·p1.00          sample              39.518            ms/op
+TestJMH.JMHTest.testGson                                   ss        2      0.082            ms/op
+TestJMH.JMHTest.testHutoolJson                             ss        2      0.046            ms/op
+TestJMH.JMHTest.testJsonLog                                ss        2      0.049            ms/op

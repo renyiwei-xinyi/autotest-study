@@ -9,10 +9,9 @@ import com.evie.autotest.atom.db.DataMap;
 import com.evie.autotest.atom.db.PrintTable;
 import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.RandomParameters;
-import com.evie.autotest.extension.TimingExtension;
 import com.evie.autotest.interfaces.TestLifecycleLogger;
 import com.evie.autotest.interfaces.TimeExecutionLogger;
-import com.evie.autotest.util.LogUtils;
+import com.evie.autotest.util.JsonLogUtils;
 import com.evie.autotest.util.RetryHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.logging.log4j.LogManager;
@@ -385,8 +384,8 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @ParameterizedTest
     @MethodSource
-    void test_12731972(Object testDate) throws JsonProcessingException {
-        LogUtils.printJsonString(testDate);
+    void test_12731972(Object testDate) {
+        JsonLogUtils.printJsonString(testDate);
     }
 
     static Stream<Map<String, Object>> test_12731972(){
@@ -411,16 +410,16 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @ParameterizedTest
     @JsonFileSource(files = {"/test/json.json","/test/json2.json"})
-    void test_127381273987(Object test) throws JsonProcessingException {
-        LogUtils.printJsonString(test);
+    void test_127381273987(Object test) {
+        JsonLogUtils.printJsonString(test);
     }
 
 
 
     @ParameterizedTest
     @JsonSource(value = "[1,2]")
-    void test_12739172(Object jsonObject) throws JsonProcessingException {
-        LogUtils.printJsonString(jsonObject);
+    void test_12739172(Object jsonObject) {
+        JsonLogUtils.printJsonString(jsonObject);
     }
 
     @ParameterizedTest

@@ -19,7 +19,8 @@
         <!--hutool无敌 Java语法糖        -->
         <hutool.version>5.5.9</hutool.version>
         <!--JMH 基准测试套件 性能测试工具-->
-        <jmh.version>1.27</jmh.version>
+        <jmh.version>1.29</jmh.version>
+        <junit-jupiter.version>5.8.0-M1</junit-jupiter.version>
 
     </properties>
     <build>
@@ -107,17 +108,19 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
-
+        <!--junit5 主要依赖包-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <version>${junit-jupiter.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
         </dependency>
-
+        <!--兼容junit4的执行平台-->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
@@ -200,6 +203,11 @@
             <version>1.10.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.spullara.mustache.java</groupId>
+            <artifactId>compiler</artifactId>
+            <version>0.9.7</version>
+        </dependency>
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>

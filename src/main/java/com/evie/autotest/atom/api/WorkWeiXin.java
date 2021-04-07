@@ -1,6 +1,7 @@
 package com.evie.autotest.atom.api;
 
 import com.evie.autotest.util.HttpUtils;
+import com.evie.autotest.util.JsonLogUtils;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.HttpUrl;
 
@@ -49,15 +50,10 @@ public class WorkWeiXin {
                 .addQueryParameter("corpid", corpId)
                 .addQueryParameter("corpsecret", secretDemo)
                 .build();
-        try {
-            String string = HttpUtils.get(baseUrl);
-            accessToken = HttpUtils.objectMapper
-                    .readValue(string, ObjectNode.class)
-                    .get("access_token")
-                    .asText();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String string = HttpUtils.get(baseUrl);
+        accessToken = JsonLogUtils.jsonTo(string, ObjectNode.class)
+                .get("access_token")
+                .asText();
     }
 
 
