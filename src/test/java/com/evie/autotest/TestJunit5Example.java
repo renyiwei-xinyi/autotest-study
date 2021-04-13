@@ -14,6 +14,7 @@ import com.evie.autotest.interfaces.TimeExecutionLogger;
 import com.evie.autotest.util.JsonLogUtils;
 import com.evie.autotest.util.RetryHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
@@ -39,7 +40,7 @@ import static org.junit.jupiter.api.Assumptions.*;
  */
 
 
-
+@ExtendWith(RandomParameters.class)
 public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogger {
 
     private static final Logger LOGGER = LogManager.getLogger(TestJunit5Example.class);
@@ -149,6 +150,12 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     }
 
+    //---------------------------------------------------参数化测试--------------------------------------------
+
+    /**
+     * 参数化测试 空 null 参数
+     * @param o
+     */
     @ParameterizedTest
     @NullSource
     @EmptySource
@@ -159,7 +166,10 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     }
 
-
+    /**
+     * 参数化测试 基本数据类型 value null&empty组合
+     * @param o
+     */
     @ParameterizedTest
     @ValueSource(strings = {"RYW", "TJY", "123"})
     @NullAndEmptySource
@@ -171,7 +181,10 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         LOGGER.info(o);
     }
 
-
+    /**
+     * 参数化测试 枚举数据测试 - 指定枚举
+     * @param o
+     */
     @ParameterizedTest
     @EnumSource(value = EnumCase.class, mode = EnumSource.Mode.EXCLUDE, names = {"SPRING"})
     @DisplayName("参数化测试;my fifth test case; learn parameterize")
@@ -183,7 +196,10 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     }
 
-
+    /**
+     * 参数化测试 枚举数据测试 - 正则匹配
+     * @param timeUnit
+     */
     @ParameterizedTest
     @EnumSource(value = TimeUnit.class, mode = EnumSource.Mode.MATCH_ALL, names = "^(M|N).+SECONDS$")
     void testWithEnumSourceRegex(TimeUnit timeUnit) {
@@ -231,6 +247,9 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     }
 
+    /**
+     * 扩展功能 随机数输入
+     */
     @ExtendWith(RandomParameters.class)
     static class MyRandomParametersTest implements TestLifecycleLogger, TimeExecutionLogger {
 
@@ -458,8 +477,9 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @Timeout(value = 5)
     public void test_123718() throws InterruptedException {
         int i = 0;
-        while (1 == 2 + i) {
+        while (2 == 2 + i) {
             Thread.sleep(250); // custom poll interval
+            logger.info(i);
             i = i+1;
         }
     }
@@ -474,8 +494,8 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @ParameterizedTest
     @RepeatedTest(20)
-    @ValueSource(strings = "12")
-    void test(String s){
+    @ValueSource(ints = 12)
+    void test(@Random int s){
         LOGGER.info(s);
         LOGGER.info(s);
 
