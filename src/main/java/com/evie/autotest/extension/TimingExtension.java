@@ -9,7 +9,11 @@ import org.junit.jupiter.api.extension.*;
 
 import java.lang.reflect.Method;
 
-public class TimingExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback,BeforeAllCallback, AfterAllCallback {
+public class TimingExtension implements
+        BeforeTestExecutionCallback,
+        AfterTestExecutionCallback,
+        BeforeAllCallback,
+        AfterAllCallback {
 
     private static final Logger logger = LogManager.getLogger(TimingExtension.class.getName());
 
@@ -55,7 +59,6 @@ public class TimingExtension implements BeforeTestExecutionCallback, AfterTestEx
     private ExtensionContext.Store getClassStore(ExtensionContext context) {
         return context.getStore(ExtensionContext.Namespace.create(getClass(), context.getRequiredTestClass()));
     }
-
 
 
 }
