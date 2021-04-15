@@ -1,19 +1,25 @@
 package com.evie.autotest;
 
+import com.evie.autotest.atom.BasePage;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.mobile.NetworkConnection;
 import org.openqa.selenium.support.FindBy;
 
-public class TestSelenium {
+public class TestSelenium extends BasePage {
+
+    public TestSelenium(WebDriver driver) {
+        super(driver);
+    }
 
     @Test
     void test_127381() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        ChromeDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+        driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
 
         driver.get("https://www.baidu.com/");
 

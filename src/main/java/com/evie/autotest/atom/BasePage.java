@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class BasePage {
 
-    final WebDriver driver;
+    public WebDriver driver;
     /**
      * 检查时间间隔
      */
