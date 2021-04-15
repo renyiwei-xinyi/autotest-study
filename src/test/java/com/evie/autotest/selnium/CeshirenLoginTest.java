@@ -11,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 public class CeshirenLoginTest {
 
     private static ChromeDriver driver;
-    private final int timeOut = 300;
-
 
     @BeforeAll
     static void before_all() {
