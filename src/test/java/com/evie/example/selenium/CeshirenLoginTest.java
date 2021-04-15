@@ -1,4 +1,4 @@
-package com.evie.autotest.selnium;
+package com.evie.example.selenium;
 
 import com.evie.autotest.component.CeshirenPage;
 import org.junit.jupiter.api.AfterAll;

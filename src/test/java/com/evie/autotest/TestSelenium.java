@@ -10,16 +10,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.mobile.NetworkConnection;
 import org.openqa.selenium.support.FindBy;
 
-public class TestSelenium extends BasePage {
-
-    public TestSelenium(WebDriver driver) {
-        super(driver);
-    }
+public class TestSelenium {
 
     @Test
     void test_127381() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
+        ChromeDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
 
         driver.get("https://www.baidu.com/");
 

@@ -4,6 +4,9 @@ import com.microsoft.playwright.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 需要用 python - pip 准备环境 安装playwrigh
+ */
 public class TestPlayWright {
 
     private static Browser browser;
