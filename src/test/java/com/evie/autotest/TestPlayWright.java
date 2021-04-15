@@ -38,13 +38,14 @@ public class TestPlayWright {
         //浏览器上下文，可以用来设置打开的模式
 
         Browser.NewContextOptions geolocation = new Browser.NewContextOptions()
+                // 设置用户代理模式
                 .setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Mobile/15E148 Safari/604.1")
-                .setViewportSize(375, 812)
-                .setDeviceScaleFactor(3)
-                .setIsMobile(true)
-                .setHasTouch(true)
-                .setPermissions(Arrays.asList("geolocation"))
-                .setGeolocation(52.52, 13.39)
+                .setViewportSize(375, 812) // 设置窗口长宽
+                .setDeviceScaleFactor(3) // 设置设备比例因子
+                .setIsMobile(true) // 设置是否为移动设备显示模式
+                .setHasTouch(true) // 设置有无触摸
+                .setPermissions(Arrays.asList("geolocation")) // 设置权限
+                .setGeolocation(52.52, 13.39) // 设置 具体地理位置
                 .setColorScheme(ColorScheme.DARK)
                 .setLocale("de-DE");
 
