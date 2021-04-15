@@ -15,6 +15,7 @@ public class TestSelenium {
     @Test
     void test_127381() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        //setHeadless 参数为false 是打开浏览器执行 true 是无头浏览器执行
         ChromeDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
 
         driver.get("https://www.baidu.com/");
