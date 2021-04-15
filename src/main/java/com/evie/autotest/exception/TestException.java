@@ -7,7 +7,7 @@ public class TestException extends RuntimeException {
      */
     private static final long serialVersionUID = 4670114874512893276L;
     /**
-     * 是否已打印; 用来避免在cclogic嵌套调用中重复打印
+     * 是否已打印; 用来避免嵌套调用中重复打印
      */
     private boolean printed = false;
 
@@ -19,35 +19,41 @@ public class TestException extends RuntimeException {
     }
 
     /**
-     * 构造一个<code>TestException</code>对象。 *  * @param message           异常描述
+     * 构造一个<code>TestException</code>对象。
+     * @param message           异常描述
      */
     public TestException(String message) {
         super(message);
     }
 
     /**
-     * 构造一个<code>TestException</code>对象。 *  * @param cause             异常原因
+     * 构造一个<code>TestException</code>对象。
+     * @param cause             异常原因
      */
     public TestException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * 构造一个<code>TestException</code>对象。 *  * @param message           异常描述 * @param cause             异常原因
+     * 构造一个<code>TestException</code>对象。
+     * @param message           异常描述
+     * @param cause             异常原因
      */
     public TestException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * Getter method for property <tt>printed</tt>. * * @return property value of printed
+     * Getter
+     * @return property value of printed
      */
     public boolean isPrinted() {
         return printed;
     }
 
     /**
-     * Setter method for property <tt>printed</tt>. * * @param printed value to be assigned to property printed
+     * Setter
+     * @param printed value to be assigned to property printed
      */
     public void setPrinted(boolean printed) {
         this.printed = printed;
