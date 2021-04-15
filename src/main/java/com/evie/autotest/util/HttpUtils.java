@@ -11,9 +11,7 @@ import java.io.IOException;
 public class HttpUtils {
     private static final Logger LOGGER = LogManager.getLogger(HttpUtils.class.getName());
 
-    static HttpUtils httpUtils;
-
-    public static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static final OkHttpClient client = new OkHttpClient();
 
@@ -149,6 +147,12 @@ public class HttpUtils {
         return null;
     }
 
+    /**
+     * 创建并返回一个baseUrl
+     * 可以直接再方法末尾链式 .add****
+     * @param baseUrl
+     * @return
+     */
     public static HttpUrl.Builder getBaseUrl(String baseUrl) {
         return HttpUrl.get(baseUrl).newBuilder();
     }
@@ -159,7 +163,7 @@ public class HttpUtils {
      * @param obj 被解析对象
      * @throws Exception 解析错误
      */
-    public static String printJsonString(Object obj) {
+    private static String printJsonString(Object obj) {
         String json = null;
         try {
             json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);

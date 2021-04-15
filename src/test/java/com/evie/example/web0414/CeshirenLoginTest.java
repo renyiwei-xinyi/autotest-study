@@ -1,6 +1,5 @@
-package com.evie.example.selenium;
+package com.evie.example.web0414;
 
-import com.evie.autotest.component.CeshirenPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -25,6 +24,7 @@ public class CeshirenLoginTest {
         ceshirenPage.click(ceshirenPage.search_button);
         ceshirenPage.sendKeys(ceshirenPage.search_term, "微信小程序自动化");
         ceshirenPage.click(ceshirenPage.search_text);
+        Thread.sleep(1000);
     }
 
     @AfterAll

@@ -1,4 +1,4 @@
-package com.evie.autotest.component;
+package com.evie.example.web0414;
 
 import com.evie.autotest.atom.BasePage;
 import org.openqa.selenium.WebDriver;
