@@ -27,8 +27,7 @@ public class WeixinPage extends BasePage {
 
     @FindBy(name = "extern_position") public WebElement extern_position;
 
-    @FindBy(className = "ww_radio")
-    public List<WebElement> button;
+    @FindBy(className = "ww_radio") public List<WebElement> button;
 
 
     //================================ 输入框元素 ==================
