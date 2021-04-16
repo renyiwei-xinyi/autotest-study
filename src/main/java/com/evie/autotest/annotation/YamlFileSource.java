@@ -10,5 +10,5 @@ import java.lang.annotation.*;
 @Documented
 @ArgumentsSource(YamlFileArgumentsProvider.class)
 public @interface YamlFileSource {
-    String[] files();
+    String[] files(); /* 相对路径 ，绝对路径会抛异常找不到*/
 }

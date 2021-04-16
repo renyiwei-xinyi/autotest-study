@@ -1,4 +1,4 @@
-package com.evie.autotest;
+package com.evie.example.xUnit0410;
 
 
 import com.evie.autotest.annotation.JsonFileSource;
@@ -13,8 +13,6 @@ import com.evie.autotest.interfaces.TestLifecycleLogger;
 import com.evie.autotest.interfaces.TimeExecutionLogger;
 import com.evie.autotest.util.JsonLogUtils;
 import com.evie.autotest.util.RetryHandler;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
@@ -485,7 +483,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
     @JsonFileSource(files = "/test/json.json")
-    @YamlFileSource(files = "/test/yaml.yaml")
+    //@YamlFileSource(files = "/test/yaml.yaml")
     @ParameterizedTest
     void test_12973189(Object test){
     }
@@ -494,7 +492,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @ParameterizedTest
     @RepeatedTest(20)
-    @ValueSource(ints = 12)
+    @ValueSource(ints = 12) // 重复测试和 参数化测试无法组合使用
     void test(@Random int s){
         LOGGER.info(s);
         LOGGER.info(s);

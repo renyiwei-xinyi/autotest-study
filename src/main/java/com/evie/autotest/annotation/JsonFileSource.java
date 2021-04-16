@@ -13,5 +13,5 @@ import java.lang.annotation.*;
 @Documented
 @ArgumentsSource(JsonFileArgumentsProvider.class)
 public @interface JsonFileSource {
-    String[] files();
+    String[] files(); /* 相对路径 ，绝对路径会抛异常找不到*/
 }

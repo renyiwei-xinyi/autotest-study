@@ -46,8 +46,8 @@ public class TestPlayWright {
                 .setHasTouch(true) // 设置有无触摸
                 .setPermissions(Arrays.asList("geolocation")) // 设置权限
                 .setGeolocation(52.52, 13.39) // 设置 具体地理位置
-                .setColorScheme(ColorScheme.DARK)
-                .setLocale("de-DE");
+                .setColorScheme(ColorScheme.DARK) // 设置配色方案
+                .setLocale("de-DE"); // 设置语言环境
 
         BrowserContext browserContext = browser.newContext(geolocation);
         //以这个上下文内容新建一个页面

@@ -1,6 +1,9 @@
 package com.evie.autotest;
 
 import com.evie.autotest.atom.BasePage;
+import com.evie.autotest.interfaces.DriverStart;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,19 +13,30 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.mobile.NetworkConnection;
 import org.openqa.selenium.support.FindBy;
 
-public class TestSelenium {
+public class TestSelenium implements DriverStart {
+
+    static ChromeDriver driver;
+
+    @BeforeAll
+    static void before_all(){
+        //setHeadless 参数为false 是打开浏览器执行 true 是无头浏览器执行
+        driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
+    }
 
     @Test
     void test_127381() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        //setHeadless 参数为false 是打开浏览器执行 true 是无头浏览器执行
-        ChromeDriver driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
-
         driver.get("https://www.baidu.com/");
+
 
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 700)");
         driver.close();
     }
+
+    @AfterAll
+    static void after_all(){
+        driver.close();
+    }
+
 
     @FindBy(id = "")
     public WebElement element1;

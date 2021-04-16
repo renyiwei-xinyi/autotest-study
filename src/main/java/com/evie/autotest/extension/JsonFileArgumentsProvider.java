@@ -18,7 +18,9 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-
+/**
+ * path 是相对路径 如果填绝对路径会抛异常
+ */
 public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<JsonFileSource> {
 
     private final BiFunction<Class, String, InputStream> inputStreamProvider;
@@ -70,6 +72,6 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         Preconditions.notBlank(resource, "Classpath resource [" + resource + "] must not be null or blank");
         Class<?> testClass = context.getRequiredTestClass();
         return Preconditions.notNull(inputStreamProvider.apply(testClass, resource),
-                () -> "Classpath resource [" + resource + "] does not exist");
+                () -> testClass + "\n Classpath resource [" + resource + "] does not exist");
     }
 }

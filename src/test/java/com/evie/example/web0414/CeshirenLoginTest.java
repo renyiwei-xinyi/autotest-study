@@ -1,5 +1,6 @@
 package com.evie.example.web0414;
 
+import com.evie.autotest.interfaces.DriverStart;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -7,13 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 
-public class CeshirenLoginTest {
+public class CeshirenLoginTest implements DriverStart {
 
     private static ChromeDriver driver;
 
     @BeforeAll
     static void before_all() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
     }
 

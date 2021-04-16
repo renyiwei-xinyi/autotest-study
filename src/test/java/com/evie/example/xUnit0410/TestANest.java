@@ -1,4 +1,4 @@
-package com.evie.autotest;
+package com.evie.example.xUnit0410;
 
 import com.evie.autotest.atom.db.DataMap;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+/**
+ * @ Nested 是从下往上执行
+ */
 public class TestANest {
 
     @Test
@@ -42,6 +45,7 @@ public class TestANest {
         }
 
     }
+
     final static String s = "{\"test\": 123}" ;
 
     @Test

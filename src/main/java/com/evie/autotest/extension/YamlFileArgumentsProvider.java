@@ -18,6 +18,9 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+/**
+ * path 是相对路径 如果填绝对路径会抛异常
+ */
 public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<YamlFileSource> {
 
     private final BiFunction<Class, String, InputStream> inputStreamProvider;
