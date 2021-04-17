@@ -11,19 +11,21 @@ import org.openqa.selenium.support.PageFactory;
 public class CeshirenLoginTest implements DriverStart {
 
     private static ChromeDriver driver;
+    private static CeshirenPage page;
 
     @BeforeAll
     static void before_all() {
         driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
+        page = PageFactory.initElements(driver, CeshirenPage.class);
+
     }
 
     @Test
     void test_login() throws InterruptedException {
-        driver.get("https://ceshiren.com/");
-        CeshirenPage ceshirenPage = PageFactory.initElements(driver, CeshirenPage.class);
-        ceshirenPage.click(ceshirenPage.search_button);
-        ceshirenPage.sendKeys(ceshirenPage.search_term, "微信小程序自动化");
-        ceshirenPage.click(ceshirenPage.search_text);
+        page.getUrl();
+        page.click(page.search_button);
+        page.sendKeys(page.search_term, "微信小程序自动化");
+        page.click(page.search_text);
         Thread.sleep(1000);
     }
 

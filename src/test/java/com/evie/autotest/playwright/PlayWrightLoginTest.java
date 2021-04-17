@@ -1,20 +1,30 @@
-package com.evie.autotest;
+package com.evie.autotest.playwright;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.evie.autotest.annotation.JsonFileSource;
+import com.evie.autotest.interfaces.TimeExecutionLogger;
+import com.evie.autotest.util.TextUtils;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
+import com.microsoft.playwright.options.Cookie;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class TestPlayWright {
+/**
+ * 需要用 python - pip 准备环境 安装playwrigh
+ */
+public class PlayWrightLoginTest implements TimeExecutionLogger {
 
     private static Browser browser;
 
     private static Browser.NewContextOptions geolocation;
+
+
 
     @BeforeAll
     static void beforeAll() {
@@ -39,22 +49,45 @@ public class TestPlayWright {
                 .setLocale("de-DE"); // 设置语言环境
 
     }
-
-    @Test
-    void test_network() {
-        Page page = browser.newPage();
-        page.onRequest(
-                request ->
-                {
-                    System.out.println(">> " + request.method() + " " + request.url() + request.headers());
-                }
-        );
-        page.onResponse(
-                response ->
-                {
-                    System.out.println("<<" + response.status() + " " + response.url() + response.headers());
-                }
-        );
-        page.navigate("https://www.baidu.com");
+    //@AfterAll
+    static void after_all() {
+        browser.close();
     }
+
+    @Disabled
+    @Test
+    void test_1_login() throws InterruptedException {
+        // 打开网页
+        BrowserContext context = browser.newContext();
+        WechatPage wechatPage = new WechatPage(context.newPage());
+
+        wechatPage.navigate();
+
+        Thread.sleep(10000);
+
+        List<Cookie> cookies = context.cookies();
+
+        cookies.forEach(cookie -> {
+            System.out.println(cookie.sameSite);
+        });
+
+        TextUtils.jsonWriteTo("src/test/resources/example/cookies2.json", cookies);
+
+    }
+
+    @JsonFileSource(files = "/example/cookies2.json")
+    @ParameterizedTest
+    void test_2_login(List<Cookie> cookie){
+        BrowserContext context = browser.newContext(geolocation);
+        context.addCookies(cookie);
+
+        WechatPage wechatPage = new WechatPage(context.newPage());
+
+        wechatPage.navigate();
+
+        wechatPage.clickAddressBook();
+
+    }
+
+
 }

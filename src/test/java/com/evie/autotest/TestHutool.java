@@ -2,10 +2,8 @@ package com.evie.autotest;
 
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.json.JSONUtil;
-import com.evie.autotest.util.JsonLogUtils;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.evie.autotest.util.TextUtils;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -32,11 +30,7 @@ public class TestHutool {
     @Test
     void test_132(){
 
-        String s1 = JsonLogUtils.jsonTo(s, ObjectNode.class).get("test").asText();
-        System.out.println(s1);
-
-        System.out.println(JSONUtil.toBean(s, HashMap.class).get("test"));
-
+        System.out.println(JSONUtil.parseObj(s).get("test"));
 
     }
 

@@ -2,8 +2,6 @@ package com.evie.autotest;
 
 
 import cn.hutool.json.JSONUtil;
-import com.evie.autotest.util.JsonLogUtils;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import okhttp3.OkHttpClient;
@@ -14,7 +12,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -22,7 +19,6 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 public class TestJMH {
@@ -86,18 +82,13 @@ public class TestJMH {
         }
 
         @Benchmark
-        public String testJsonLog(){
-            return JsonLogUtils.jsonTo(s, ObjectNode.class).get("test").asText();
+        public String test_hutool_json(){
+            return JSONUtil.parseObj(s).getStr("test");
         }
 
 
         @Benchmark
-        public String testHutoolJson(){
-            return JSONUtil.parseObj(s).get("test").toString();
-        }
-
-        @Benchmark
-        public String testGson(){
+        public String test_gson(){
             Gson gson = new Gson();
             return gson.fromJson(s, JsonObject.class).get("test").getAsString();
         }

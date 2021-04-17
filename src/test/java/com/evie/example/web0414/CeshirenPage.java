@@ -10,6 +10,10 @@ public class CeshirenPage extends BasePage {
         super(driver);
     }
 
+    public void getUrl(){
+        driver.get("https://ceshiren.com/");
+    }
+
     @FindBy(id = "search-button")
     public WebElement search_button;
 

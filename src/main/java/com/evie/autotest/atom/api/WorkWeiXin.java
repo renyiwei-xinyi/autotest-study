@@ -1,11 +1,8 @@
 package com.evie.autotest.atom.api;
 
+import cn.hutool.json.JSONUtil;
 import com.evie.autotest.util.HttpUtils;
-import com.evie.autotest.util.JsonLogUtils;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import okhttp3.HttpUrl;
-
-import java.io.IOException;
 
 // 单例模式
 public class WorkWeiXin {
@@ -51,9 +48,8 @@ public class WorkWeiXin {
                 .addQueryParameter("corpsecret", secretDemo)
                 .build();
         String string = HttpUtils.get(baseUrl);
-        accessToken = JsonLogUtils.jsonTo(string, ObjectNode.class)
-                .get("access_token")
-                .asText();
+        accessToken = JSONUtil.parseObj(string)
+                .getStr("access_token");
     }
 
 
