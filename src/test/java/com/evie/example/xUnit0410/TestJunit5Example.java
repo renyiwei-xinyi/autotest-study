@@ -496,6 +496,11 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     //@YamlFileSource(files = "/test/yaml.yaml")
     @ParameterizedTest
     void test_12973189(Object test){
+        JSONObject jsonObject = JSONUtil.parseObj(test);
+        jsonObject.set("test", 456);
+
+        System.out.println(test);
+        System.out.println(jsonObject);
     }
 
 

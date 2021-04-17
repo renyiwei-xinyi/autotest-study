@@ -14,8 +14,13 @@ public class WechatPage {
         page.navigate("https://work.weixin.qq.com/wework_admin/loginpage_wx");
     }
 
-    public void clickAddressBook() {
+    public void clickRessBook() {
         page.click("text=通讯录");
     }
+
+    public void clickAdd(){
+        page.click("linkText=添加成员");
+    }
+
 
 }

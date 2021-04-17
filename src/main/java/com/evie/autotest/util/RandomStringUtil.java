@@ -150,7 +150,7 @@ public class RandomStringUtil {
      *
      * @return
      */
-    public static String randomCode() {
+    public static String getRandomCode() {
         int code = (int) (Math.random() * 1000);
         if (code < 10) {
             return "00" + code;
@@ -165,7 +165,7 @@ public class RandomStringUtil {
      * 随机生成出生日期
      * @return
      */
-    public static String randomBirthday() {
+    public static String getRandomBirthday() {
         Calendar birthday = Calendar.getInstance();
         birthday.set(Calendar.YEAR, (int) (Math.random() * 60) + 1950);
         birthday.set(Calendar.MONTH, (int) (Math.random() * 12));
@@ -191,7 +191,7 @@ public class RandomStringUtil {
      * @param registerLocation
      * @return
      */
-    public static String randomLocationCode(Map<String, Integer> registerLocation) {
+    public static String getRandomLocationCode(Map<String, Integer> registerLocation) {
         int index = (int) (Math.random() * registerLocation.size());
         Collection<Integer> values = registerLocation.values();
         Iterator<Integer> it = values.iterator();

@@ -1,17 +1,18 @@
 package com.evie.autotest.playwright;
 
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import com.evie.autotest.annotation.JsonFileSource;
 import com.evie.autotest.interfaces.TimeExecutionLogger;
 import com.evie.autotest.util.TextUtils;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
 import com.microsoft.playwright.options.Cookie;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
         browser.close();
     }
 
+    @DisplayName("获取cookie，手动扫码，10秒等待")
     @Disabled
     @Test
     void test_1_login() throws InterruptedException {
@@ -66,26 +68,31 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
         Thread.sleep(10000);
 
         List<Cookie> cookies = context.cookies();
-
+        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
+        // 这里有BUG 暂时用这种方法解决
         cookies.forEach(cookie -> {
-            System.out.println(cookie.sameSite);
+            JSONObject jsonObject = JSONUtil.parseObj(cookie);
+            jsonObject.set("sameSite", "None");
+            jsonObjects.add(jsonObject);
         });
+        String path = "src/test/resources/example/cookies2.json";
 
-        TextUtils.jsonWriteTo("src/test/resources/example/cookies2.json", cookies);
+        TextUtils.jsonWriteTo(path, jsonObjects);
+
 
     }
 
     @JsonFileSource(files = "/example/cookies2.json")
     @ParameterizedTest
     void test_2_login(List<Cookie> cookie){
-        BrowserContext context = browser.newContext(geolocation);
+        BrowserContext context = browser.newContext();
         context.addCookies(cookie);
 
         WechatPage wechatPage = new WechatPage(context.newPage());
 
         wechatPage.navigate();
 
-        wechatPage.clickAddressBook();
+        wechatPage.clickRessBook();
 
     }
 

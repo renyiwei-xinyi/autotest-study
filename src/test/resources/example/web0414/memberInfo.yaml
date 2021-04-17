@@ -1,9 +1,23 @@
-name: "你好"
 alias: "nihao"
-id: "9999"
-phone: "15466669999"
 landline: "8544211"
-email: "6688888@qq.com"
 address: "中国"
 jobTitle: "老板"
 
+---
+
+alias: "nihao"
+landline: "8544211"
+address: "中国"
+jobTitle: "老板"
+---
+
+alias: "nihao"
+landline: "8544211"
+address: "中国"
+jobTitle: "老板"
+---
+
+alias: "nihao"
+landline: "8544211"
+address: "中国"
+jobTitle: "老板"

@@ -5,6 +5,7 @@ import com.evie.autotest.annotation.JsonFileSource;
 import com.evie.autotest.annotation.YamlFileSource;
 import com.evie.autotest.interfaces.DriverStart;
 import com.evie.autotest.interfaces.TimeExecutionLogger;
+import com.evie.autotest.util.RandomStringUtil;
 import com.evie.autotest.util.TextUtils;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 
-import java.io.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,11 +25,11 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WeixinloginTest implements DriverStart, TimeExecutionLogger {
+public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
-    private static final Logger LOGGER = LogManager.getLogger(WeixinloginTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(WeixinAutoTest.class);
 
-    private static final String COOKIE = "/example/cookies1.json"; //相对路径
+    private static final String COOKIE = "/example/cookies2.json"; //相对路径
 
     private static ChromeDriver driver;
 
@@ -107,29 +107,36 @@ public class WeixinloginTest implements DriverStart, TimeExecutionLogger {
      */
     @YamlFileSource(files = "/example/web0414/memberInfo.yaml")
     @ParameterizedTest
-    void test_3_add_member(String date) {
-        memberInfo memberInfo = JSONUtil.toBean(date, memberInfo.class);
+    void test_3_add_member(Object date) {
+        memberInfo memberInfo = JSONUtil.toBean(JSONUtil.parseObj(date), memberInfo.class);
         assert memberInfo != null;
+        String phone = RandomStringUtil.getPhone();
+        memberInfo.setId(RandomStringUtil.getRandom(4,false));
+        memberInfo.setEmail(phone + "@164" + ".com");
+        memberInfo.setName(RandomStringUtil.getRandomName());
+        memberInfo.setPhone(phone);
         // 点击通讯录
-        page.menu_contacts.click();
+        page.click(page.menu_contacts);
         // 点击添加成员
-        page.add_member.click();
+        page.click(page.add_member);
         // 输入成员信息
-        page.username.sendKeys(memberInfo.getName());
-        page.memberAdd_english_name.sendKeys(memberInfo.getAlias());
-        page.memberAdd_acctid.sendKeys(memberInfo.getId());
-        page.memberAdd_phone.sendKeys(memberInfo.getPhone());
-        page.memberAdd_telephone.sendKeys(memberInfo.getLandline());
-        page.memberAdd_mail.sendKeys(memberInfo.getEmail());
-        page.memberEdit_address.sendKeys(memberInfo.getAddress());
-        page.memberAdd_title.sendKeys(memberInfo.getJobTitle());
+        page.sendKeys(page.username, memberInfo.getName());
+        page.sendKeys(page.memberAdd_english_name, memberInfo.getAlias());
+        page.sendKeys(page.memberAdd_acctid, memberInfo.getId());
+        page.sendKeys(page.memberAdd_phone, memberInfo.getPhone());
+        page.sendKeys(page.memberAdd_telephone, memberInfo.getLandline());
+        page.sendKeys(page.memberAdd_mail, memberInfo.getEmail());
+        page.sendKeys(page.memberEdit_address, memberInfo.getAddress());
+        page.sendKeys(page.memberAdd_title, memberInfo.getJobTitle());
 
-        page.button.forEach(WebElement::click);
-        page.extern_position.sendKeys("自定义职务");
+        page.button.forEach(webElement -> {
+            page.click(webElement);
+        });
+        page.sendKeys(page.extern_position, "自定义职务");
 
-        page.sendInvite.click();
+        page.click(page.sendInvite);
 
-        page.save.click();
+        page.click(page.save);
     }
 
 
