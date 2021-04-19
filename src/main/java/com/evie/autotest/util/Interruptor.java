@@ -1,4 +1,4 @@
-package com.evie.autotest.interfaces;
+package com.evie.autotest.util;
 
 public class Interruptor {
     private boolean interrupt;

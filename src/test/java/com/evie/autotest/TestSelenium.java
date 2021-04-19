@@ -1,16 +1,13 @@
 package com.evie.autotest;
 
-import com.evie.autotest.atom.BasePage;
-import com.evie.autotest.interfaces.DriverStart;
+import com.evie.autotest.extension.DriverStart;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.mobile.NetworkConnection;
 import org.openqa.selenium.support.FindBy;
 
 public class TestSelenium implements DriverStart {

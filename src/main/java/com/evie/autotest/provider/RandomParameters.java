@@ -1,6 +1,5 @@
-package com.evie.autotest.extension;
+package com.evie.autotest.provider;
 
-import com.evie.autotest.annotation.Random;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;

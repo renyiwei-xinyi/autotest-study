@@ -1,6 +1,5 @@
-package com.evie.autotest.extension;
+package com.evie.autotest.provider;
 
-import com.evie.autotest.annotation.JsonSource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.extension.ExtensionContext;

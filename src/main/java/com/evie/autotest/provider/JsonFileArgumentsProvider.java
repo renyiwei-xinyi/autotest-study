@@ -1,70 +1,66 @@
-package com.evie.autotest.extension;
+package com.evie.autotest.provider;
 
 
-import com.evie.autotest.annotation.YamlFileSource;
-import org.apache.commons.io.IOUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.support.AnnotationConsumer;
 import org.junit.platform.commons.util.Preconditions;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * path 是相对路径 如果填绝对路径会抛异常
  */
-public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<YamlFileSource> {
+public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<JsonFileSource> {
 
     private final BiFunction<Class, String, InputStream> inputStreamProvider;
 
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+
     private String[] resources;
 
-
-    public YamlFileArgumentsProvider() throws Exception {
+    public JsonFileArgumentsProvider() throws Exception {
         this(Class::getResourceAsStream);
     }
 
-    YamlFileArgumentsProvider(BiFunction<Class, String, InputStream> inputStreamProvider) {
+    JsonFileArgumentsProvider(BiFunction<Class, String, InputStream> inputStreamProvider) {
         this.inputStreamProvider = inputStreamProvider;
     }
 
     private static Stream<Object> values(InputStream inputStream) {
-        Iterable<Object> yamlObjects = null;
+        Object jsonObject = null;
         try {
-            Yaml yaml = new Yaml();
-            yamlObjects = yaml.loadAll(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
+            //为了处理Date属性，需要调用 findAndRegisterModules 方法
+            mapper.findAndRegisterModules();
+            jsonObject = mapper.readValue(inputStream, Object.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assert yamlObjects != null;
-        return getObjectStream(yamlObjects);
+        return getObjectStream(jsonObject);
     }
 
-    static Stream<Object> getObjectStream(Iterable<Object> yamlObject) {
+    static Stream<Object> getObjectStream(Object jsonObject) {
 
-        return StreamSupport.stream(yamlObject.spliterator(), true);
-
+        return Stream.of(jsonObject);
     }
 
     @Override
-    public void accept(YamlFileSource yamlFileSource) {
-        resources = yamlFileSource.files();
-
+    public void accept(JsonFileSource jsonFileSource) {
+        resources = jsonFileSource.files();
     }
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
         return Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(YamlFileArgumentsProvider::values)
+                .flatMap(JsonFileArgumentsProvider::values)
                 .map(Arguments::of);
     }
 
@@ -72,6 +68,6 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         Preconditions.notBlank(resource, "Classpath resource [" + resource + "] must not be null or blank");
         Class<?> testClass = context.getRequiredTestClass();
         return Preconditions.notNull(inputStreamProvider.apply(testClass, resource),
-                () -> "Classpath resource [" + resource + "] does not exist");
+                () -> testClass + "\n Classpath resource [" + resource + "] does not exist");
     }
 }

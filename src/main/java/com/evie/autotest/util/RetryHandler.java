@@ -1,10 +1,6 @@
 package com.evie.autotest.util;
 
 import com.evie.autotest.exception.TestException;
-import com.evie.autotest.interfaces.IRetry;
-import com.evie.autotest.interfaces.IRetryWithInteruption;
-import com.evie.autotest.interfaces.IRetryWithReturn;
-import com.evie.autotest.interfaces.Interruptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

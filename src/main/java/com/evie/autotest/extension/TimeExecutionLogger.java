@@ -1,4 +1,4 @@
-package com.evie.autotest.interfaces;
+package com.evie.autotest.extension;
 
 import com.evie.autotest.extension.TimingExtension;
 import org.junit.jupiter.api.Tag;

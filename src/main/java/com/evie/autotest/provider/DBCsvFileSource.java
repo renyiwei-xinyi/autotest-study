@@ -1,17 +1,13 @@
-package com.evie.autotest.annotation;
+package com.evie.autotest.provider;
 
-import com.evie.autotest.extension.JsonFileArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-
 
 import java.lang.annotation.*;
 
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@ArgumentsSource(JsonFileArgumentsProvider.class)
-public @interface JsonFileSource {
+@ArgumentsSource(DBCsvFileArgumentsProvider.class)
+public @interface DBCsvFileSource {
     String[] files(); /* 相对路径 ，绝对路径会抛异常找不到*/
 }

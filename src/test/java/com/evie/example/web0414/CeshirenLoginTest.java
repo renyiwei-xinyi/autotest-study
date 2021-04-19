@@ -1,6 +1,6 @@
 package com.evie.example.web0414;
 
-import com.evie.autotest.interfaces.DriverStart;
+import com.evie.autotest.extension.DriverStart;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.evie.autotest.annotation;
+package com.evie.autotest.provider;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

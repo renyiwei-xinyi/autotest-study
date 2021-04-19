@@ -3,11 +3,10 @@ package com.evie.autotest;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpUtil;
-import com.evie.autotest.annotation.JsonFileSource;
+import com.evie.autotest.provider.JsonFileSource;
 import com.evie.autotest.atom.api.WorkWeiXin;
 import com.evie.autotest.util.HttpUtils;
 import okhttp3.*;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 

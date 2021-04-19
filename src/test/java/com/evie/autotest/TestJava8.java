@@ -1,10 +1,8 @@
 package com.evie.autotest;
 
-import com.evie.autotest.extension.TimingExtension;
-import com.evie.autotest.interfaces.TimeExecutionLogger;
-import com.evie.autotest.interfaces.TestLifecycleLogger;
+import com.evie.autotest.extension.TimeExecutionLogger;
+import com.evie.autotest.extension.TestLifecycleLogger;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Arrays;
 import java.util.Iterator;

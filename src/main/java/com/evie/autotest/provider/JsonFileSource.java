@@ -1,14 +1,14 @@
-package com.evie.autotest.annotation;
+package com.evie.autotest.provider;
 
-import com.evie.autotest.extension.YamlFileArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+
 
 import java.lang.annotation.*;
 
 @Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@ArgumentsSource(YamlFileArgumentsProvider.class)
-public @interface YamlFileSource {
+@ArgumentsSource(JsonFileArgumentsProvider.class)
+public @interface JsonFileSource {
     String[] files(); /* 相对路径 ，绝对路径会抛异常找不到*/
 }

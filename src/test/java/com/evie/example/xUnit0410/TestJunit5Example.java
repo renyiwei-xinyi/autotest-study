@@ -1,26 +1,17 @@
 package com.evie.example.xUnit0410;
 
 
-import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.evie.autotest.annotation.JsonFileSource;
-import com.evie.autotest.annotation.JsonSource;
-import com.evie.autotest.annotation.Random;
-import com.evie.autotest.annotation.YamlFileSource;
 import com.evie.autotest.atom.db.DataMap;
+import com.evie.autotest.provider.*;
 import com.evie.autotest.atom.db.PrintTable;
 import com.evie.autotest.extension.IndicativeSentences;
-import com.evie.autotest.extension.RandomParameters;
-import com.evie.autotest.interfaces.TestLifecycleLogger;
-import com.evie.autotest.interfaces.TimeExecutionLogger;
+import com.evie.autotest.extension.TestLifecycleLogger;
+import com.evie.autotest.extension.TimeExecutionLogger;
+import com.evie.autotest.provider.Random;
 import com.evie.autotest.util.TextUtils;
 import com.evie.autotest.util.RetryHandler;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
@@ -32,9 +23,7 @@ import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
 import org.junit.jupiter.params.provider.*;
 import org.junit.platform.commons.util.StringUtils;
-import org.openqa.selenium.Cookie;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -432,6 +421,31 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
             Object o = arguments.get(i);
             LOGGER.info(o);
         }
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(files = {
+            "src/test/resources/test/test5.csv",
+            "src/test/resources/test/test6.csv"
+    })
+    void test_127812279(ArgumentsAccessor arguments){
+        // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
+        for (int i = 0; i<arguments.size();i=i+1){
+            Object o = arguments.get(i);
+            LOGGER.info(o);
+        }
+    }
+
+    @ParameterizedTest
+    @DBCsvFileSource(files = "/test/exceltext.csv")
+    void test_1278129(Map<String, Object> arguments){
+        // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
+        System.out.println(arguments.size());
+
+        System.out.println(arguments);
+
+        Object o = arguments.get("12121_title");
+        System.out.println(o);
     }
 
 
