@@ -26,21 +26,37 @@ public class BasePage {
     /**
      * 重写sendKeys方法
      */
-    public void sendKeys(WebElement element, CharSequence data) {
+    public BasePage sendKeys(WebElement element, CharSequence data) {
         // 加入显式等待
         new WebDriverWait(driver, timeOut).until(ExpectedConditions.visibilityOf(element));
         // 输入数据
         element.sendKeys(data);
+
+        return this;
+
     }
 
     /**
      * 重写click方法
      */
-    public void click(WebElement element) {
+    public BasePage click(WebElement element) {
         // 加入显式等待
         new WebDriverWait(driver, timeOut).until(ExpectedConditions.visibilityOf(element));
         element.click();
 
+        return this;
+
     }
+
+    /**
+     * 跳转网址
+     */
+    public BasePage getUrl(String url) {
+        driver.get(url);
+
+        return this;
+
+    }
+
 
 }

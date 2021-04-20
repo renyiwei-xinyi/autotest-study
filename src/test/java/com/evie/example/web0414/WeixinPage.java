@@ -4,6 +4,7 @@ import com.evie.autotest.atom.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 
@@ -20,6 +21,12 @@ public class WeixinPage extends BasePage {
     //================================ 可被点击按钮元素 ==================
     @FindBy(id = "menu_contacts")
     public WebElement menu_contacts;
+
+    @FindBy(linkText = "添加")
+    public WebElement add;
+
+    @FindBy(linkText = "添加部门")
+    public WebElement add_party;
 
     @FindBy(linkText = "添加成员")
     public WebElement add_member;
@@ -39,6 +46,21 @@ public class WeixinPage extends BasePage {
     @FindBy(className = "ww_radio")
     public List<WebElement> button;
 
+    @FindBy(linkText = "选择所属部门")
+    public WebElement parent_party;
+
+    @FindBy(xpath = "//*[@id=\"1688850174192889_anchor\"]")
+    public List<WebElement> evie;
+
+    @FindBys({
+            @FindBy(tagName = "form"),
+            @FindBy(linkText = "Evie")
+    })
+    public WebElement form_evie;
+
+    @FindBy(linkText = "确定")
+    public WebElement fix;
+
 
     //================================ 输入框元素 ==================
     @FindBy(id = "username")
@@ -57,5 +79,7 @@ public class WeixinPage extends BasePage {
     public WebElement memberEdit_address;
     @FindBy(id = "memberAdd_title")
     public WebElement memberAdd_title;
+    @FindBy(name = "name")
+    public WebElement name;
 
 }

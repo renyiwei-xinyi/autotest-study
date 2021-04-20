@@ -2,6 +2,8 @@ package com.evie.example.web0414;
 
 import cn.hutool.json.JSONUtil;
 import com.evie.autotest.provider.JsonFileSource;
+import com.evie.autotest.provider.Random;
+import com.evie.autotest.provider.RandomParameters;
 import com.evie.autotest.provider.YamlFileSource;
 import com.evie.autotest.extension.DriverStart;
 import com.evie.autotest.extension.TimeExecutionLogger;
@@ -11,10 +13,14 @@ import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -24,20 +30,21 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(RandomParameters.class)
 public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
     private static final Logger LOGGER = LogManager.getLogger(WeixinAutoTest.class);
 
-    private static final String COOKIE = "/example/cookies2.json"; //相对路径
+    private static final String COOKIE = "/example/cookies1.json"; //相对路径
 
-    private static ChromeDriver driver;
+    private static EdgeDriver driver;
 
     private static WeixinPage page;
 
     @BeforeAll
     static void before_all() {
         // 谷歌浏览器实例
-        driver = new ChromeDriver(new ChromeOptions().setHeadless(false));
+        driver = new EdgeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         // 初始化页面元素
         page = PageFactory.initElements(driver, WeixinPage.class);
@@ -102,40 +109,50 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     /**
      * 课后作业2：自动添加公司成员
      *
-     * @param date
      */
+    @Disabled
     @YamlFileSource(files = "/example/web0414/memberInfo.yaml")
     @ParameterizedTest
-    void test_3_add_member(Object date) {
-        memberInfo memberInfo = JSONUtil.toBean(JSONUtil.parseObj(date), memberInfo.class);
+    void test_3_add_member(Object data) {
+        memberInfo memberInfo = JSONUtil.toBean(JSONUtil.parseObj(data), memberInfo.class);
         assert memberInfo != null;
         String phone = RandomStringUtil.getPhone();
-        memberInfo.setId(RandomStringUtil.getRandom(4,false));
+        memberInfo.setId(RandomStringUtil.getRandom(4, false));
         memberInfo.setEmail(phone + "@164" + ".com");
         memberInfo.setName(RandomStringUtil.getRandomName());
         memberInfo.setPhone(phone);
-        // 点击通讯录
-        page.click(page.menu_contacts);
-        // 点击添加成员
-        page.click(page.add_member);
+        // 点击通讯录 然后点击添加成员
+        page.click(page.menu_contacts).click(page.add_member).click(page.sendInvite);
         // 输入成员信息
-        page.sendKeys(page.username, memberInfo.getName());
-        page.sendKeys(page.memberAdd_english_name, memberInfo.getAlias());
-        page.sendKeys(page.memberAdd_acctid, memberInfo.getId());
-        page.sendKeys(page.memberAdd_phone, memberInfo.getPhone());
-        page.sendKeys(page.memberAdd_telephone, memberInfo.getLandline());
-        page.sendKeys(page.memberAdd_mail, memberInfo.getEmail());
-        page.sendKeys(page.memberEdit_address, memberInfo.getAddress());
-        page.sendKeys(page.memberAdd_title, memberInfo.getJobTitle());
+        page.sendKeys(page.username, memberInfo.getName())
+                .sendKeys(page.memberAdd_english_name, memberInfo.getAlias())
+                .sendKeys(page.memberAdd_acctid, memberInfo.getId())
+                .sendKeys(page.memberAdd_phone, memberInfo.getPhone())
+                .sendKeys(page.memberAdd_telephone, memberInfo.getLandline())
+                .sendKeys(page.memberAdd_mail, memberInfo.getEmail())
+                .sendKeys(page.memberEdit_address, memberInfo.getAddress())
+                .sendKeys(page.memberAdd_title, memberInfo.getJobTitle())
+                .sendKeys(page.extern_position, "自定义职务");
 
-        page.button.forEach(webElement -> {
-            page.click(webElement);
-        });
-        page.sendKeys(page.extern_position, "自定义职务");
-
-        page.click(page.sendInvite);
+        page.button.forEach(webElement -> page.click(webElement));
 
         page.click(page.save);
+    }
+
+
+    /**
+     * 课后作业3：部门管理
+     */
+    @YamlFileSource(files = "/example/web0414/party.yaml")
+    @ParameterizedTest
+    void test_4_department_management(Object data, @Random int a) {
+        page.click(page.menu_contacts)
+                .click(page.add)
+                .click(page.add_party)
+                .sendKeys(page.name, data.toString() + a)
+                .click(page.parent_party)
+                .click(page.form_evie)
+                .click(page.fix);
     }
 
 
