@@ -2,7 +2,10 @@ package com.evie.autotest.atom.api;
 
 import cn.hutool.json.JSONUtil;
 import com.evie.autotest.util.HttpUtils;
+import com.evie.autotest.util.TextUtils;
 import okhttp3.HttpUrl;
+
+import java.io.IOException;
 
 // 单例模式
 public class WorkWeiXin {
@@ -48,8 +51,13 @@ public class WorkWeiXin {
                 .addQueryParameter("corpsecret", secretDemo)
                 .build();
         String string = HttpUtils.get(baseUrl);
-        accessToken = JSONUtil.parseObj(string)
-                .getStr("access_token");
+        try {
+            accessToken = TextUtils.objectMapper.createParser(string)
+                    .getValueAsString("access_token");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

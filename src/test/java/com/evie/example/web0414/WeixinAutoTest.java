@@ -30,6 +30,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 课后作业
+ */
 @ExtendWith(RandomParameters.class)
 public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
@@ -57,8 +60,9 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
         driver.close();
     }
 
-    @DisplayName("手动登录储存cookie操作 10s等待时间 完成扫码")
+
     @Disabled
+    @DisplayName("手动登录储存cookie操作 10s等待时间 完成扫码")
     @Test
     void test_1_login_save_cookie() throws InterruptedException {
         page.getUrl();
@@ -66,15 +70,13 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
         Thread.sleep(10000);
         Set<Cookie> cookies = driver.manage().getCookies();
         // 将cookie 写入 json文件用于复用
-        TextUtils.jsonWriteTo("src/test/resources/example/cookies1.json", cookies);
+        TextUtils.jsonWriteTo("src/test/resources" + COOKIE, cookies);
     }
 
 
-    /**
-     * 课后作业1：自动登录企业微信
-     *
-     * @param cookies 已经保存的，未过期的cookie
-     */
+
+    @Tag("login")
+    @DisplayName("自动登录企业微信首页")
     @JsonFileSource(files = COOKIE)
     @ParameterizedTest
     void test_2_login(List<Map<String, String>> cookies) {
@@ -106,18 +108,18 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
         private String jobTitle;
     }
 
-    /**
-     * 课后作业2：自动添加公司成员
-     *
-     */
+
     @Disabled
+    @Tag("add")
+    @DisplayName("自动添加成员")
     @YamlFileSource(files = "/example/web0414/memberInfo.yaml")
     @ParameterizedTest
-    void test_3_add_member(Object data) {
+    void test_3_add_member(Object data, @Random int id) {
         memberInfo memberInfo = JSONUtil.toBean(JSONUtil.parseObj(data), memberInfo.class);
         assert memberInfo != null;
         String phone = RandomStringUtil.getPhone();
-        memberInfo.setId(RandomStringUtil.getRandom(4, false));
+
+        memberInfo.setId(String.valueOf(id));
         memberInfo.setEmail(phone + "@164" + ".com");
         memberInfo.setName(RandomStringUtil.getRandomName());
         memberInfo.setPhone(phone);
@@ -139,10 +141,8 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
         page.click(page.save);
     }
 
-
-    /**
-     * 课后作业3：部门管理
-     */
+    @Tag("add")
+    @DisplayName("自动添加部门")
     @YamlFileSource(files = "/example/web0414/party.yaml")
     @ParameterizedTest
     void test_4_department_management(Object data, @Random int a) {
@@ -154,6 +154,8 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
                 .click(page.form_evie)
                 .click(page.fix);
     }
+
+
 
 
 }

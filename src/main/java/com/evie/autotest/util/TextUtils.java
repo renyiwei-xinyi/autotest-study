@@ -1,12 +1,16 @@
 package com.evie.autotest.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
+import java.util.List;
+import java.util.Map;
 
 public class TextUtils {
 
@@ -35,6 +39,7 @@ public class TextUtils {
 
     /**
      * 从文件读取json
+     *
      * @param path
      * @return
      */
@@ -52,6 +57,7 @@ public class TextUtils {
 
     /**
      * 从文件读取yaml
+     *
      * @param path
      * @return
      */
@@ -98,5 +104,43 @@ public class TextUtils {
             e.printStackTrace();
         }
     }
+
+    public static Map parseToMap(String jsonStr) {
+        try {
+            return objectMapper.readValue(jsonStr, Map.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> T parseToBean(String jsonStr, Class<T> valueType) {
+        try {
+            return objectMapper.readValue(jsonStr, valueType);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Map> parseToArray(String jsonStr) {
+        try {
+            return objectMapper.readValue(jsonStr, new TypeReference<List<Map>>() {
+            });
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> T parse(String jsonStr, TypeReference<T> beanClass) {
+        try {
+            return objectMapper.readValue(jsonStr, beanClass);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

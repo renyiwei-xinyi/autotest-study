@@ -1,5 +1,6 @@
 package com.evie.autotest.util;
 
+import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
@@ -10,8 +11,6 @@ import java.io.IOException;
 
 public class HttpUtils {
     private static final Logger LOGGER = LogManager.getLogger(HttpUtils.class.getName());
-
-    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static final OkHttpClient client = new OkHttpClient();
 
@@ -166,12 +165,11 @@ public class HttpUtils {
     private static String printJsonString(Object obj) {
         String json = null;
         try {
-            json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            json = TextUtils.objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
             LOGGER.info("jsonParameter:\n" + json);
             return json;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-
         }
 
         return null;
