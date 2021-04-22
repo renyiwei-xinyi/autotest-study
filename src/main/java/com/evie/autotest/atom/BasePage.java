@@ -2,6 +2,9 @@ package com.evie.autotest.atom;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,9 +17,14 @@ public class BasePage {
 
     public WebDriver driver;
     /**
-     * 检查时间间隔
+     * 最长超时时间，默认以秒为单位
      */
-    private final int timeOut = 300;
+    private final long timeOut = 3;
+
+    /**
+     * 检查间隔时间，默认为毫秒为单位
+     */
+    private final long sleep = 300;
 
     public BasePage(WebDriver driver) {
         // TODO Auto-generated constructor stub
@@ -28,7 +36,7 @@ public class BasePage {
      */
     public BasePage sendKeys(WebElement element, CharSequence data) {
         // 加入显式等待
-        new WebDriverWait(driver, timeOut).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(driver, timeOut, sleep).until(ExpectedConditions.visibilityOf(element));
         // 输入数据
         element.sendKeys(data);
 
@@ -41,7 +49,7 @@ public class BasePage {
      */
     public BasePage click(WebElement element) {
         // 加入显式等待
-        new WebDriverWait(driver, timeOut).until(ExpectedConditions.visibilityOf(element));
+        new WebDriverWait(driver, timeOut, sleep).until(ExpectedConditions.visibilityOf(element));
         element.click();
 
         return this;
@@ -56,6 +64,15 @@ public class BasePage {
 
         return this;
 
+    }
+
+    public RemoteWebDriver getEdgeDriver(){
+
+        return new EdgeDriver();
+    }
+
+    public RemoteWebDriver getChromeDriver(){
+        return new ChromeDriver();
     }
 
 

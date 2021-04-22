@@ -15,12 +15,10 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
@@ -39,22 +37,24 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     private static final Logger LOGGER = LogManager.getLogger(WeixinAutoTest.class);
 
     private static final String COOKIE = "/example/cookies1.json"; //相对路径
+    // 浏览器实例
+    private static RemoteWebDriver driver;
 
-    private static EdgeDriver driver;
 
     private static WeixinPage page;
 
     @BeforeAll
     static void before_all() {
-        // 谷歌浏览器实例
-        driver = new EdgeDriver();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //driver = new EdgeDriver();
+        driver = new ChromeDriver();
+        //设置页面隐式等待
+        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         // 初始化页面元素
         page = PageFactory.initElements(driver, WeixinPage.class);
 
     }
 
-    //@AfterAll
+    @AfterAll
     static void after_all() {
         // 测试结束 关闭浏览器
         driver.close();
