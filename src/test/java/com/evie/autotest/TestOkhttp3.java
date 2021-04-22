@@ -96,7 +96,7 @@ public class TestOkhttp3 {
 
     }
 
-    @ParameterizedTest
+
     @JsonFileSource(files = "/test/demo.json")
     void test_1231(Object data) {
         String url = "https://qyapi.weixin.qq.com/cgi-bin/message/send";

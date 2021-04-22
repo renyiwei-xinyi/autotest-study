@@ -1,5 +1,6 @@
 package com.evie.autotest.provider;
 
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.lang.annotation.*;
@@ -8,6 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @ArgumentsSource(JsonArgumentsProvider.class)
+@ParameterizedTest
 public @interface JsonSource {
     String value();
 }

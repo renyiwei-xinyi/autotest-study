@@ -436,7 +436,6 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         }
     }
 
-    @ParameterizedTest
     @DBCsvFileSource(files = "/test/exceltext.csv")
     void test_1278129(Map<String, Object> arguments){
         // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
@@ -449,7 +448,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
 
-    @ParameterizedTest
+
     @JsonFileSource(files = {"/test/json.json","/test/json2.json"})
     void test_127381273987(Object test) {
         TextUtils.printJsonString(test);
@@ -457,13 +456,13 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
 
 
-    @ParameterizedTest
+
     @JsonSource(value = "[1,2]")
     void test_12739172(Object jsonObject) {
         TextUtils.printJsonString(jsonObject);
     }
 
-    @ParameterizedTest
+
     @YamlFileSource(files = {
             "/test/moreYaml.yaml",
             "/test/yaml.yaml"
@@ -479,7 +478,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     //@Disabled
     @ParameterizedTest
-    @ValueSource(strings = {"test","121","1212","21233"})
+    @ValueSource(strings = {"test","121","1212","21233", "qweqwe  asda"})
     @Execution(ExecutionMode.CONCURRENT)
     void test_skip(Object test)  {
         LOGGER.info(test);
@@ -508,7 +507,6 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @JsonFileSource(files = "/test/json.json")
     //@YamlFileSource(files = "/test/yaml.yaml")
-    @ParameterizedTest
     void test_12973189(Object test){
         JSONObject jsonObject = JSONUtil.parseObj(test);
         jsonObject.set("test", 456);
@@ -545,10 +543,16 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
 
     @JsonFileSource(files = "/example/cookies2.json")
-    @ParameterizedTest
     void test_12397979(Object o) {
 
         TextUtils.yamlWriteTo("src/test/resources/example/cookie3.yaml", o);
+    }
+
+    @YamlFileSource(files = "/test/yaml.yaml")
+    @JsonFileSource(files = "/example/cookies2.json")
+    void test_12738(Object o){
+        System.out.println(o);
+
     }
 
 

@@ -78,7 +78,6 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     @Tag("login")
     @DisplayName("自动登录企业微信首页")
     @JsonFileSource(files = COOKIE)
-    @ParameterizedTest
     void test_2_login(List<Map<String, String>> cookies) {
         // 打开网页
         page.getUrl();
@@ -113,7 +112,6 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     @Tag("add")
     @DisplayName("自动添加成员")
     @YamlFileSource(files = "/example/web0414/memberInfo.yaml")
-    @ParameterizedTest
     void test_3_add_member(Object data, @Random int id) {
         memberInfo memberInfo = JSONUtil.toBean(JSONUtil.parseObj(data), memberInfo.class);
         assert memberInfo != null;
@@ -144,7 +142,6 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     @Tag("add")
     @DisplayName("自动添加部门")
     @YamlFileSource(files = "/example/web0414/party.yaml")
-    @ParameterizedTest
     void test_4_department_management(Object data, @Random int a) {
         page.click(page.menu_contacts)
                 .click(page.add)

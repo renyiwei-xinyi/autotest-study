@@ -82,7 +82,6 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
     }
 
     @JsonFileSource(files = "/example/cookies2.json")
-    @ParameterizedTest
     void test_2_login(List<Cookie> cookie){
         BrowserContext context = browser.newContext();
         context.addCookies(cookie);
