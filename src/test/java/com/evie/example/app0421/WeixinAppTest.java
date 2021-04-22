@@ -37,7 +37,7 @@ public class WeixinAppTest {
 
 //        cap.setCapability("browserName", "chrome");//设置HTML5的自动化，打开谷歌浏览器
 
-        cap.setCapability("udid", "127.0.0.1:7555"); //设备的udid (adb devices 查看到的)
+        cap.setCapability("udid", "8b99c044"); //设备的udid (adb devices 查看到的)
 
         try {
             driver = new AppiumDriver<>(new URL("http://127.0.0.1:4723/wd/hub"),cap);//把以上配置传到appium服务端并连接手机

@@ -89,10 +89,6 @@
             <version>3.0.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
         <!--undertow容器 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -167,12 +163,6 @@
         </dependency>
 
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-        </dependency>
-
-
-        <dependency>
             <groupId>com.massisframework</groupId>
             <artifactId>j-text-utils</artifactId>
             <version>0.3.4</version>
@@ -230,11 +220,6 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-ie-driver</artifactId>
         </dependency>
 
         <dependency>
