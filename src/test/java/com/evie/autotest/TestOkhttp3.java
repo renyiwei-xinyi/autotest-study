@@ -104,6 +104,7 @@ public class TestOkhttp3 {
                 .getBaseUrl(url)
                 .addQueryParameter("access_token", WorkWeiXin.getInstance().getAccessToken())
                 .build();
+
         HttpUtils.post(httpUrl, data);
 
     }

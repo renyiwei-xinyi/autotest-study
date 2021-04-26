@@ -38,7 +38,7 @@ public class HttpUtils {
                 LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info(responseBody);
+                LOGGER.info("👆 responseBody:" + responseBody);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
@@ -73,7 +73,7 @@ public class HttpUtils {
                 LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info(responseBody);
+                LOGGER.info("👆 responseBody:" + responseBody);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
@@ -103,7 +103,7 @@ public class HttpUtils {
                 LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info(responseBody);
+                LOGGER.info("👆 responseBody:" + responseBody);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
@@ -133,7 +133,7 @@ public class HttpUtils {
                 LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info(responseBody);
+                LOGGER.info("👆 responseBody:" + responseBody);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);

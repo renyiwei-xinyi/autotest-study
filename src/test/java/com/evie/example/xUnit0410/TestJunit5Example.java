@@ -10,6 +10,7 @@ import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.TestLifecycleLogger;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.provider.Random;
+import com.evie.autotest.util.RandomStringUtil;
 import com.evie.autotest.util.TextUtils;
 import com.evie.autotest.util.RetryHandler;
 import org.apache.logging.log4j.LogManager;
@@ -554,6 +555,18 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         System.out.println(o);
 
     }
+
+    @RepeatedTest(100)
+    void test_1271982797(){
+        java.util.Random random = new java.util.Random();
+        // 调节比例
+        int i = random.nextInt(3);
+
+        String[] test = {"111","2222"};
+        System.out.println(i + "\n"+ test.length);
+    }
+
+    
 
 
 

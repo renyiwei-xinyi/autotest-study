@@ -6,17 +6,18 @@ import com.evie.autotest.util.TextUtils;
 import okhttp3.HttpUrl;
 
 import java.io.IOException;
+import java.util.Objects;
 
 // 单例模式
 public class WorkWeiXin {
     // 同步源语 表示易于改变的 在多线程范文的时候 会被jvm刷新 多线程是可以看到实例的变化
     private static volatile WorkWeiXin workWeiXin;
 
-    public static final String corpId = "";
+    public static final String corpId = "ww56a0dac84fe980f3";
 
-    public static final String secretDemo = "";
+    public static final String secretDemo = "_89HY84tEe5RFe4rYjW5acrEbYPZ-PZjr3X9WGgn65Y";
 
-    public static final String agentId = "";
+    public static final String agentId = "1000002";
 
     private String accessToken = "";
 
@@ -51,13 +52,7 @@ public class WorkWeiXin {
                 .addQueryParameter("corpsecret", secretDemo)
                 .build();
         String string = HttpUtils.get(baseUrl);
-        try {
-            accessToken = TextUtils.objectMapper.createParser(string)
-                    .getValueAsString("access_token");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        accessToken = String.valueOf(Objects.requireNonNull(TextUtils.parseToMap(string)).get("access_token"));
     }
 
 
