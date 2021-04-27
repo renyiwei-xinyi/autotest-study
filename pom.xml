@@ -47,7 +47,7 @@
                     <!--包含测试 -->
                     <includes>
                         <include>
-                            com/evie/autotest/TestJunit5Example.java
+                            com/evie/example/xUnit0410/TestJunit5Example.java
                         </include>
                     </includes>
                     <!--排除测试 -->
