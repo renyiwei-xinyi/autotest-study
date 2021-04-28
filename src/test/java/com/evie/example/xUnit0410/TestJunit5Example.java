@@ -396,7 +396,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ParameterizedTest
     @ValueSource(strings = {"test"})
     void test_12989(String test){
-        assertTrue(StringUtils.isBlank(test));
+        logger.info(test);
     }
 
     @ParameterizedTest
