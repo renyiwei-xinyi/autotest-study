@@ -82,7 +82,7 @@ public class TextUtils {
     public static void jsonWriteTo(String path, Object obj) {
         try {
             OutputStream outputStream = new FileOutputStream(path);
-            TextUtils.objectMapper.writeValue(outputStream, obj);
+            objectMapper.writeValue(outputStream, obj);
         } catch (IOException e) {
             e.printStackTrace();
         }
