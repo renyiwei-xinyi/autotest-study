@@ -35,6 +35,7 @@ import static org.junit.jupiter.api.Assumptions.*;
 
 /**
  * @author ryw@xinyi
+ * 集成测试用例中 一个 @Test 是一个 步骤 对应一个基础的校验； 一个 class 就是一个集成测试用例 有依赖的顺序
  */
 
 
@@ -564,6 +565,19 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
         String[] test = {"111","2222"};
         System.out.println(i + "\n"+ test.length);
+    }
+
+
+    @Test
+    @Timeout(5) // Poll at most 5 seconds
+    void pollUntil() throws InterruptedException {
+        int a = 1;
+
+        while (a == 1) {
+            Thread.sleep(250); // custom poll interval
+            logger.info("sleep");
+        }
+        // Obtain the asynchronous result and perform assertions
     }
 
     

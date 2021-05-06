@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TestOkhttp3 {
 
-    final static String url = "http://127.0.0.1:6868/task";
+    final static String url = "http://www.baidu.com";
 
     /**
      * 同步get请求
@@ -48,7 +48,7 @@ public class TestOkhttp3 {
      * Post提交表单
      */
     @Test
-    public static void postFromParameters() {
+    public  void postFromParameters() {
         String url = "http://v.juhe.cn/wepiao/query"; // 请求链接
         String KEY = "9488373060c8483a3ef6333353fdc7fe"; // 请求参数
 
@@ -108,9 +108,4 @@ public class TestOkhttp3 {
         HttpUtils.post(httpUrl, data);
 
     }
-
-    public static void main(String[] args) {
-        postFromParameters();
-    }
-
 }
