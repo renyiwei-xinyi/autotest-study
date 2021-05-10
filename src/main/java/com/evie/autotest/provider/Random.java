@@ -1,11 +1,14 @@
 package com.evie.autotest.provider;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
+import java.lang.annotation.*;
+
+@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
+@Documented
+@ArgumentsSource(RandomParameters.class)
+@ParameterizedTest
 public @interface Random {
 }

@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assumptions.*;
  */
 
 
-@ExtendWith(RandomParameters.class)
+@ExtendWith({RandomParameters.class, JsonFileArgumentsProvider.class, YamlFileArgumentsProvider.class})
 public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogger {
 
     private static final Logger LOGGER = LogManager.getLogger(TestJunit5Example.class);
@@ -152,6 +152,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     /**
      * 参数化测试 空 null 参数
+     *
      * @param o
      */
     @ParameterizedTest
@@ -166,6 +167,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     /**
      * 参数化测试 基本数据类型 value null&empty组合
+     *
      * @param o
      */
     @ParameterizedTest
@@ -181,6 +183,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     /**
      * 参数化测试 枚举数据测试 - 指定枚举
+     *
      * @param o
      */
     @ParameterizedTest
@@ -196,6 +199,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     /**
      * 参数化测试 枚举数据测试 - 正则匹配
+     *
      * @param timeUnit
      */
     @ParameterizedTest
@@ -300,9 +304,6 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
 
-
-
-
     private static Stack<Object> stack;
 
     @Test
@@ -395,19 +396,25 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @ParameterizedTest
     @ValueSource(strings = {"test"})
-    void test_12989(String test){
+    void test_12989(String test) {
         logger.info(test);
     }
 
     @ParameterizedTest
-    @MethodSource
+    @ValueSource(strings = {"test"})
+    void test_12912189(String test) {
+        logger.info(test);
+    }
+
+    @ParameterizedTest
+    @MethodSource("test_12731972")
     void test_12731972(Object testDate) {
         TextUtils.printJsonString(testDate);
     }
 
-    static Stream<Map<String, Object>> test_12731972(){
+    static Stream<Map<String, Object>> test_12731972() {
         Map<String, Object> jsonObject = new HashMap<>();
-        jsonObject.put("str",12312);
+        jsonObject.put("str", 12312);
         ArrayList<Map<String, Object>> maps = new ArrayList<>();
         maps.add(jsonObject);
 
@@ -416,29 +423,30 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/test/csv.csv")
-    void test_12781279(ArgumentsAccessor arguments){
+    void test_12781279(ArgumentsAccessor arguments) {
         // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
-        for (int i = 0; i<arguments.size();i=i+1){
+        for (int i = 0; i < arguments.size(); i = i + 1) {
             Object o = arguments.get(i);
             LOGGER.info(o);
         }
     }
+
 
     @ParameterizedTest
     @CsvFileSource(files = {
             "src/test/resources/test/test5.csv",
             "src/test/resources/test/test6.csv"
     })
-    void test_127812279(ArgumentsAccessor arguments){
+    void test_127812279(ArgumentsAccessor arguments) {
         // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
-        for (int i = 0; i<arguments.size();i=i+1){
+        for (int i = 0; i < arguments.size(); i = i + 1) {
             Object o = arguments.get(i);
             LOGGER.info(o);
         }
     }
 
     @DBCsvFileSource(files = "/test/exceltext.csv")
-    void test_1278129(Map<String, Object> arguments){
+    void test_1278129(Map<String, Object> arguments) {
         // 对于 参数源有多个参数情况 可以用ArgumentsAccessor 来代替
         System.out.println(arguments.size());
 
@@ -449,13 +457,10 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
 
-
-    @JsonFileSource(files = {"/test/json.json","/test/json2.json"})
+    @JsonFileSource(files = {"/test/json.json", "/test/json2.json"})
     void test_127381273987(Object test) {
         TextUtils.printJsonString(test);
     }
-
-
 
 
     @JsonSource(value = "[1,2]")
@@ -470,7 +475,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     })
     // 是否多线程执行用例
     @Execution(ExecutionMode.SAME_THREAD)
-    void test_1273812987(Object test)  {
+    void test_1273812987(Object test) {
         LOGGER.info(test);
 //        RetryHandler.retryTillNoError(() -> {
 //            assertEquals(1, 2);
@@ -479,9 +484,9 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     //@Disabled
     @ParameterizedTest
-    @ValueSource(strings = {"test","121","1212","21233", "qweqwe  asda"})
+    @ValueSource(strings = {"test", "121", "1212", "21233", "qweqwe  asda"})
     @Execution(ExecutionMode.CONCURRENT)
-    void test_skip(Object test)  {
+    void test_skip(Object test) {
         LOGGER.info(test);
         RetryHandler.retryTillNoError(() -> {
 
@@ -491,7 +496,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @Disabled
     @Test
-    void test_skip_test(){
+    void test_skip_test() {
         LOGGER.info("test");
     }
 
@@ -502,13 +507,13 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         while (2 == 2 + i) {
             Thread.sleep(250); // custom poll interval
             logger.info(i);
-            i = i+1;
+            i = i + 1;
         }
     }
 
     @JsonFileSource(files = "/test/json.json")
-    //@YamlFileSource(files = "/test/yaml.yaml")
-    void test_12973189(Object test){
+        //@YamlFileSource(files = "/test/yaml.yaml")
+    void test_12973189(Object test) {
         JSONObject jsonObject = JSONUtil.parseObj(test);
         jsonObject.set("test", 456);
 
@@ -517,11 +522,11 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
 
-
     @ParameterizedTest
     @RepeatedTest(20)
-    @ValueSource(ints = 12) // 重复测试和 参数化测试无法组合使用
-    void test(@Random int s){
+    @ValueSource(ints = 12)
+        // 重复测试和 参数化测试无法组合使用
+    void test(@Random int s) {
         LOGGER.info(s);
         LOGGER.info(s);
 
@@ -531,13 +536,13 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     StringBuilder s = new StringBuilder("nihao");
 
     @RepeatedTest(10)
-    void test_1273917(){
+    void test_1273917() {
         LOGGER.info("我是一个重复执行的测试方法，我会执行好多次。。。");
         LOGGER.info(s);
     }
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         s.append("*");
         LOGGER.error("在重复测试中 我每次都要执行么？");
     }
@@ -551,25 +556,34 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @YamlFileSource(files = "/test/yaml.yaml")
     @JsonFileSource(files = "/example/cookies2.json")
-    void test_12738(Object o){
+    void test_12738(Object o) {
         System.out.println(o);
 
     }
 
     @RepeatedTest(100)
-    void test_1271982797(){
+    void test_1271982797() {
         java.util.Random random = new java.util.Random();
         // 调节比例
         int i = random.nextInt(3);
 
-        String[] test = {"111","2222"};
-        System.out.println(i + "\n"+ test.length);
+        String[] test = {"111", "2222"};
+        System.out.println(i + "\n" + test.length);
     }
 
-    
+    @Test
+    void test_790790709(@JsonFileSource(files = "/example/cookies2.json") List<Object> JsonData,
+                        @YamlFileSource(files = "/test/yaml.yaml") List<Object> yamlData,
+                        @Random int a) {
+
+
+        LOGGER.info(JsonData);
+        LOGGER.info(yamlData);
+        LOGGER.info(a);
 
 
 
+    }
 
 
 }
