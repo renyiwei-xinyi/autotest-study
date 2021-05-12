@@ -1,13 +1,13 @@
-boolean:
+booleans:
   - TRUE  #true,True都可以
   - FALSE  #false，False都可以
-float:
+floats:
   - 3.14
   - 6.8523015e+5  #可以使用科学计数法
-int:
+ints:
   - 123
   - 0b1010_0111_0100_1010_1110    #二进制表示
-null:
+nulls:
   nodeName: 'node'
   parent: ~  #使用~表示null
 string:

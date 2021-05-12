@@ -13,4 +13,6 @@ import java.lang.annotation.*;
 @ParameterizedTest
 public @interface JsonFileSource {
     String[] files(); /* 相对路径 ，绝对路径会抛异常找不到*/
+
+    Class<?> type() default Object.class;
 }

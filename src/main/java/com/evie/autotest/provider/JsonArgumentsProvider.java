@@ -12,25 +12,24 @@ import java.util.stream.Stream;
 public class JsonArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<JsonSource> {
 
     private String value;
+    private Class<?> type;
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
-        Stream<Object> arguments = getArguments(this.value);
-        if(arguments == null) {
-            throw new Exception("json 入参有错误");
-        }
-        return getArguments(this.value).map(Arguments::of);
+
+        return getArguments(this.value, this.type).map(Arguments::of);
     }
 
     @Override
     public void accept(JsonSource jsonSource) {
         this.value = jsonSource.value();
+        this.type = jsonSource.type();
     }
 
-    private Stream<Object> getArguments(String value) throws JsonProcessingException {
-        Object jsonObject = objectMapper.readValue(value,Object.class);
+    private Stream<Object> getArguments(String value, Class<?> type) throws JsonProcessingException {
+        Object jsonObject = objectMapper.readValue(value,type);
         return getObjectStream(jsonObject);
     }
     static Stream<Object> getObjectStream(Object jsonObject) {
