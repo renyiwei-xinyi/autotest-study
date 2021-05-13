@@ -31,6 +31,9 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private String[] resources;
 
+    private static Class<?> type;
+
+
     public JsonFileArgumentsProvider() throws Exception {
         this(Class::getResourceAsStream);
     }
@@ -44,7 +47,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         try {
             //为了处理Date属性，需要调用 findAndRegisterModules 方法
             mapper.findAndRegisterModules();
-            jsonObject = mapper.readValue(inputStream, Object.class);
+            jsonObject = mapper.readValue(inputStream, type);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,6 +62,8 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
     @Override
     public void accept(JsonFileSource jsonFileSource) {
         resources = jsonFileSource.files();
+        type = jsonFileSource.type();
+
     }
 
     @Override

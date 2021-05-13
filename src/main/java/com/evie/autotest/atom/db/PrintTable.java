@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author ryw@xinyi
@@ -43,7 +44,7 @@ public class PrintTable {
         tt.printTable();
     }
 
-    public boolean printAsTable(String tbName, List<DataMap> actual, Map<String, Object> expect) {
+    public boolean printAsTable(String tbName, Map<String, Object> expect, List<DataMap> actual) {
         if (null == actual) {
             return false;
         }
@@ -55,9 +56,10 @@ public class PrintTable {
         boolean result = true;
         for (DataMap act : actual) {
 //ext标准红有可能存在期望结果没列进去的，但是实际查出来，所以这里要做一个判断
-            if (null != (Map<String, String>) expect.get(act.getStringValue("EXT_TYPE"))) {
-                boolean res = printAsTable(tbName, act, (Map<String, String>) expect.get(act.getStringValue("EXT_TYPE")));
-                if (res == false) {
+            if (null != expect.get(act.getStringValue("EXT_TYPE"))) {
+                Object ext_type = expect.get(act.getStringValue("EXT_TYPE"));
+                boolean res = printAsTable(tbName, (Map<String, String>) ext_type, act);
+                if (!res) {
                     result = res;
                 }
             }
@@ -65,7 +67,7 @@ public class PrintTable {
         return result;
     }
 
-    public boolean printAsTable(String tbName, DataMap actual, Map<String, String> expect) {
+    public boolean printAsTable(String tbName, Map<String, String> expect, DataMap actual) {
         if (null == actual) {
             return false;
         }
@@ -73,7 +75,7 @@ public class PrintTable {
             return false;
         }
         Collection<String> collection = expect.values();
-        collection.removeIf(value -> value == null);
+        collection.removeIf(Objects::isNull);
         boolean checkResult = true;
         String[] title = {tbName, "actual", "expect", "result"};
         String[][] values = new String[collection.size()][4];
@@ -95,6 +97,74 @@ public class PrintTable {
                     values[i][3] = "true";
                 } else if (expect.get(key).contains("JSON:")) {
                     JSONObject exp = JSONUtil.parseObj(expect.get(key).replaceAll("JSON:", ""));
+                    JSONObject act = JSONUtil.parseObj(values[i][1]);
+                    if (exp.size() != act.size()) {
+                        values[i][3] = "FALSE";
+                        checkResult = false;
+                        i++;
+                        continue;
+                    }
+                    for (String expKey : exp.keySet()) {
+                        boolean match = false;
+                        for (String actKey : act.keySet()) {
+                            if (expKey.equals(actKey)) {
+                                match = true;
+                                if (!exp.get(expKey).equals(act.get(actKey))) {
+                                    values[i][3] = "FALSE";
+                                    checkResult = false;
+                                }
+                            }
+                        }
+                        if (!match) {
+                            values[i][3] = "FALSE";
+                            checkResult = false;
+                        }
+                    }
+                    if (!"FALSE".equals(values[i][3])) {
+                        values[i][3] = "true";
+                    }
+                } else if (!values[i][1].equals(expect.get(key))) {
+                    values[i][3] = "FALSE";
+                    checkResult = false;
+                }
+            }
+            i++;
+        }
+        TextTable tt = new TextTable(title, values);
+        tt.printTable();
+        return checkResult;
+    }
+
+    public boolean printAsTable(String tbName, DataMap expect, DataMap actual) {
+        if (null == actual) {
+            return false;
+        }
+        if (null == expect) {
+            return false;
+        }
+        Collection<Object> collection = expect.values();
+        collection.removeIf(Objects::isNull);
+        boolean checkResult = true;
+        String[] title = {tbName, "actual", "expect", "result"};
+        String[][] values = new String[collection.size()][4];
+        int i = 0;
+        for (String key : expect.keySet()) {
+            if (null != expect.get(key)) {
+                values[i][0] = key;
+                if (null == actual.get(key)) {
+                    values[i][1] = "null";
+                } else {
+                    values[i][1] = actual.get(key).toString();
+                }
+                values[i][2] = (String) expect.get(key);
+                if (values[i][1].equals(expect.get(key))) {
+                    values[i][3] = "true";
+                } else if ("NOT NULL".equals(expect.get(key)) && (null != values[i][1] && !"".equals(values[i][1]) && !"null".equals(values[i][1]))) {
+                    values[i][3] = "true";
+                } else if (expect.getStringValue(key).contains("CONTAINS_CHECK:") && values[i][1].contains(expect.getStringValue(key).substring(15))) {
+                    values[i][3] = "true";
+                } else if (expect.getStringValue(key).contains("JSON:")) {
+                    JSONObject exp = JSONUtil.parseObj(expect.getStringValue(key).replaceAll("JSON:", ""));
                     JSONObject act = JSONUtil.parseObj(values[i][1]);
                     if (exp.size() != act.size()) {
                         values[i][3] = "FALSE";

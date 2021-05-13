@@ -1,5 +1,6 @@
 package com.evie.autotest.atom.db;
 
+import cn.hutool.core.map.CaseInsensitiveMap;
 import cn.hutool.core.util.StrUtil;
 
 import java.math.BigDecimal;
@@ -7,13 +8,13 @@ import java.util.HashMap;
 
 /**
  * @author ryw@xinyi
+ * 不区分大小写的key
  */
-public class DataMap extends HashMap<String, Object> {
+public class DataMap extends CaseInsensitiveMap<String, Object> {
 
     private static final long serialVersionUID = 9164967756576939731L;
 
     public String getStringValue(String key) {
-        key = convertKey(key);
         String value = null;
         if (this.containsKey(key)) {
             Object obj = this.get(key);
@@ -29,14 +30,12 @@ public class DataMap extends HashMap<String, Object> {
     }
 
     public int getIntValue(String key) {
-        key = convertKey(key);
         String stringValue = this.getStringValue(key);
         int value = Integer.parseInt(stringValue);
         return value;
     }
 
     public long getLongValue(String key) {
-        key = convertKey(key);
         String stringValue = this.getStringValue(key);
         long value = Long.parseLong(stringValue);
         return value;
@@ -47,8 +46,7 @@ public class DataMap extends HashMap<String, Object> {
     }
 
     public Object get(String key) {
-        String k = convertKey(key);
-        return super.get(k);
+        return super.get(key);
     }
 }
 

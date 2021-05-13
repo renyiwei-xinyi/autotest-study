@@ -12,4 +12,6 @@ import java.lang.annotation.*;
 @ParameterizedTest
 public @interface JsonSource {
     String value();
+
+    Class<?> type() default Object.class;
 }

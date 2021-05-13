@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.support.AnnotationConsumer;
 import org.junit.platform.commons.util.Preconditions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.constructor.Constructor;
 
 import java.io.InputStream;
 import java.lang.reflect.Parameter;
@@ -39,7 +40,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private static Stream<Object> values(InputStream inputStream) {
         Iterable<Object> yamlObjects;
-        Yaml yaml = new Yaml();
+        Yaml yaml = new Yaml(new Constructor(type));
         yamlObjects = yaml.loadAll(inputStream);
         assert yamlObjects != null;
         return getObjectStream(yamlObjects);
@@ -54,6 +55,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
     @Override
     public void accept(YamlFileSource yamlFileSource) {
         resources = yamlFileSource.files();
+        type = yamlFileSource.type();
     }
 
     @Override

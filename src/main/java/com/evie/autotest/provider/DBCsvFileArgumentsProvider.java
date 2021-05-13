@@ -33,6 +33,8 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
             ;
 
     private String[] resources;
+    private static Class<?> type;
+
 
     public DBCsvFileArgumentsProvider() throws Exception {
         this(Class::getResourceAsStream);
@@ -46,7 +48,7 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
         try {
 
             Iterator<Object> iterator = csvMapper
-                    .readerFor(Object.class)
+                    .readerFor(type)
                     .with(schema)
                     .readValues(inputStream)
                     .readAll()
@@ -72,6 +74,7 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
     @Override
     public void accept(DBCsvFileSource DBCsvFileSource) {
         resources = DBCsvFileSource.files();
+        type = DBCsvFileSource.type();
     }
 
     @Override
