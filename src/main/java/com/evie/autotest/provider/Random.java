@@ -11,4 +11,8 @@ import java.lang.annotation.*;
 @ArgumentsSource(RandomParameters.class)
 @ParameterizedTest
 public @interface Random {
+
+    /*形参个数*/
+
+    /*几组数据*/
 }
