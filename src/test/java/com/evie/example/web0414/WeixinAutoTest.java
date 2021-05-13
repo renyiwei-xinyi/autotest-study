@@ -7,17 +7,15 @@ import com.evie.autotest.provider.RandomParameters;
 import com.evie.autotest.provider.YamlFileSource;
 import com.evie.autotest.extension.DriverStart;
 import com.evie.autotest.extension.TimeExecutionLogger;
+import com.evie.autotest.util.JsonUtils;
 import com.evie.autotest.util.RandomStringUtil;
-import com.evie.autotest.util.TextUtils;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -70,7 +68,7 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
         Thread.sleep(10000);
         Set<Cookie> cookies = driver.manage().getCookies();
         // 将cookie 写入 json文件用于复用
-        TextUtils.jsonWriteTo("src/test/resources" + COOKIE, cookies);
+        JsonUtils.writeJsonStr("src/test/resources" + COOKIE, cookies);
     }
 
 

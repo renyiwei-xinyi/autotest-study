@@ -3,6 +3,7 @@ package com.evie.example.xUnit0410;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONSupport;
 import cn.hutool.json.JSONUtil;
 import com.evie.autotest.atom.db.DataMap;
 import com.evie.autotest.provider.*;
@@ -11,8 +12,8 @@ import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.TestLifecycleLogger;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.provider.Random;
-import com.evie.autotest.util.RandomStringUtil;
-import com.evie.autotest.util.TextUtils;
+import com.evie.autotest.util.JsonUtils;
+import com.evie.autotest.util.YamlUtils;
 import com.evie.autotest.util.RetryHandler;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +26,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.converter.JavaTimeConversionPattern;
 import org.junit.jupiter.params.provider.*;
-import org.junit.platform.commons.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -412,7 +412,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ParameterizedTest
     @MethodSource("test_12731972")
     void test_12731972(Object testDate) {
-        TextUtils.printJsonString(testDate);
+        JsonUtils.printJsonStr(testDate);
     }
 
     static Stream<Map<String, Object>> test_12731972() {
@@ -461,7 +461,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
 
     @Data
-    static class dataJson {
+    static class dataJson extends JSONSupport {
         public boolean boolean1111;
         public int test;
         public String string;
@@ -522,13 +522,13 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @JsonFileSource(files = {"/test/json.json", "/test/json2.json"})
     void test_127381273987(Map<String, Object> test) {
-        TextUtils.printJsonString(test);
+        JsonUtils.printJsonStr(test);
     }
 
 
     @JsonSource(value = "[1,2]")
     void test_12739172(Object jsonObject) {
-        TextUtils.printJsonString(jsonObject);
+        JsonUtils.printJsonStr(jsonObject);
     }
 
 
@@ -614,7 +614,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @JsonFileSource(files = "/example/cookies2.json")
     void test_12397979(Object o) {
 
-        TextUtils.yamlWriteTo("src/test/resources/example/cookie3.yaml", o);
+        YamlUtils.yamlWriteTo("src/test/resources/example/cookie3.yaml", o);
     }
 
     @YamlFileSource(files = "/test/yaml.yaml")

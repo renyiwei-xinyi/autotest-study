@@ -1,6 +1,8 @@
 package com.evie.autotest.provider;
 
 
+
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,8 +36,10 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private Class<?> type;
 
+    private boolean isArrayType;
 
-    public JsonFileArgumentsProvider() throws Exception {
+
+    public JsonFileArgumentsProvider() {
         this(Class::getResourceAsStream);
     }
 
@@ -42,7 +47,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         this.inputStreamProvider = inputStreamProvider;
     }
 
-    private static Stream<Object> values(InputStream inputStream, Class<?> type) {
+    public static Stream<Object> values(InputStream inputStream, Class<?> type) {
         Object jsonObject = null;
         try {
             //为了处理Date属性，需要调用 findAndRegisterModules 方法
@@ -54,6 +59,21 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         return getObjectStream(jsonObject);
     }
 
+    public static Stream<Object> arrayValues(InputStream inputStream, Class<?> type) {
+        Object jsonArray = null;
+        try {
+            mapper.findAndRegisterModules();
+            JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, type);
+
+            jsonArray = mapper.readValue(inputStream, javaType);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return getObjectStream(jsonArray);
+    }
+
     static Stream<Object> getObjectStream(Object jsonObject) {
 
         return Stream.of(jsonObject);
@@ -63,15 +83,25 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
     public void accept(JsonFileSource jsonFileSource) {
         resources = jsonFileSource.files();
         type = jsonFileSource.type();
-
+        isArrayType = jsonFileSource.isArrayType();
     }
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-        return Arrays.stream(resources)
-                .map(resource -> openInputStream(context, resource))
+        Stream<InputStream> inputStreamStream = Arrays.stream(resources)
+                .map(resource -> openInputStream(context, resource));
+        if (isArrayType) {
+            // 非 list 嵌套对象
+            return inputStreamStream
+                    .flatMap(inputStream -> arrayValues(inputStream, type))
+                    .map(Arguments::of);
+        }
+        //非 list 嵌套对象
+        return inputStreamStream
                 .flatMap(inputStream -> values(inputStream, type))
                 .map(Arguments::of);
+
+
     }
 
     private InputStream openInputStream(ExtensionContext context, String resource) {

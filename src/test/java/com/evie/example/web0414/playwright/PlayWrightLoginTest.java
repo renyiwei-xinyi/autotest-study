@@ -1,17 +1,14 @@
 package com.evie.example.web0414.playwright;
 
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.evie.autotest.provider.JsonFileSource;
 import com.evie.autotest.extension.TimeExecutionLogger;
-import com.evie.autotest.util.TextUtils;
+import com.evie.autotest.util.JsonUtils;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
 import com.microsoft.playwright.options.Cookie;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,12 +23,12 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
 
 
-    @BeforeAll
+    //@BeforeAll
     static void beforeAll() {
 
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions() //启动选项
                 .setHeadless(false) // 有头模式 false & 无头模式 true
-                .setSlowMo(3000); // 慢动作
+                .setSlowMo(300); // 慢动作
         // 实例化谷歌浏览器对象
         browser = Playwright.create().chromium().launch(launchOptions);
 
@@ -49,7 +46,7 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
                 .setLocale("de-DE"); // 设置语言环境
 
     }
-    @AfterAll
+    //@AfterAll
     static void after_all() {
         browser.close();
     }
@@ -67,22 +64,24 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
         Thread.sleep(10000);
 
         List<Cookie> cookies = context.cookies();
-        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
-        // 这里有BUG 暂时用这种方法解决
-        cookies.forEach(cookie -> {
-            JSONObject jsonObject = JSONUtil.parseObj(cookie);
-            jsonObject.set("sameSite", "None");
-            jsonObjects.add(jsonObject);
-        });
+//        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
+//        // 这里有BUG 暂时用这种方法解决
+//        cookies.forEach(cookie -> {
+//            JSONObject jsonObject = JSONUtil.parseObj(cookie);
+//            jsonObject.set("sameSite", "None");
+//            jsonObjects.add(jsonObject);
+//        });
         String path = "src/test/resources/example/cookies2.json";
 
-        TextUtils.jsonWriteTo(path, jsonObjects);
+        JsonUtils.writeJsonStr(path, cookies);
 
 
     }
 
     @JsonFileSource(files = "/example/cookies2.json")
     void test_2_login(List<Cookie> cookie){
+        System.out.println(cookie);
+
         BrowserContext context = browser.newContext();
         context.addCookies(cookie);
 
@@ -92,6 +91,32 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
         wechatPage.clickRessBook();
 
+    }
+
+    @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
+    void test_SameSiteAttribute(List<Cookie> jsonCookie){
+
+        Browser browser = Playwright.create().chromium().launch();
+
+        BrowserContext context = browser.newContext();
+
+        Page page = context.newPage();
+
+        context.addCookies(jsonCookie);
+
+        page.navigate("https://www.google.com/");
+
+    }
+
+    @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
+    void test_12839(List<Cookie> cookies){
+        System.out.println(JSONUtil.toJsonPrettyStr(cookies));
+
+        Browser browser = Playwright.create().chromium().launch();
+
+        BrowserContext context = browser.newContext();
+        // test add cookies
+        context.addCookies(cookies);
     }
 
 

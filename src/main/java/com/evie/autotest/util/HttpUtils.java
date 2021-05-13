@@ -1,8 +1,6 @@
 package com.evie.autotest.util;
 
-import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +16,8 @@ public class HttpUtils {
 
     public static String post(HttpUrl baseUrl, Headers headers, Object bodyParameter) {
 
-        String jsonString = printJsonString(bodyParameter);
+        String jsonString = JsonUtils.obj2StrPretty(bodyParameter);
+
 
         assert jsonString != null;
         RequestBody body = RequestBody.create(jsonParse, jsonString);
@@ -28,7 +27,8 @@ public class HttpUtils {
                 .build();
 
         LOGGER.info("start send HTTP:" + request);
-        printJsonString(bodyParameter);
+        LOGGER.info("jsonParameter:\n" + jsonString);
+
         //发送请求，输出日志
         try {
             Response response = client
@@ -54,7 +54,7 @@ public class HttpUtils {
 
     public static String post(HttpUrl baseUrl, Object bodyParameter) {
 
-        String jsonString = printJsonString(bodyParameter);
+        String jsonString = JsonUtils.obj2StrPretty(bodyParameter);
 
         assert jsonString != null;
         RequestBody body = RequestBody.create(jsonParse, jsonString);
@@ -64,6 +64,8 @@ public class HttpUtils {
                 .build();
 
         LOGGER.info("start send HTTP:" + request);
+        LOGGER.info("jsonParameter:\n" + jsonString);
+
         //发送请求，输出日志
         try {
             Response response = client
@@ -156,24 +158,5 @@ public class HttpUtils {
         return HttpUrl.get(baseUrl).newBuilder();
     }
 
-    /**
-     * 解析为json格式 并格式化输出
-     *
-     * @param obj 被解析对象
-     * @throws Exception 解析错误
-     */
-    private static String printJsonString(Object obj) {
-        String json = null;
-        try {
-            json = TextUtils.objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-            LOGGER.info("jsonParameter:\n" + json);
-            return json;
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-
-    }
 
 }
