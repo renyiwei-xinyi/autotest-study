@@ -29,6 +29,9 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private String[] resources;
 
+    private static Class<?> type;
+
+
 
     public YamlFileArgumentsProvider() throws Exception {
         this(Class::getResourceAsStream);
