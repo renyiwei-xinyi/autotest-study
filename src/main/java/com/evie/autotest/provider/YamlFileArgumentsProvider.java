@@ -29,7 +29,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private String[] resources;
 
-    private static Class<?> type;
+    private Class<?> type;
 
 
 
@@ -41,7 +41,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         this.inputStreamProvider = inputStreamProvider;
     }
 
-    private static Stream<Object> values(InputStream inputStream) {
+    private static Stream<Object> values(InputStream inputStream, Class<?> type) {
         Iterable<Object> yamlObjects;
         Yaml yaml = new Yaml(new Constructor(type));
         yamlObjects = yaml.loadAll(inputStream);
@@ -65,7 +65,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
         return Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(YamlFileArgumentsProvider::values)
+                .flatMap(inputStream -> values(inputStream, type))
                 .map(Arguments::of);
     }
 
@@ -91,7 +91,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
         return Arrays.stream(parameter.getDeclaredAnnotation(YamlFileSource.class).files())
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(YamlFileArgumentsProvider::values)
+                .flatMap(inputStream -> values(inputStream, type))
                 .collect(Collectors.toList());
 
     }

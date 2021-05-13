@@ -31,7 +31,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private String[] resources;
 
-    private static Class<?> type;
+    private Class<?> type;
 
 
     public JsonFileArgumentsProvider() throws Exception {
@@ -42,7 +42,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         this.inputStreamProvider = inputStreamProvider;
     }
 
-    private static Stream<Object> values(InputStream inputStream) {
+    private static Stream<Object> values(InputStream inputStream, Class<?> type) {
         Object jsonObject = null;
         try {
             //为了处理Date属性，需要调用 findAndRegisterModules 方法
@@ -70,7 +70,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
         return Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(JsonFileArgumentsProvider::values)
+                .flatMap(inputStream -> values(inputStream, type))
                 .map(Arguments::of);
     }
 
@@ -96,7 +96,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
         return Arrays.stream(parameter.getDeclaredAnnotation(JsonFileSource.class).files())
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(JsonFileArgumentsProvider::values)
+                .flatMap(inputStream -> values(inputStream, type))
                 .collect(Collectors.toList());
 
     }

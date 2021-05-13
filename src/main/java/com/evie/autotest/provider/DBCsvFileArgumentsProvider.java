@@ -4,6 +4,9 @@ package com.evie.autotest.provider;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.ParameterResolutionException;
+import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.support.AnnotationConsumer;
@@ -11,20 +14,22 @@ import org.junit.platform.commons.util.Preconditions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 /**
  * path 是相对路径 如果填绝对路径会抛异常
  */
-public class DBCsvFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<DBCsvFileSource> {
+public class DBCsvFileArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<DBCsvFileSource>, ParameterResolver {
 
     private final BiFunction<Class, String, InputStream> inputStreamProvider;
 
-    public static CsvMapper csvMapper = new CsvMapper();
+    public static final CsvMapper csvMapper = new CsvMapper();
 
     public static CsvSchema schema = CsvSchema.emptySchema()
             .withHeader()
@@ -33,7 +38,7 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
             ;
 
     private String[] resources;
-    private static Class<?> type;
+    private Class<?> type;
 
 
     public DBCsvFileArgumentsProvider() throws Exception {
@@ -44,7 +49,7 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
         this.inputStreamProvider = inputStreamProvider;
     }
 
-    private static Stream<Object> values(InputStream inputStream) {
+    private static Stream<Object> values(InputStream inputStream, Class<?> type) {
         try {
 
             Iterator<Object> iterator = csvMapper
@@ -81,7 +86,7 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
         return Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(DBCsvFileArgumentsProvider::values)
+                .flatMap(inputStream -> values(inputStream, type))
                 .map(Arguments::of);
     }
 
@@ -90,5 +95,25 @@ public class DBCsvFileArgumentsProvider implements ArgumentsProvider, Annotation
         Class<?> testClass = context.getRequiredTestClass();
         return Preconditions.notNull(inputStreamProvider.apply(testClass, resource),
                 () -> testClass + "\n Classpath resource [" + resource + "] does not exist");
+    }
+
+    @Override
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return parameterContext.isAnnotated(DBCsvFileSource.class);
+    }
+
+    @Override
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
+        return getCsvFileValue(parameterContext.getParameter(), extensionContext);
+    }
+
+    private Object getCsvFileValue(Parameter parameter, ExtensionContext context) {
+        Class<?> type = parameter.getType();
+
+        return Arrays.stream(parameter.getDeclaredAnnotation(DBCsvFileSource.class).files())
+                .map(resource -> openInputStream(context, resource))
+                .flatMap(inputStream -> values(inputStream, type))
+                .collect(Collectors.toList());
+
     }
 }
