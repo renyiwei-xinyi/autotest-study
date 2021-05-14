@@ -10,19 +10,18 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.SimpleDateFormat;
 
 @Slf4j
 public class JsonUtils {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
     // 日起格式化
     private static final String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
     static {
+        //为了处理Date属性，需要调用 findAndRegisterModules 方法
+        objectMapper.findAndRegisterModules();
         //对象的所有字段全部列入
         objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         //取消默认转换timestamps形式
@@ -41,7 +40,7 @@ public class JsonUtils {
      * @param obj
      * @throws Exception
      */
-    public static void printJsonStr(Object obj) {
+    public static void printJson(Object obj) {
         try {
             String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
             log.info("\n" + json);
@@ -56,7 +55,7 @@ public class JsonUtils {
      * @param obj 对象
      * @return Json格式字符串
      */
-    public static <T> String obj2Str(T obj) {
+    public static <T> String parseObj(T obj) {
         if (obj == null) {
             return null;
         }
@@ -73,7 +72,7 @@ public class JsonUtils {
      * @param obj 对象
      * @return 美化的Json格式字符串
      */
-    public static <T> String obj2StrPretty(T obj) {
+    public static <T> String parseObjPretty(T obj) {
         if (obj == null) {
             return null;
         }
@@ -91,7 +90,7 @@ public class JsonUtils {
      * @param clazz 自定义对象的class对象
      * @return 自定义对象
      */
-    public static <T> T str2Obj(String str, Class<T> clazz){
+    public static <T> T readValue(String str, Class<T> clazz){
         if(StringUtils.isEmpty(str) || clazz == null){
             return null;
         }
@@ -109,7 +108,7 @@ public class JsonUtils {
      * @param typeReference 复杂的对象
      * @return 自定义对象
      */
-    public static <T> T str2Obj(String str, TypeReference<T> typeReference) {
+    public static <T> T readValue(String str, TypeReference<T> typeReference) {
         if (StringUtils.isEmpty(str) || typeReference == null) {
             return null;
         }
@@ -128,7 +127,7 @@ public class JsonUtils {
      * @param elementClazzes  成员对象
      * @return 自定义对象
      */
-    public static <T> T str2Obj(String str, Class<?> collectionClazz, Class<?>... elementClazzes) {
+    public static <T> T readValue(String str, Class<?> collectionClazz, Class<?>... elementClazzes) {
         JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClazz, elementClazzes);
         try {
             return objectMapper.readValue(str, javaType);
@@ -138,29 +137,71 @@ public class JsonUtils {
         }
     }
 
-    public static Object read2JsonObj(String path) {
+    /**
+     * 字符串转换为嵌套对象
+     * @param inputStream 文件流
+     * @param collectionClazz 包装对象
+     * @param elementClazzes  成员对象
+     * @return 自定义对象
+     */
+    public static <T> T readValue(InputStream inputStream, Class<?> collectionClazz, Class<?>... elementClazzes) {
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClazz, elementClazzes);
         try {
-            FileInputStream inputStream = new FileInputStream(path);
-
-            return objectMapper.readValue(inputStream, Object.class);
+            return objectMapper.readValue(inputStream, javaType);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("Parse String to Object error : {}" + e.getMessage());
+            return null;
         }
-        return null;
-
     }
 
-    public static String read2JsonStr(String path) {
+
+
+    public static <T> T readValue(InputStream inputStream, Class<T> type){
+        try {
+            return objectMapper.readValue(inputStream, type);
+        } catch (IOException e) {
+            log.warn("read input stream to Object error : {}" + e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * 读取json文件解析为string对象
+     * @param path
+     * @return
+     */
+    public static String readFile(String path) {
         try {
             FileInputStream inputStream = new FileInputStream(path);
 
             return objectMapper.readValue(inputStream, Object.class).toString();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("read file to Object error : {}" + e.getMessage());
         }
         return null;
 
     }
+
+    /**
+     * 读取json文件解析为Java对象
+     * @param path
+     * @return
+     */
+    public static <T> T readFile(String path, Class<T> type) {
+        try {
+            FileInputStream inputStream = new FileInputStream(path);
+
+            return objectMapper.readValue(inputStream, type);
+        } catch (IOException e) {
+            log.warn("read file to Object error : {}" + e.getMessage());
+        }
+        return null;
+
+    }
+
+
+
 
 
     /**
@@ -174,7 +215,7 @@ public class JsonUtils {
             OutputStream outputStream = new FileOutputStream(path);
             objectMapper.writeValue(outputStream, obj);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn("write file to Object error : {}" + e.getMessage());
         }
 
     }

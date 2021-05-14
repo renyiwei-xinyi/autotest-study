@@ -16,7 +16,7 @@ public class HttpUtils {
 
     public static String post(HttpUrl baseUrl, Headers headers, Object bodyParameter) {
 
-        String jsonString = JsonUtils.obj2StrPretty(bodyParameter);
+        String jsonString = JsonUtils.parseObjPretty(bodyParameter);
 
 
         assert jsonString != null;
@@ -54,7 +54,7 @@ public class HttpUtils {
 
     public static String post(HttpUrl baseUrl, Object bodyParameter) {
 
-        String jsonString = JsonUtils.obj2StrPretty(bodyParameter);
+        String jsonString = JsonUtils.parseObjPretty(bodyParameter);
 
         assert jsonString != null;
         RequestBody body = RequestBody.create(jsonParse, jsonString);

@@ -1,5 +1,6 @@
 package com.evie.autotest.provider;
 
+import com.evie.autotest.util.JsonUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -13,8 +14,6 @@ public class JsonArgumentsProvider implements ArgumentsProvider, AnnotationConsu
 
     private String value;
     private Class<?> type;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
@@ -28,8 +27,10 @@ public class JsonArgumentsProvider implements ArgumentsProvider, AnnotationConsu
         this.type = jsonSource.type();
     }
 
-    private Stream<Object> getArguments(String value, Class<?> type) throws JsonProcessingException {
-        Object jsonObject = objectMapper.readValue(value,type);
+    private Stream<Object> getArguments(String value, Class<?> type) {
+
+        Object jsonObject = JsonUtils.readValue(value, type);
+
         return getObjectStream(jsonObject);
     }
     static Stream<Object> getObjectStream(Object jsonObject) {

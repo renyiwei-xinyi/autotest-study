@@ -2,6 +2,7 @@ package com.evie.autotest.provider;
 
 
 
+import com.evie.autotest.util.JsonUtils;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -29,9 +30,6 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private final BiFunction<Class, String, InputStream> inputStreamProvider;
 
-    private static final ObjectMapper mapper = new ObjectMapper();
-
-
     private String[] resources;
 
     private Class<?> type;
@@ -47,29 +45,16 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         this.inputStreamProvider = inputStreamProvider;
     }
 
-    public static Stream<Object> values(InputStream inputStream, Class<?> type) {
-        Object jsonObject = null;
-        try {
-            //为了处理Date属性，需要调用 findAndRegisterModules 方法
-            mapper.findAndRegisterModules();
-            jsonObject = mapper.readValue(inputStream, type);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static Stream<Object> objectValues(InputStream inputStream, Class<?> type) {
+
+        Object jsonObject = JsonUtils.readValue(inputStream, type);
+
         return getObjectStream(jsonObject);
     }
 
     public static Stream<Object> arrayValues(InputStream inputStream, Class<?> type) {
-        Object jsonArray = null;
-        try {
-            mapper.findAndRegisterModules();
-            JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, type);
 
-            jsonArray = mapper.readValue(inputStream, javaType);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Object jsonArray = JsonUtils.readValue(inputStream, List.class, type);
 
         return getObjectStream(jsonArray);
     }
@@ -98,7 +83,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         }
         //非 list 嵌套对象
         return inputStreamStream
-                .flatMap(inputStream -> values(inputStream, type))
+                .flatMap(inputStream -> objectValues(inputStream, type))
                 .map(Arguments::of);
 
 
@@ -126,7 +111,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
         return Arrays.stream(parameter.getDeclaredAnnotation(JsonFileSource.class).files())
                 .map(resource -> openInputStream(context, resource))
-                .flatMap(inputStream -> values(inputStream, type))
+                .flatMap(inputStream -> objectValues(inputStream, type))
                 .collect(Collectors.toList());
 
     }

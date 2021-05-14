@@ -5,6 +5,7 @@ import com.evie.autotest.util.JsonUtils;
 import okhttp3.HttpUrl;
 
 import java.util.Map;
+import java.util.Objects;
 
 // 单例模式
 public class WorkWeiXin {
@@ -50,7 +51,7 @@ public class WorkWeiXin {
                 .addQueryParameter("corpsecret", secretDemo)
                 .build();
         String string = HttpUtils.get(baseUrl);
-        accessToken = (String) JsonUtils.str2Obj(string, Map.class).get("access_token");
+        accessToken = (String) Objects.requireNonNull(JsonUtils.readValue(string, Map.class)).get("access_token");
     }
 
 

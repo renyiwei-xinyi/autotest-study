@@ -412,7 +412,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ParameterizedTest
     @MethodSource("test_12731972")
     void test_12731972(Object testDate) {
-        JsonUtils.printJsonStr(testDate);
+        JsonUtils.printJson(testDate);
     }
 
     static Stream<Map<String, Object>> test_12731972() {
@@ -522,13 +522,13 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @JsonFileSource(files = {"/test/json.json", "/test/json2.json"})
     void test_127381273987(Map<String, Object> test) {
-        JsonUtils.printJsonStr(test);
+        JsonUtils.printJson(test);
     }
 
 
     @JsonSource(value = "[1,2]")
     void test_12739172(Object jsonObject) {
-        JsonUtils.printJsonStr(jsonObject);
+        JsonUtils.printJson(jsonObject);
     }
 
 
