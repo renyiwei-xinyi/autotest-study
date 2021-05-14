@@ -10,18 +10,18 @@ import org.openqa.selenium.edge.EdgeDriverService;
 
 public interface DriverStart {
 
-    static final Logger logger = LogManager.getLogger(DriverStart.class.getName());
+    Logger LOGGER = LogManager.getLogger(DriverStart.class.getName());
 
     @BeforeAll
     static void Before() {
-        logger.info("================ Before all tests ================");
+        LOGGER.info("================ Before all tests ================");
         System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, "src/test/resources/chromedriver.exe");
         System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, "src/test/resources/msedgedriver.exe");
     }
 
     @AfterAll
     static void After() {
-        logger.info("================ After all tests ================");
+        LOGGER.info("================ After all tests ================");
     }
 
 

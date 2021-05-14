@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class ContextUtil {
 
-    private static final Logger logger = LogManager.getLogger(ContextUtil.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(ContextUtil.class.getName());
 
 
     public static ExtensionContext.Store getClassStore(ExtensionContext context) {

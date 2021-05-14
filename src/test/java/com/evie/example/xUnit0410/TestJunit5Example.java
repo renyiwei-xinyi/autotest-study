@@ -1,6 +1,5 @@
 package com.evie.example.xUnit0410;
 
-
 import cn.hutool.core.date.DateTime;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONSupport;
@@ -400,13 +399,13 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ParameterizedTest
     @ValueSource(strings = {"test"})
     void test_12989(String test) {
-        logger.info(test);
+        LOGGER.info(test);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"test"})
     void test_12912189(String test) {
-        logger.info(test);
+        LOGGER.info(test);
     }
 
     @ParameterizedTest
@@ -569,7 +568,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         int i = 0;
         while (2 == 2 + i) {
             Thread.sleep(250); // custom poll interval
-            logger.info(i);
+            LOGGER.info(i);
             i = i+1;
         }
     }
@@ -652,9 +651,14 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         int a = 1;
         while (a == 1) {
             Thread.sleep(250); // custom poll interval
-            logger.info("sleep");
+            LOGGER.info("sleep");
         }
         // Obtain the asynchronous result and perform assertions
+    }
+
+    @Random
+    void test_random(){
+
     }
 
 

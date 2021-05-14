@@ -7,16 +7,16 @@ import org.junit.jupiter.api.*;
 
 public interface TestLifecycleLogger {
 
-    static final Logger logger = LogManager.getLogger(TestLifecycleLogger.class.getName());
+    static final Logger LOGGER = LogManager.getLogger(TestLifecycleLogger.class.getName());
 
     @BeforeAll
     static void Before() {
-        logger.info("================ Before all tests ================");
+        LOGGER.info("================ Before all tests ================");
     }
 
     @AfterAll
     static void After() {
-        logger.info("================ After all tests ================");
+        LOGGER.info("================ After all tests ================");
 
     }
 

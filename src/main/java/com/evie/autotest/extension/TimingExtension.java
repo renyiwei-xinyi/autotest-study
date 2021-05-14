@@ -1,7 +1,5 @@
 package com.evie.autotest.extension;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.extension.*;
@@ -15,7 +13,7 @@ public class TimingExtension implements
         BeforeAllCallback,
         AfterAllCallback {
 
-    private static final Logger logger = LogManager.getLogger(TimingExtension.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(TimingExtension.class.getName());
 
     private static final String METHOD_START_TIME = "method start time";
 
@@ -32,7 +30,7 @@ public class TimingExtension implements
         long startTime = getStore(context).remove(METHOD_START_TIME, long.class);
         long duration = System.currentTimeMillis() - startTime;
 
-        logger.info(
+        LOGGER.info(
                 String.format("******** Method [-%s-] took %s ms. ********", testMethod.getName(), duration));
     }
 
@@ -46,7 +44,7 @@ public class TimingExtension implements
     public void afterAll(ExtensionContext context) {
         long allTime = getClassStore(context).remove(ALL_TIME, long.class);
         long duration = System.currentTimeMillis() - allTime;
-        logger.info(
+        LOGGER.info(
                 String.format("******** All Test took %s ms. ********", duration)
         );
 
