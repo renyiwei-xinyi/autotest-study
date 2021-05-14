@@ -1,6 +1,5 @@
 package com.evie.example.web0414.playwright;
 
-import cn.hutool.json.JSONUtil;
 import com.evie.autotest.provider.JsonFileSource;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.util.JsonUtils;
@@ -19,11 +18,11 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
     private static Browser browser;
 
-    private static Browser.NewContextOptions geolocation;
+    private static Browser.NewContextOptions options;
 
 
 
-    //@BeforeAll
+    @BeforeAll
     static void beforeAll() {
 
         BrowserType.LaunchOptions launchOptions = new BrowserType.LaunchOptions() //启动选项
@@ -33,7 +32,7 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
         browser = Playwright.create().chromium().launch(launchOptions);
 
         //浏览器上下文，可以用来设置打开的模式
-        geolocation = new Browser.NewContextOptions()
+        options = new Browser.NewContextOptions()
                 // 设置用户代理模式
                 .setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Mobile/15E148 Safari/604.1")
                 .setViewportSize(375, 812) // 设置窗口长宽
@@ -46,7 +45,7 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
                 .setLocale("de-DE"); // 设置语言环境
 
     }
-    //@AfterAll
+    @AfterAll
     static void after_all() {
         browser.close();
     }
@@ -56,7 +55,8 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
     @Test
     void test_1_login() throws InterruptedException {
         // 打开网页
-        BrowserContext context = browser.newContext();
+        BrowserContext context = browser.newContext(options);
+
         WechatPage wechatPage = new WechatPage(context.newPage());
 
         wechatPage.navigate();
@@ -64,16 +64,10 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
         Thread.sleep(10000);
 
         List<Cookie> cookies = context.cookies();
-//        ArrayList<JSONObject> jsonObjects = new ArrayList<>();
-//        // 这里有BUG 暂时用这种方法解决
-//        cookies.forEach(cookie -> {
-//            JSONObject jsonObject = JSONUtil.parseObj(cookie);
-//            jsonObject.set("sameSite", "None");
-//            jsonObjects.add(jsonObject);
-//        });
+
         String path = "src/test/resources/example/cookies2.json";
 
-        JsonUtils.writeJsonStr(path, cookies);
+        JsonUtils.writeFile(path, cookies);
 
 
     }
@@ -110,7 +104,7 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
     @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
     void test_12839(List<Cookie> cookies){
-        System.out.println(JSONUtil.toJsonPrettyStr(cookies));
+        JsonUtils.printJson(cookies);
 
         Browser browser = Playwright.create().chromium().launch();
 

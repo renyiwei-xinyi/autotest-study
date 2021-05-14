@@ -14,7 +14,7 @@ public class YamlUtils {
      * @param path
      * @return
      */
-    public static Object yamlReadFor(String path) {
+    public static Object readFile(String path) {
         try {
             FileInputStream inputStream = new FileInputStream(path);
 
@@ -33,7 +33,7 @@ public class YamlUtils {
      * @param path
      * @param obj
      */
-    public static void yamlWriteTo(String path, Object obj) {
+    public static void writeFile(String path, Object obj) {
         try {
             OutputStream outputStream = new FileOutputStream(path);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);

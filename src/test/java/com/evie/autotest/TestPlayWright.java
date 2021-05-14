@@ -1,9 +1,6 @@
 package com.evie.autotest;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,7 +11,7 @@ public class TestPlayWright {
 
     private static Browser browser;
 
-    private static Browser.NewContextOptions geolocation;
+    private static Browser.NewContextOptions options;
 
     @BeforeAll
     static void beforeAll() {
@@ -26,7 +23,7 @@ public class TestPlayWright {
         browser = Playwright.create().firefox().launch(launchOptions);
 
         //浏览器上下文，可以用来设置打开的模式
-        geolocation = new Browser.NewContextOptions()
+        options = new Browser.NewContextOptions()
                 // 设置用户代理模式
                 .setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Mobile/15E148 Safari/604.1")
                 .setViewportSize(180, 812) // 设置窗口长宽
@@ -42,7 +39,8 @@ public class TestPlayWright {
 
     @Test
     void test_network() {
-        Page page = browser.newPage();
+        Page page = browser.newContext(options).newPage();
+
         page.onRequest(
                 request ->
                 {

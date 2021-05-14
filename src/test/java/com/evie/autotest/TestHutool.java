@@ -1,13 +1,22 @@
 package com.evie.autotest;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.map.MapBuilder;
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.digest.BCrypt;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import lombok.Data;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+项目中 hutool - json 不能和 jackson / gson 混用
+ */
 public class TestHutool {
 
     /**
@@ -38,14 +47,35 @@ public class TestHutool {
         String jsonStr = "{\"name\":\"seven\",\"password\":null}";
 
         JSONObject json = new JSONObject(jsonStr);
-        System.out.println(json.get("password")==null);
+        Assertions.assertNotNull(json.get("password"));//hutool json 对象 需要用 JSONObject.isNull 来判断
         System.out.println(json.get("password").getClass());
 
-        Map<String,String> map = new JSONObject(jsonStr).toBean(Map.class);
-        System.out.println(map.get("password")==null);
+        Assertions.assertTrue(json.isNull("password")); // 这里的null 如果 toString 会变成 "null" 字符串
+
+        boolean bean = BeanUtil.isBean(Map.class); // map 不是 javaBean
+        Assertions.assertFalse(bean);
+
+
+        Map<String,Object> map = json.toBean(HashMap.class);// 这里转换会成功的，但是 null 已经被转为 JSONNull
+        Assertions.assertEquals(map.getClass(), HashMap.class);
+
+        Assertions.assertNotNull(map.get("password"));// 所以这里也依然需要用 JSONUtil.isNull 来判断
         System.out.println(map.get("password").getClass());
 
-        System.out.println(json.isNull("password"));
+
+        Map<String, Object> jsonToMap = MapUtil.builder(json).map();// 这里转换会失败，依然是 JSONObject
+        Assertions.assertEquals(jsonToMap.getClass(), JSONObject.class);
+        Assertions.assertNotNull(jsonToMap.get("password"));// 所以这里也依然需要用 JSONObject.isNull 来判断
+        Assertions.assertTrue(JSONUtil.isNull(jsonToMap.get("password")));// 所以这里也依然需要用 JSONUtil.isNull 来判断
+
+        System.out.println(jsonToMap.get("password").getClass());
+
+    }
+
+    @Data
+    static class demo{
+        public String name;
+        public String password;
     }
 
 

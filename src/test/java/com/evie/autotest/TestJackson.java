@@ -1,12 +1,13 @@
 package com.evie.autotest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
+
+import com.evie.autotest.util.JsonUtils;
 import lombok.Data;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 public class TestJackson {
 
@@ -17,12 +18,15 @@ public class TestJackson {
         String age;
     }
 
-    ObjectMapper mapper = new ObjectMapper();
-
     @Test
-    void test_1237817() throws IOException {
-        TypeReference<List<User>> typeReference = new TypeReference<List<User>>(){};
-        List<User> o = mapper.readValue(TestJackson.class.getResourceAsStream("/user.yaml"), typeReference);
+    void test_173981() throws JSONException {
+        String jsonStr = "{\"name\":\"seven\",\"password\":null}";
+
+        Map<String,Object> jsonObject = JsonUtils.readValue(jsonStr, Map.class);
+
+        System.out.println(jsonObject.get("password") == null);
+
     }
+
 }
 

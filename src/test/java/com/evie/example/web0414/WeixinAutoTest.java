@@ -68,7 +68,7 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
         Thread.sleep(10000);
         Set<Cookie> cookies = driver.manage().getCookies();
         // 将cookie 写入 json文件用于复用
-        JsonUtils.writeJsonStr("src/test/resources" + COOKIE, cookies);
+        JsonUtils.writeFile("src/test/resources" + COOKIE, cookies);
     }
 
 

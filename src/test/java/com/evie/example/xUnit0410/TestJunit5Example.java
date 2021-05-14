@@ -614,7 +614,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @JsonFileSource(files = "/example/cookies2.json")
     void test_12397979(Object o) {
 
-        YamlUtils.yamlWriteTo("src/test/resources/example/cookie3.yaml", o);
+        YamlUtils.writeFile("src/test/resources/example/cookie3.yaml", o);
     }
 
     @YamlFileSource(files = "/test/yaml.yaml")

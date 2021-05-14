@@ -35,7 +35,7 @@ public class JsonUtils {
     }
 
     /**
-     * 输出JSON信息
+     * 输出json信息(格式化的Json字符串)
      *
      * @param obj
      * @throws Exception
@@ -210,7 +210,7 @@ public class JsonUtils {
      * @param path
      * @param obj
      */
-    public static void writeJsonStr(String path, Object obj) {
+    public static void writeFile(String path, Object obj) {
         try {
             OutputStream outputStream = new FileOutputStream(path);
             objectMapper.writeValue(outputStream, obj);

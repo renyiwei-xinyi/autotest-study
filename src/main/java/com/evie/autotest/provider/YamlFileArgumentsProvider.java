@@ -33,7 +33,7 @@ public class YamlFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
 
 
-    public YamlFileArgumentsProvider() throws Exception {
+    public YamlFileArgumentsProvider() {
         this(Class::getResourceAsStream);
     }
 
