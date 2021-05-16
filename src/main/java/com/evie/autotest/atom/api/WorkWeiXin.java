@@ -9,7 +9,7 @@ import java.util.Objects;
 
 // 单例模式
 public class WorkWeiXin {
-    // 同步源语 表示易于改变的 在多线程范文的时候 会被jvm刷新 多线程是可以看到实例的变化
+    // volatile 同步源语 表示易于改变的 在多线程范文的时候 会被jvm刷新 多线程是可以看到实例的变化
     private static volatile WorkWeiXin workWeiXin;
 
     public static final String corpId = "ww56a0dac84fe980f3";

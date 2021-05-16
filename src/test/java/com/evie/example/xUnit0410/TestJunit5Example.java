@@ -277,6 +277,19 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     }
 
+    final List<String> fruits = Arrays.asList("apple", "banana", "lemon");
+
+    /**
+     * 扩展功能 测试模板上下文
+     * @param fruit
+     */
+    @TestTemplate
+    @ExtendWith(TestTemplateContextProvider.class)
+    void testTemplate(String fruit){
+        assertTrue(fruits.contains(fruit));
+
+    }
+
     static class A_year_is_not_supported {
 
         @Test

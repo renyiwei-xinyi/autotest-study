@@ -5,6 +5,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.crypto.digest.BCrypt;
+import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
@@ -45,6 +46,10 @@ public class TestHutool {
     @Test
     void test_127987(){
         String jsonStr = "{\"name\":\"seven\",\"password\":null}";
+
+        JSONConfig jsonConfig = JSONConfig.create().setIgnoreNullValue(false);
+        JSONObject jsonObject = new JSONObject(jsonStr, jsonConfig);
+        System.out.println(jsonObject.get("password") == null);
 
         JSONObject json = new JSONObject(jsonStr);
         Assertions.assertNotNull(json.get("password"));//hutool json 对象 需要用 JSONObject.isNull 来判断

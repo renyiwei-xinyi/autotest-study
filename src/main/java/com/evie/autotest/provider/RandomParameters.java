@@ -15,9 +15,7 @@ import java.util.stream.Stream;
 /**
  * @author ryw@xinyi
  */
-public class RandomParameters implements ArgumentsProvider, AnnotationConsumer<Random>, ParameterResolver {
-
-
+public class RandomParameters implements ParameterResolver {
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
@@ -40,15 +38,5 @@ public class RandomParameters implements ArgumentsProvider, AnnotationConsumer<R
             return random.nextDouble();
         }
         throw new ParameterResolutionException("No random generator implemented for " + type);
-    }
-
-    @Override
-    public void accept(Random random) {
-
-    }
-
-    @Override
-    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
-        return null;
     }
 }

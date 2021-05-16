@@ -19,14 +19,14 @@ public class JsonUtils {
 
     private static final Logger LOGGER = LogManager.getLogger(JsonUtils.class);
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    public static final ObjectMapper objectMapper = new ObjectMapper();
     // 日起格式化
     private static final String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
     static {
         //为了处理Date属性，需要调用 findAndRegisterModules 方法
         objectMapper.findAndRegisterModules();
         //对象的所有字段全部列入
-        objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
+        //objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         //取消默认转换timestamps形式
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false);
         //忽略空Bean转json的错误
