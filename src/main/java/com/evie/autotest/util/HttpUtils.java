@@ -34,10 +34,10 @@ public class HttpUtils {
                     .newCall(request)
                     .execute();
             if (response.isSuccessful()){
-                LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info("👆 responseBody:" + responseBody);
+                LOGGER.info("responseBody:" + responseBody);
+                LOGGER.info("end send HTTP success:" + response);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
@@ -71,10 +71,10 @@ public class HttpUtils {
                     .newCall(request)
                     .execute();
             if (response.isSuccessful()){
-                LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info("👆 responseBody:" + responseBody);
+                LOGGER.info("responseBody:" + responseBody);
+                LOGGER.info("end send HTTP success:" + response);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
@@ -101,10 +101,10 @@ public class HttpUtils {
                     .newCall(request)
                     .execute();
             if (response.isSuccessful()){
-                LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info("👆 responseBody:" + responseBody);
+                LOGGER.info("responseBody:" + responseBody);
+                LOGGER.info("end send HTTP success:" + response);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
@@ -131,10 +131,10 @@ public class HttpUtils {
                     .newCall(request)
                     .execute();
             if (response.isSuccessful()){
-                LOGGER.info("end send HTTP success:" + response);
                 assert response.body() != null;
                 String responseBody = response.body().string();
-                LOGGER.info("👆 responseBody:" + responseBody);
+                LOGGER.info("responseBody:" + responseBody);
+                LOGGER.info("end send HTTP success:" + response);
                 return responseBody;
             }else {
                 LOGGER.info("end send HTTP fail:" + response);
