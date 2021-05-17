@@ -45,14 +45,14 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         this.inputStreamProvider = inputStreamProvider;
     }
 
-    public static Stream<Object> objectValues(InputStream inputStream, Class<?> type) {
+    private static Stream<Object> objectValues(InputStream inputStream, Class<?> type) {
 
         Object jsonObject = JsonUtils.readValue(inputStream, type);
 
         return getObjectStream(jsonObject);
     }
 
-    public static Stream<Object> arrayValues(InputStream inputStream, Class<?> type) {
+    private static Stream<Object> arrayValues(InputStream inputStream, Class<?> type) {
 
         Object jsonArray = JsonUtils.readValue(inputStream, List.class, type);
 
@@ -76,7 +76,7 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
         Stream<InputStream> inputStreamStream = Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource));
         if (isArrayType) {
-            // 非 list 嵌套对象
+            // list 嵌套对象
             return inputStreamStream
                     .flatMap(inputStream -> arrayValues(inputStream, type))
                     .map(Arguments::of);

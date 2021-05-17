@@ -1,23 +1,34 @@
 package com.evie.example.web0414.playwright;
 
-import com.evie.autotest.provider.JsonFileSource;
+import com.evie.autotest.provider.*;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.util.JsonUtils;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
 import com.microsoft.playwright.options.Cookie;
+import com.microsoft.playwright.options.SameSiteAttribute;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * 需要用 python - pip 准备环境 安装playwrigh
  */
+@ExtendWith({
+        RandomParameters.class,
+        ContextArgumentsProvider.class,
+        JsonFileArgumentsProvider.class,
+        YamlFileArgumentsProvider.class,})
 public class PlayWrightLoginTest implements TimeExecutionLogger {
-
+    // 浏览器
     private static Browser browser;
-
+    // 浏览器配置
     private static Browser.NewContextOptions options;
 
 
@@ -96,12 +107,38 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
         Page page = context.newPage();
 
-        context.addCookies(jsonCookie);
-
         page.navigate("https://www.google.com/");
+
+        List<Cookie> cookies = context.cookies();
+
+        String path = "src/test/resources/example/cookies2.json";
+
+        JsonUtils.writeFile(path, cookies);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(List.class, Cookie.class);
+        try {
+            FileInputStream inputStream = new FileInputStream(path);
+
+            Object o = objectMapper.readValue(inputStream, Object.class);
+
+            String jsonStr = objectMapper.writeValueAsString(o);
+
+            List<Cookie> cookieList =  objectMapper.readValue(jsonStr, javaType);
+
+            Assertions.assertNotNull(cookieList);
+            SameSiteAttribute sameSite = cookieList.get(0).sameSite;
+            Assertions.assertNotNull(sameSite);
+        } catch (IOException e) {
+             e.printStackTrace();
+        }
+
+
 
     }
 
+    @Disabled
     @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
     void test_12839(List<Cookie> cookies){
         JsonUtils.printJson(cookies);

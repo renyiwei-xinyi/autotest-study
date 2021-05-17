@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +25,7 @@ public class JsonUtils {
         //为了处理Date属性，需要调用 findAndRegisterModules 方法
         objectMapper.findAndRegisterModules();
         //对象的所有字段全部列入
-        //objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         //取消默认转换timestamps形式
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false);
         //忽略空Bean转json的错误
@@ -152,7 +151,7 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(inputStream, javaType);
         } catch (IOException e) {
-            LOGGER.warn("Parse String to Object error : {}" + e.getMessage());
+            LOGGER.warn("Parse Object to Object error : {}" + e.getMessage());
             return null;
         }
     }
@@ -169,7 +168,7 @@ public class JsonUtils {
     }
 
     /**
-     * 读取json文件解析为string对象
+     * 读取json文件解析为JsonString对象
      * @param path
      * @return
      */
@@ -177,7 +176,9 @@ public class JsonUtils {
         try {
             FileInputStream inputStream = new FileInputStream(path);
 
-            return objectMapper.readValue(inputStream, Object.class).toString();
+            Object o = objectMapper.readValue(inputStream, Object.class);
+
+            return objectMapper.writeValueAsString(o);
 
         } catch (IOException e) {
             LOGGER.warn("read file to Object error : {}" + e.getMessage());
