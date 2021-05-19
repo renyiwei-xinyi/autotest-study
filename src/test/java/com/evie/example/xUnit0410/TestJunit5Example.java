@@ -14,6 +14,7 @@ import com.evie.autotest.provider.Random;
 import com.evie.autotest.util.JsonUtils;
 import com.evie.autotest.util.YamlUtils;
 import com.evie.autotest.util.RetryHandler;
+import com.evie.example.web0414.WeixinAutoTest;
 import lombok.Data;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -669,13 +670,28 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         // Obtain the asynchronous result and perform assertions
     }
 
-    @Random
-    void test_random(){
+    @Data
+    static class MemberInfo {
+
+        public String name;
+        public String alias;
+        public String id;
+        public String phone;
+        public String landline;
+        public String email;
+        public String address;
+        public String jobTitle;
+    }
+
+
+    @YamlFileSource(files = "/example/web0414/memberInfo.yaml", type = MemberInfo.class)
+    void test_1239(MemberInfo memberInfo){
+        System.out.println(memberInfo);
 
     }
 
 
-    
+
 
 
 }

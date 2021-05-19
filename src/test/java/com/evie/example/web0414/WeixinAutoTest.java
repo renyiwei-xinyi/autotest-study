@@ -41,7 +41,7 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
     private static WeixinPage page;
 
-    @BeforeAll
+    //@BeforeAll
     static void before_all() {
         //driver = new EdgeDriver();
         driver = new ChromeDriver();
@@ -52,7 +52,7 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
     }
 
-    @AfterAll
+    //@AfterAll
     static void after_all() {
         // 测试结束 关闭浏览器
         driver.close();
@@ -93,25 +93,24 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     }
 
     @Data
-    static class memberInfo {
+    static class MemberInfo {
 
-        private String name;
-        private String alias;
-        private String id;
-        private String phone;
-        private String landline;
-        private String email;
-        private String address;
-        private String jobTitle;
+        public String name;
+        public String alias;
+        public String id;
+        public String phone;
+        public String landline;
+        public String email;
+        public String address;
+        public String jobTitle;
     }
 
 
     @Disabled
     @Tag("add")
     @DisplayName("自动添加成员")
-    @YamlFileSource(files = "/example/web0414/memberInfo.yaml")
-    void test_3_add_member(Object data, @Random int id) {
-        memberInfo memberInfo = JSONUtil.toBean(JSONUtil.parseObj(data), memberInfo.class);
+    @YamlFileSource(files = "/example/web0414/memberInfo.yaml", type = MemberInfo.class)
+    void test_3_add_member(MemberInfo memberInfo, @Random int id) {
         assert memberInfo != null;
         String phone = RandomStringUtil.getPhone();
 
@@ -139,12 +138,12 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
     @Tag("add")
     @DisplayName("自动添加部门")
-    @YamlFileSource(files = "/example/web0414/party.yaml")
-    void test_4_department_management(Object data, @Random int a) {
+    @YamlFileSource(files = "/example/web0414/party.yaml", type = String.class)
+    void test_4_department_management(String data, @Random int a) {
         page.click(page.menu_contacts)
                 .click(page.add)
                 .click(page.add_party)
-                .sendKeys(page.name, data.toString() + a)
+                .sendKeys(page.name, data + a)
                 .click(page.parent_party)
                 .click(page.form_evie)
                 .click(page.fix);

@@ -107,4 +107,13 @@ public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
     }
 
 
+    @Test
+    public void StringBuilder(){
+        StringBuilder mock = new StringBuilder("test");
+        mock.append(",test2");
+        String x = mock.toString();
+        System.out.println(x);
+    }
+
+
 }

@@ -61,12 +61,12 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
         browser.close();
     }
 
-    @DisplayName("获取cookie，手动扫码，10秒等待")
     @Disabled
     @Test
+    @DisplayName("获取cookie，手动扫码，10秒等待")
     void test_1_login() throws InterruptedException {
         // 打开网页
-        BrowserContext context = browser.newContext(options);
+        BrowserContext context = browser.newContext();
 
         WechatPage wechatPage = new WechatPage(context.newPage());
 
@@ -83,11 +83,11 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
     }
 
-    @JsonFileSource(files = "/example/cookies2.json")
+    @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
     void test_2_login(List<Cookie> cookie){
-        System.out.println(cookie);
 
         BrowserContext context = browser.newContext();
+
         context.addCookies(cookie);
 
         WechatPage wechatPage = new WechatPage(context.newPage());
@@ -98,45 +98,6 @@ public class PlayWrightLoginTest implements TimeExecutionLogger {
 
     }
 
-    @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
-    void test_SameSiteAttribute(List<Cookie> jsonCookie){
-
-        Browser browser = Playwright.create().chromium().launch();
-
-        BrowserContext context = browser.newContext();
-
-        Page page = context.newPage();
-
-        page.navigate("https://www.google.com/");
-
-        List<Cookie> cookies = context.cookies();
-
-        String path = "src/test/resources/example/cookies2.json";
-
-        JsonUtils.writeFile(path, cookies);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(List.class, Cookie.class);
-        try {
-            FileInputStream inputStream = new FileInputStream(path);
-
-            Object o = objectMapper.readValue(inputStream, Object.class);
-
-            String jsonStr = objectMapper.writeValueAsString(o);
-
-            List<Cookie> cookieList =  objectMapper.readValue(jsonStr, javaType);
-
-            Assertions.assertNotNull(cookieList);
-            SameSiteAttribute sameSite = cookieList.get(0).sameSite;
-            Assertions.assertNotNull(sameSite);
-        } catch (IOException e) {
-             e.printStackTrace();
-        }
-
-
-
-    }
 
     @Disabled
     @JsonFileSource(files = "/example/cookies2.json", type = Cookie.class, isArrayType = true)
