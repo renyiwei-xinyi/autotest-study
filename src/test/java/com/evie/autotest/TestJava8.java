@@ -2,6 +2,7 @@ package com.evie.autotest;
 
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.extension.TestLifecycleLogger;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -41,6 +42,20 @@ public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
     void main_c() {
         al.forEach(TestJava8::printValur);
 
+    }
+
+    @Test
+    @Tag("example")
+    void test_127389172() {
+        //三元运算符
+        int i = 1;
+        String s = "success";
+        String a = "fail";
+        String f = i + 2 >= 3 ?
+                s : a;
+        LOGGER.info(f);
+
+        System.out.println();
     }
 
     @Test
