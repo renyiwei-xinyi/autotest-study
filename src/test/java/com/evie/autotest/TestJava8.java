@@ -5,6 +5,7 @@ import com.evie.autotest.extension.TestLifecycleLogger;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -128,6 +129,15 @@ public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
         mock.append(",test2");
         String x = mock.toString();
         System.out.println(x);
+    }
+
+    @Test
+    public void testBigDecimal(){
+        BigDecimal num1 = new BigDecimal(100);
+        BigDecimal num2 = new BigDecimal("1.5");
+        BigDecimal divide = num1.divide(num2, 0, BigDecimal.ROUND_HALF_UP);
+        System.out.println(divide);
+
     }
 
 
