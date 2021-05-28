@@ -513,7 +513,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @YamlFileSource(files = "/test/yaml.yaml", type = dataYaml.class)
     void test_1223273127(dataYaml test) {
 
-        System.out.println(test);
+        System.out.println(test.getClass());
 
     }
 
@@ -521,7 +521,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @DBCsvFileSource(files = "/test/exceltext.csv", type = DataMap.class)
     void test_1724917(DataMap data){
         HashMap<String, String> map = new HashMap<>();
-        System.out.println(data);
+        System.out.println(data.getClass());
         System.out.println(data.get("qwe_title"));
 
         map.put("qwe_title", "qweqw");
@@ -562,12 +562,12 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ParameterizedTest
     @ValueSource(strings = {"test", "121", "1212", "21233", "qweqwe  asda"})
     @Execution(ExecutionMode.CONCURRENT)
-    void test_skip(Object test) {
+    void test_skip(String test) {
         LOGGER.info(test);
         RetryHandler.retryTillNoError(() -> {
 
         }, 5);
-        //此处有BUG 用例实际是跳过没有执行 但是结果是 pass
+
     }
 
     @Disabled
@@ -662,11 +662,21 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @Timeout(5)
         // Poll at most 5 seconds
     void pollUntil() throws InterruptedException {
-        int a = 1;
-        while (a == 1) {
-            Thread.sleep(250); // custom poll interval
-            LOGGER.info("sleep");
+        int i = 0;
+        while (true) {
+            Thread.sleep(250); // custom poll interval 5000 / 250 = 20 time
+
+            i++;
+            if (i == 5){
+                continue;// 终止本次执行 继续下个执行
+            }else {
+                LOGGER.info("sleep");
+            }
+            if (i == 10){
+                break;// 跳出循环
+            }
         }
+        return; // 结束方法
         // Obtain the asynchronous result and perform assertions
     }
 
@@ -683,10 +693,10 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         public String jobTitle;
     }
 
-
+    @Timeout(5)
     @YamlFileSource(files = "/example/web0414/memberInfo.yaml", type = MemberInfo.class)
     void test_1239(MemberInfo memberInfo){
-        System.out.println(memberInfo);
+        System.out.println(memberInfo.getClass());
 
     }
 
