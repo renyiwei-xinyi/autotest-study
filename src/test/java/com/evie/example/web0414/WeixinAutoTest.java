@@ -1,6 +1,5 @@
 package com.evie.example.web0414;
 
-import cn.hutool.json.JSONUtil;
 import com.evie.autotest.provider.JsonFileSource;
 import com.evie.autotest.provider.Random;
 import com.evie.autotest.provider.RandomParameters;
@@ -15,13 +14,16 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverInfo;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,18 +43,44 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
 
     private static WeixinPage page;
 
-    //@BeforeAll
+    @BeforeAll
     static void before_all() {
-        //driver = new EdgeDriver();
-        driver = new ChromeDriver();
+
+        // option
+        //配置参数
+        Map<String, Object> deviceMetrics = new HashMap<>();
+
+        //设置屏幕大小、像素
+        deviceMetrics.put("width", 480);
+        deviceMetrics.put("height", 720);
+        deviceMetrics.put("pixelRatio", 3.0);
+
+        Map<String, Object> mobileEmulation = new HashMap<>();
+        mobileEmulation.put("deviceMetrics", deviceMetrics);
+
+        //设置要模拟的手机标识
+        mobileEmulation.put("userAgent",
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1");
+
+        EdgeOptions edgeOptions = new EdgeOptions();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
+        chromeOptions.setCapability("mobileEmulation", mobileEmulation);
+        edgeOptions.setCapability("mobileEmulation", mobileEmulation);
+
+        driver = new EdgeDriver(edgeOptions);
+        //driver = new ChromeDriver(chromeOptions); // 谷歌浏览器天天更新 受不了
+        driver.manage().window().maximize();
+
+        WeixinAutoTest.driver.navigate().to("https://www.baidu.com");
         //设置页面隐式等待
-        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+        WeixinAutoTest.driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
         // 初始化页面元素
-        page = PageFactory.initElements(driver, WeixinPage.class);
+        page = PageFactory.initElements(WeixinAutoTest.driver, WeixinPage.class);
 
     }
 
-    //@AfterAll
+    @AfterAll
     static void after_all() {
         // 测试结束 关闭浏览器
         driver.close();
@@ -63,7 +91,7 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     @DisplayName("手动登录储存cookie操作 10s等待时间 完成扫码")
     @Test
     void test_1_login_save_cookie() throws InterruptedException {
-        page.getUrl();
+        //page.getUrl();
         // 设置等待时间 扫码登录
         Thread.sleep(10000);
         Set<Cookie> cookies = driver.manage().getCookies();
