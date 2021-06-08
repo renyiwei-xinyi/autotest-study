@@ -46,30 +46,8 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     @BeforeAll
     static void before_all() {
 
-        // option
-        //配置参数
-        Map<String, Object> deviceMetrics = new HashMap<>();
+        driver = new EdgeDriver();
 
-        //设置屏幕大小、像素
-        deviceMetrics.put("width", 480);
-        deviceMetrics.put("height", 720);
-        deviceMetrics.put("pixelRatio", 3.0);
-
-        Map<String, Object> mobileEmulation = new HashMap<>();
-        mobileEmulation.put("deviceMetrics", deviceMetrics);
-
-        //设置要模拟的手机标识
-        mobileEmulation.put("userAgent",
-                "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1");
-
-        EdgeOptions edgeOptions = new EdgeOptions();
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
-        chromeOptions.setCapability("mobileEmulation", mobileEmulation);
-        edgeOptions.setCapability("mobileEmulation", mobileEmulation);
-
-        driver = new EdgeDriver(edgeOptions);
-        //driver = new ChromeDriver(chromeOptions); // 谷歌浏览器天天更新 受不了
         driver.manage().window().maximize();
 
         WeixinAutoTest.driver.navigate().to("https://www.baidu.com");

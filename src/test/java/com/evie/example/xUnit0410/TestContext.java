@@ -12,11 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 
 
-@ExtendWith({
-        RandomParameters.class,
-        ContextArgumentsProvider.class,
-        JsonFileArgumentsProvider.class,
-        YamlFileArgumentsProvider.class,})
+@ExtendWith({RandomParameters.class, ContextArgumentsProvider.class, JsonFileArgumentsProvider.class, YamlFileArgumentsProvider.class,})
 public class TestContext {
 
     @ValueSource(strings = "testContext.class")

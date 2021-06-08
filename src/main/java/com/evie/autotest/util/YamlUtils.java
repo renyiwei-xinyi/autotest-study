@@ -18,7 +18,7 @@ public class YamlUtils {
         try {
             FileInputStream inputStream = new FileInputStream(path);
 
-            return yaml.loadAll(inputStream);
+            return yaml.load(inputStream);
 
         } catch (IOException e) {
             e.printStackTrace();

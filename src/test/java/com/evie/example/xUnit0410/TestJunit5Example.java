@@ -1,6 +1,7 @@
 package com.evie.example.xUnit0410;
 
 import cn.hutool.core.date.DateTime;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONSupport;
 import cn.hutool.json.JSONUtil;
@@ -11,11 +12,13 @@ import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.TestLifecycleLogger;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.provider.Random;
+import com.evie.autotest.util.HttpUtils;
 import com.evie.autotest.util.JsonUtils;
 import com.evie.autotest.util.YamlUtils;
 import com.evie.autotest.util.RetryHandler;
 import com.evie.example.web0414.WeixinAutoTest;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
@@ -30,6 +33,7 @@ import org.junit.jupiter.params.provider.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -447,6 +451,12 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         }
     }
 
+    @Test
+    void test_1209809809(){
+        Object a = YamlUtils.readFile("src/test/resources/test/csv.csv");
+        LOGGER.info(a);
+    }
+
 
     @ParameterizedTest
     @CsvFileSource(files = {
@@ -474,6 +484,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
 
     @Data
+    @EqualsAndHashCode(callSuper=false)
     static class dataJson extends JSONSupport {
         public boolean boolean1111;
         public int test;
@@ -698,6 +709,18 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     void test_1239(MemberInfo memberInfo){
         System.out.println(memberInfo.getClass());
 
+    }
+
+    @Test
+    void test_17239172(){
+        String s = HttpUtils.get("http://rtcenter.pre.alipay.net/rtcenter/api/query/blockReleaseCase?releaseId=GPA20210607&caseOwner=%E6%B8%85%E5%9B%A0&caseStatus=BLOCK&tenantCode=GC");
+
+        List<String> collect = JSONUtil.parseObj(s).getJSONArray("data").stream()
+                .filter(o -> JSONUtil.parseObj(o).getStr("labId").equals("2021050811100100830968704090"))
+                .map(o -> JSONUtil.parseObj(o).getStr("caseName"))
+                .distinct()
+                .collect(Collectors.toList());
+        JsonUtils.writeFile("src/test/resources/test/dddd.json", collect);
     }
 
 

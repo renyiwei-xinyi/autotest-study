@@ -147,6 +147,36 @@ public class HttpUtils {
         return null;
     }
 
+    public static String get(String baseUrl){
+
+        //构造请求参数，输出日志
+        Request request = new Request.Builder()
+                .url(baseUrl).get()
+                .build();
+
+        LOGGER.info("start send HTTP:" + request);
+        //发送请求，输出日志
+        try {
+            Response response = client
+                    .newCall(request)
+                    .execute();
+            if (response.isSuccessful()){
+                assert response.body() != null;
+                String responseBody = response.body().string();
+                LOGGER.info("responseBody:" + responseBody);
+                LOGGER.info("end send HTTP success:" + response);
+                return responseBody;
+            }else {
+                LOGGER.info("end send HTTP fail:" + response);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * 创建并返回一个baseUrl
      * 可以直接再方法末尾链式 .add****

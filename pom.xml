@@ -21,7 +21,6 @@
         <!--JMH 基准测试套件 性能测试工具-->
         <jmh.version>1.29</jmh.version>
         <junit-jupiter.version>5.8.0-M1</junit-jupiter.version>
-
     </properties>
     <build>
         <plugins>
@@ -225,17 +224,6 @@
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-server</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
         </dependency>
 
@@ -243,11 +231,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
-        <!--selenium BUG 需要此依赖才能实例化 -->
+
+        <!--selenium 需要此依赖 -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>23.0</version>
+            <version>30.1.1-jre</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
