@@ -171,6 +171,13 @@
             <artifactId>snakeyaml</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.76</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>io.rest-assured</groupId>-->
 <!--            <artifactId>rest-assured</artifactId>-->

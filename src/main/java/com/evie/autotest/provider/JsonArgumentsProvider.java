@@ -16,7 +16,7 @@ public class JsonArgumentsProvider implements ArgumentsProvider, AnnotationConsu
     private Class<?> type;
 
     @Override
-    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
+    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
 
         return getArguments(this.value, this.type).map(Arguments::of);
     }

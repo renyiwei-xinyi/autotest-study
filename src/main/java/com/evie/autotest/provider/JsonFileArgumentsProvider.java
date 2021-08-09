@@ -16,9 +16,11 @@ import org.junit.platform.commons.util.Preconditions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,6 +75,9 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+        Optional<Method> testMethod = context.getTestMethod();
+        Method method = testMethod.orElse(null);
+
         Stream<InputStream> inputStreamStream = Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource));
         if (isArrayType) {
