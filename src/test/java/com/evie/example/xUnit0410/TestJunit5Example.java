@@ -723,6 +723,56 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         JsonUtils.writeFile("src/test/resources/test/dddd.json", collect);
     }
 
+    @Test
+    void test_12378(){
+        int[] a = {1,2};
+        int length = a.length;
+    }
+
+    public int[] primes = {8,89,6,3,77,55,9};
+
+    @Test
+    public void nthSuperUglyNumber() {
+        // 1、数组排列问题
+        // 简单选择排序
+        // 基本思想：在要排序的一组数中，选出最小的一个数与第一个位置的数交换；
+        //
+        //然后在剩下的数当中再找最小的与第二个位置的数交换，如此循环到倒数第二个数和最后一个数比较为止。
+        int a = 0;
+        for(int i = 0; i < primes.length-1; i++){
+            // 假设第一个是最小的
+            // 获取当前 下标
+            a = i;
+            // 获取当前 值
+            int temp = primes[i];
+
+            int n = i+1;
+
+            for (;n<primes.length;n++){
+                // 如果下一位 比当前位 小 那么 记录一下 值 和 下标
+                if(temp > primes[n]){
+                    temp = primes[n];
+                    a = n;
+
+                }
+            }
+
+            // 互换位置
+            // 当前位置的数 给到 最小的数
+            primes[a] = primes[i];
+            // 最小的数 给到 当前位置的数
+            primes[i] = temp;
+
+
+        }
+        System.out.println(Arrays.toString(primes));
+        // 2、以质数数组 为 因子 构建 一个 超级丑数 数组
+        // 3、当构建到 第n个时 return
+        // 4、超级丑数在 32-bit  带符号证书范围内
+
+    }
+
+
 
 
 
