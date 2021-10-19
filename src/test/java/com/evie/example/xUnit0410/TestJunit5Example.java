@@ -561,7 +561,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
             "/test/yaml.yaml"
     })
     // 是否多线程执行用例
-    @Execution(ExecutionMode.SAME_THREAD)
+    @Execution(ExecutionMode.SAME_THREAD)//单线程执行/顺序执行
     void test_1273812987(Object test) {
         LOGGER.info(test);
 //        RetryHandler.retryTillNoError(() -> {
@@ -572,7 +572,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     //@Disabled
     @ParameterizedTest
     @ValueSource(strings = {"test", "121", "1212", "21233", "qweqwe  asda"})
-    @Execution(ExecutionMode.CONCURRENT)
+    @Execution(ExecutionMode.CONCURRENT)//并行执行
     void test_skip(String test) {
         LOGGER.info(test);
         RetryHandler.retryTillNoError(() -> {
