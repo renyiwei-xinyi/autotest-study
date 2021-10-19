@@ -711,17 +711,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     }
 
-    @Test
-    void test_17239172(){
-        String s = HttpUtils.get("http://rtcenter.pre.alipay.net/rtcenter/api/query/blockReleaseCase?releaseId=GPA20210607&caseOwner=%E6%B8%85%E5%9B%A0&caseStatus=BLOCK&tenantCode=GC");
 
-        List<String> collect = JSONUtil.parseObj(s).getJSONArray("data").stream()
-                .filter(o -> JSONUtil.parseObj(o).getStr("labId").equals("2021050811100100830968704090"))
-                .map(o -> JSONUtil.parseObj(o).getStr("caseName"))
-                .distinct()
-                .collect(Collectors.toList());
-        JsonUtils.writeFile("src/test/resources/test/dddd.json", collect);
-    }
 
     @Test
     void test_12378(){
