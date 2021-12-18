@@ -3,6 +3,8 @@ package com.evie.autotest;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.evie.autotest.provider.JsonFileSource;
 import com.evie.autotest.atom.api.WorkWeiXin;
 import com.evie.autotest.util.HttpUtils;
@@ -106,6 +108,23 @@ public class TestOkhttp3 {
                 .build();
 
         HttpUtils.post(httpUrl, data);
+
+    }
+
+
+    @JsonFileSource(files = "/test/demo.json")
+    void test_234798237(Object json){
+        HttpUrl.Builder baseUrl = HttpUtils.getBaseUrl(url);
+        JSONObject object = JSON.parseObject(JSON.toJSONString(json));
+
+        object.forEach((s, o) -> baseUrl.addQueryParameter(s, String.valueOf(o)));
+
+
+        Headers.Builder builder = new Headers.Builder();
+        builder.add("accept: */*");
+        HttpUtils.get(baseUrl.build(),builder.build());
+
+
 
     }
 }

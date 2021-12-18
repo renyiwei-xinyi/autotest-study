@@ -1,7 +1,6 @@
 package com.evie.example.xUnit0410;
 
 import cn.hutool.core.date.DateTime;
-import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONSupport;
 import cn.hutool.json.JSONUtil;
@@ -12,11 +11,9 @@ import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.TestLifecycleLogger;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.provider.Random;
-import com.evie.autotest.util.HttpUtils;
 import com.evie.autotest.util.JsonUtils;
 import com.evie.autotest.util.YamlUtils;
 import com.evie.autotest.util.RetryHandler;
-import com.evie.example.web0414.WeixinAutoTest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.LogManager;
