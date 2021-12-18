@@ -1,7 +1,6 @@
 package com.evie.example.xUnit0410;
 
 import cn.hutool.core.date.DateTime;
-import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONSupport;
 import cn.hutool.json.JSONUtil;
@@ -12,11 +11,9 @@ import com.evie.autotest.extension.IndicativeSentences;
 import com.evie.autotest.extension.TestLifecycleLogger;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.provider.Random;
-import com.evie.autotest.util.HttpUtils;
 import com.evie.autotest.util.JsonUtils;
 import com.evie.autotest.util.YamlUtils;
 import com.evie.autotest.util.RetryHandler;
-import com.evie.example.web0414.WeixinAutoTest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.LogManager;
@@ -561,7 +558,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
             "/test/yaml.yaml"
     })
     // 是否多线程执行用例
-    @Execution(ExecutionMode.SAME_THREAD)
+    @Execution(ExecutionMode.SAME_THREAD)//单线程执行/顺序执行
     void test_1273812987(Object test) {
         LOGGER.info(test);
 //        RetryHandler.retryTillNoError(() -> {
@@ -572,7 +569,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     //@Disabled
     @ParameterizedTest
     @ValueSource(strings = {"test", "121", "1212", "21233", "qweqwe  asda"})
-    @Execution(ExecutionMode.CONCURRENT)
+    @Execution(ExecutionMode.CONCURRENT)//并行执行
     void test_skip(String test) {
         LOGGER.info(test);
         RetryHandler.retryTillNoError(() -> {
