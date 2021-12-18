@@ -5,16 +5,12 @@ import cn.hutool.core.util.ReUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSONPath;
 import com.evie.autotest.provider.JsonFileSource;
 import com.evie.autotest.atom.api.WorkWeiXin;
 import com.evie.autotest.util.HttpUtils;
-import com.evie.autotest.util.JsonUtils;
 import okhttp3.*;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,21 +51,18 @@ public class TestOkhttp3 {
                 .add("Host", "miniapps.ryxsg.qq.com:8080")
                 .build();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.set("token", data.get("token"));
-        jsonObject.set("add", 10);
-        jsonObject.set("way", -100);
+        jsonObject.put("token", data.get("token"));
+        jsonObject.put("add", 10);
+        jsonObject.put("way", -100);
         int i = 1989;
         int item = 0;
         while (item < i){
             String post = HttpUtils.post(url, headers, jsonObject);
-//            HttpUtils.post(url_1, headers, jsonObject);
-//            String post = HttpUtils.post(url_2, headers, data);
-            JSON parse = JSONUtil.parse(post);
-            if (parse.getByPath("data") == null){
-                jsonObject.set("way", Integer.valueOf(jsonObject.get("way").toString()) + 1);
+            if (JSONPath.read(post, "$.data") == null){
+                jsonObject.put("way", Integer.valueOf(jsonObject.get("way").toString()) + 1);
                 continue;
             }
-            String s = parse.getByPath("data.item").toString();
+            String s = JSONPath.read(post,"$.data.item").toString();
             System.out.println("令牌数为：" + s);
             item = item + Integer.parseInt(s);
             Thread.sleep(500);
@@ -165,6 +158,22 @@ public class TestOkhttp3 {
                 .build();
 
         HttpUtils.post(httpUrl, data);
+
+    }
+
+
+
+    @JsonFileSource(files = "/test/demo.json")
+    void test_12471287(Object json){
+        HttpUrl.Builder baseUrl = HttpUtils.getBaseUrl(url);
+
+        JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(json));
+        jsonObject.forEach((s, o) -> baseUrl.addQueryParameter(s,String.valueOf(o)));
+
+        HttpUrl build = baseUrl.build();
+
+        String s = HttpUtils.get(build);
+
 
     }
 
