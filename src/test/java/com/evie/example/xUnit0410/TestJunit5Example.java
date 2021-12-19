@@ -265,6 +265,8 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
             LOGGER.info(i);
             LOGGER.info(j);
 
+            LOGGER.info("是否要执行！");
+
             assertNotEquals(i, j);
 
         }

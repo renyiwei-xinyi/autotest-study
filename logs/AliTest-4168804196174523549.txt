@@ -1,0 +1,5 @@
+[engine:junit-jupiter]/[class:com.evie.example.xUnit0410.TestLife]/[method:test_12381(org.junit.jupiter.api.TestInfo)]
+[engine:junit-jupiter]/[class:com.evie.example.xUnit0410.TestLife]/[test-template:test_17398(org.junit.jupiter.api.RepetitionInfo, org.junit.jupiter.api.TestInfo)]/[test-template-invocation:#1]
+[engine:junit-jupiter]/[class:com.evie.example.xUnit0410.TestLife]/[test-template:test_17398(org.junit.jupiter.api.RepetitionInfo, org.junit.jupiter.api.TestInfo)]/[test-template-invocation:#2]
+[engine:junit-jupiter]/[class:com.evie.example.xUnit0410.TestLife]/[test-template:test_17398(org.junit.jupiter.api.RepetitionInfo, org.junit.jupiter.api.TestInfo)]/[test-template-invocation:#3]
+[engine:junit-jupiter]/[class:com.evie.example.xUnit0410.TestLife]/[test-template:test_172389(java.lang.String, org.junit.jupiter.api.TestInfo)]/[test-template-invocation:#1]
