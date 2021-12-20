@@ -1,0 +1,22 @@
+[
+  {
+    "expires": 1.623494074694436E9,
+    "secure": true,
+    "path": "/",
+    "domain": ".google.com",
+    "sameSite": "NONE",
+    "name": "1P_JAR",
+    "httpOnly": false,
+    "value": "2021-05-13-10"
+  },
+  {
+    "expires": 1.636713273526168E9,
+    "secure": false,
+    "path": "/",
+    "domain": ".google.com",
+    "sameSite": "NONE",
+    "name": "NID",
+    "httpOnly": true,
+    "value": "215=ObmpQ6ViY23MDPchhjeXt-2dJ3HcZEw_F8UJgwheSruq9rRH3yQZD54_ZqHTXzCNCrRe_jcUZWo0i1oleQGiidr3EAIK4rCHRpzSBRlPBaV1TpXx21yXgRrCdgObklnJvpUof1B6cfe3h7aNWbsiUfu1y6-Kr7QeQHotyKh1EPs"
+  }
+]

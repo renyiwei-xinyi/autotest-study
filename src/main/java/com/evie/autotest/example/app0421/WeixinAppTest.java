@@ -1,4 +1,4 @@
-package com.evie.example.app0421;
+package com.evie.autotest.example.app0421;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;

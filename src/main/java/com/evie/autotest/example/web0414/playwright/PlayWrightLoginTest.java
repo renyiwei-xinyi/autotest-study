@@ -1,20 +1,14 @@
-package com.evie.example.web0414.playwright;
+package com.evie.autotest.example.web0414.playwright;
 
 import com.evie.autotest.provider.*;
 import com.evie.autotest.extension.TimeExecutionLogger;
 import com.evie.autotest.util.JsonUtils;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
 import com.microsoft.playwright.options.Cookie;
-import com.microsoft.playwright.options.SameSiteAttribute;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

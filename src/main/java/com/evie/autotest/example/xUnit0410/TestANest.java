@@ -1,13 +1,9 @@
-package com.evie.example.xUnit0410;
+package com.evie.autotest.example.xUnit0410;
 
-import com.evie.autotest.atom.db.DataMap;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
 
 /**
  * @ Nested 是从下往上执行

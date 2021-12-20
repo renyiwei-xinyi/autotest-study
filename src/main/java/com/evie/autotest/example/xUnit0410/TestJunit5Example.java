@@ -1,9 +1,10 @@
-package com.evie.example.xUnit0410;
+package com.evie.autotest.example.xUnit0410;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONSupport;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import com.evie.autotest.atom.db.DataMap;
 import com.evie.autotest.provider.*;
 import com.evie.autotest.atom.db.PrintTable;
@@ -14,6 +15,7 @@ import com.evie.autotest.provider.Random;
 import com.evie.autotest.util.JsonUtils;
 import com.evie.autotest.util.YamlUtils;
 import com.evie.autotest.util.RetryHandler;
+import com.microsoft.playwright.options.Cookie;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.logging.log4j.LogManager;
@@ -30,7 +32,6 @@ import org.junit.jupiter.params.provider.*;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -428,7 +429,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     @ParameterizedTest
     @MethodSource("test_12731972")
     void test_12731972(Object testDate) {
-        JsonUtils.printJson(testDate);
+        System.out.println(JSON.toJSONString(testDate));
     }
 
     static Stream<Map<String, Object>> test_12731972() {
@@ -549,8 +550,8 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
     }
 
 
-    @JsonSource(value = "[1,2]")
-    void test_12739172(Object jsonObject) {
+    @JsonSource(value = "[1,2]", isArrayType = true)
+    void test_12739172(List<Integer> jsonObject) {
         JsonUtils.printJson(jsonObject);
     }
 
@@ -666,6 +667,12 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
         LOGGER.info(JsonData);
         LOGGER.info(yamlData);
         LOGGER.info(a);
+    }
+
+    @JsonFileSource(files = "/example/cookies2.json", isArrayType = true)
+    void test_7907925323509(List<Cookie> JsonData) {
+
+        LOGGER.info(JsonData);
     }
 
     @Test

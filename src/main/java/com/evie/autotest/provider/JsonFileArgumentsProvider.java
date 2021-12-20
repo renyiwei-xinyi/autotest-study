@@ -2,6 +2,9 @@ package com.evie.autotest.provider;
 
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.evie.autotest.util.JsonUtils;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,16 +52,14 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     private static Stream<Object> objectValues(InputStream inputStream, Class<?> type) {
 
-        Object jsonObject = JsonUtils.readValue(inputStream, type);
+        Object jsonObject = null;
+        try {
+            jsonObject = JSON.parseObject(inputStream, type);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return getObjectStream(jsonObject);
-    }
-
-    private static Stream<Object> arrayValues(InputStream inputStream, Class<?> type) {
-
-        Object jsonArray = JsonUtils.readValue(inputStream, List.class, type);
-
-        return getObjectStream(jsonArray);
     }
 
     static Stream<Object> getObjectStream(Object jsonObject) {
@@ -75,18 +76,13 @@ public class JsonFileArgumentsProvider implements ArgumentsProvider, AnnotationC
 
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
-        Optional<Method> testMethod = context.getTestMethod();
-        Method method = testMethod.orElse(null);
 
         Stream<InputStream> inputStreamStream = Arrays.stream(resources)
                 .map(resource -> openInputStream(context, resource));
-        if (isArrayType) {
-            // list 嵌套对象
-            return inputStreamStream
-                    .flatMap(inputStream -> arrayValues(inputStream, type))
-                    .map(Arguments::of);
-        }
-        //非 list 嵌套对象
+
+        // list 嵌套对象 非 list 嵌套对象
+        type = isArrayType ? JSONArray.class : type;
+
         return inputStreamStream
                 .flatMap(inputStream -> objectValues(inputStream, type))
                 .map(Arguments::of);

@@ -1,4 +1,4 @@
-package com.evie.example.web0414.playwright;
+package com.evie.autotest.example.web0414.playwright;
 
 import com.microsoft.playwright.Page;
 

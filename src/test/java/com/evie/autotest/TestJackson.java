@@ -20,7 +20,7 @@ public class TestJackson {
     }
 
     @Test
-    void test_173981() throws JSONException {
+    void test_173981() {
         String jsonStr = "{\"name\":\"seven\",\"password\":null}";
 
         Map<String,Object> jsonObject = JsonUtils.readValue(jsonStr, Map.class);

@@ -1,0 +1,157 @@
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10
+
+---
+
+localhost:
+  host: &host 127.0.0.1
+user:
+  host: *host
+  db: 8
+
+book:
+  host: *host
+  db: 9
+
+comment:
+  host: *host
+  db: 10

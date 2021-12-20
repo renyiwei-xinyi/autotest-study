@@ -21,6 +21,7 @@
         <!--JMH 基准测试套件 性能测试工具-->
         <jmh.version>1.29</jmh.version>
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
+        <junit-platform.version>1.8.2</junit-platform.version>
     </properties>
     <build>
         <plugins>
@@ -130,16 +131,19 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
+            <version>${junit-platform.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-api</artifactId>
+            <version>${junit-platform.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-reporting</artifactId>
+            <version>${junit-platform.version}</version>
         </dependency>
 
         <dependency>

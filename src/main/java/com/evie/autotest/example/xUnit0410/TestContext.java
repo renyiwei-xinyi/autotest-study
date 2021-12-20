@@ -1,4 +1,4 @@
-package com.evie.example.xUnit0410;
+package com.evie.autotest.example.xUnit0410;
 
 import com.evie.autotest.provider.*;
 import com.evie.autotest.util.JsonUtils;

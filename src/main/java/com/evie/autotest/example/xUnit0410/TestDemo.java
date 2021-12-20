@@ -1,4 +1,4 @@
-package com.evie.example.xUnit0410;
+package com.evie.autotest.example.xUnit0410;
 
 public class TestDemo {
 
