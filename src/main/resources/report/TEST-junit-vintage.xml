@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<testsuite name="JUnit Vintage" tests="0" skipped="0" failures="0" errors="0" time="0.002" hostname="DESKTOP-JJM3BL5" timestamp="2021-12-21T18:47:25">
+<testsuite name="JUnit Vintage" tests="0" skipped="0" failures="0" errors="0" time="0" hostname="DESKTOP-JJM3BL5" timestamp="2021-12-21T18:55:16">
 <properties>
 <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
 <property name="FILE_LOG_CHARSET" value="UTF-8"/>
-<property name="PID" value="15188"/>
+<property name="PID" value="24388"/>
 <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
 <property name="file.encoding" value="UTF-8"/>
 <property name="file.encoding.pkg" value="sun.io"/>

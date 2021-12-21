@@ -2,6 +2,7 @@ package com.evie.autotest.platform.testcase.example.xUnit0410;
 
 import com.evie.autotest.platform.provider.*;
 import com.evie.autotest.util.JsonUtils;
+import org.junit.Rule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
