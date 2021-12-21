@@ -1,23 +1,18 @@
 package com.evie.autotest.platform;
 
-import com.evie.autotest.example.xUnit0410.TestANest;
-import com.evie.autotest.example.xUnit0410.TestContext;
-import com.evie.autotest.example.xUnit0410.TestJunit5Example;
-import com.evie.autotest.example.xUnit0410.TestLife;
+import com.evie.autotest.platform.testcase.example.xUnit0410.TestANest;
+import com.evie.autotest.platform.testcase.example.xUnit0410.TestContext;
+import com.evie.autotest.platform.testcase.example.xUnit0410.TestJunit5Example;
+import com.evie.autotest.platform.testcase.example.xUnit0410.TestLife;
 import org.junit.platform.commons.util.Preconditions;
-import org.junit.platform.engine.discovery.ClassNameFilter;
 import org.junit.platform.engine.discovery.MethodSelector;
 import org.junit.platform.launcher.*;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
-import org.junit.platform.launcher.core.LauncherFactory;
-import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
-import org.junit.platform.launcher.listeners.TestExecutionSummary;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.platform.engine.discovery.ClassNameFilter.includeClassNamePatterns;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.*;
 
 /**

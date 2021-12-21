@@ -8,7 +8,7 @@
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson
 
 # Run progress: 0.00% complete, ETA 00:04:30
 # Fork: 1 of 1
@@ -17,7 +17,7 @@ Iteration   1: 1926.680 ops/ms
 Iteration   2: 1924.713 ops/ms
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testGson":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson":
   1925.697 ops/ms
 
 
@@ -31,7 +31,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testGson":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson
 
 # Run progress: 11.11% complete, ETA 00:04:14
 # Fork: 1 of 1
@@ -40,7 +40,7 @@ Iteration   1: 7892.033 ops/ms
 Iteration   2: 8003.101 ops/ms
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson":
   7947.567 ops/ms
 
 
@@ -54,7 +54,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog
 
 # Run progress: 22.22% complete, ETA 00:03:43
 # Fork: 1 of 1
@@ -63,7 +63,7 @@ Iteration   1: 10095.840 ops/ms
 Iteration   2: 10079.244 ops/ms
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog":
   10087.542 ops/ms
 
 
@@ -77,7 +77,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson
 
 # Run progress: 33.33% complete, ETA 00:03:11
 # Fork: 1 of 1
@@ -86,7 +86,7 @@ Iteration   1: 0.003 ±(99.9%) 0.001 ms/op
 Iteration   2: 0.003 ±(99.9%) 0.001 ms/op
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testGson":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson":
   0.003 ms/op
 
 
@@ -100,7 +100,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testGson":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson
 
 # Run progress: 44.44% complete, ETA 00:02:39
 # Fork: 1 of 1
@@ -109,7 +109,7 @@ Iteration   1: 0.001 ±(99.9%) 0.001 ms/op
 Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson":
   0.001 ms/op
 
 
@@ -123,7 +123,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog
 
 # Run progress: 55.55% complete, ETA 00:02:07
 # Fork: 1 of 1
@@ -132,7 +132,7 @@ Iteration   1: ≈ 10⁻³ ms/op
 Iteration   2: ≈ 10⁻³ ms/op
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog":
   ≈ 10⁻³ ms/op
 
 
@@ -146,7 +146,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Sampling time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson
 
 # Run progress: 66.66% complete, ETA 00:01:35
 # Fork: 1 of 1
@@ -173,7 +173,7 @@ Iteration   2: 0.004 ±(99.9%) 0.001 ms/op
 
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testGson":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson":
   N = 2404322
   mean =      0.004 ±(99.9%) 0.001 ms/op
 
@@ -211,7 +211,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testGson":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Sampling time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson
 
 # Run progress: 77.78% complete, ETA 00:01:03
 # Fork: 1 of 1
@@ -238,7 +238,7 @@ Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
 
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson":
   N = 2156042
   mean =      0.002 ±(99.9%) 0.001 ms/op
 
@@ -282,7 +282,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testHutoolJson":
 # Timeout: 3 min per iteration
 # Threads: 5 threads, will synchronize iterations
 # Benchmark mode: Sampling time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog
 
 # Run progress: 88.89% complete, ETA 00:00:31
 # Fork: 1 of 1
@@ -309,7 +309,7 @@ Iteration   2: 0.001 ±(99.9%) 0.001 ms/op
 
 
 
-Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
+Result "com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog":
   N = 3141626
   mean =      0.001 ±(99.9%) 0.001 ms/op
 
@@ -353,7 +353,7 @@ Result "com.evie.autotest.TestJMH.JMHTest.testJsonLog":
 # Timeout: 3 min per iteration
 # Threads: 5 threads
 # Benchmark mode: Single shot invocation time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testGson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testGson
 
 # Run progress: 100.00% complete, ETA 00:00:00
 # Fork: 1 of 1
@@ -373,7 +373,7 @@ Iteration   2: 0.098 ±(99.9%) 0.116 ms/op
 # Timeout: 3 min per iteration
 # Threads: 5 threads
 # Benchmark mode: Single shot invocation time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testHutoolJson
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testHutoolJson
 
 # Run progress: 100.00% complete, ETA 00:00:00
 # Fork: 1 of 1
@@ -393,7 +393,7 @@ Iteration   2: 0.031 ±(99.9%) 0.076 ms/op
 # Timeout: 3 min per iteration
 # Threads: 5 threads
 # Benchmark mode: Single shot invocation time
-# Benchmark: com.evie.autotest.TestJMH.JMHTest.testJsonLog
+# Benchmark: com.evie.autotest.platform.testcase.example.TestJMH.JMHTest.testJsonLog
 
 # Run progress: 100.00% complete, ETA 00:00:00
 # Fork: 1 of 1

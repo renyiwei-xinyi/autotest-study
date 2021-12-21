@@ -22,6 +22,7 @@
         <jmh.version>1.29</jmh.version>
         <junit-jupiter.version>5.8.1</junit-jupiter.version>
         <junit-platform.version>1.8.2</junit-platform.version>
+        <swagger3.version>3.0.0</swagger3.version>
     </properties>
     <build>
         <plugins>
@@ -109,6 +110,13 @@
                     <artifactId>mockito-junit-jupiter</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--Swagger3-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger3.version}</version>
         </dependency>
 
         <dependency>

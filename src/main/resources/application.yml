@@ -9,11 +9,11 @@ server:
   http2:
     enabled: true
   undertow:
-    io-threads: 16
-    worker-threads: 256
     buffer-size: 1024
-    buffers-per-region: 1024
     direct-buffers: true
+    threads:
+      io: 16
+      worker: 256
   feign:
     httpclient:
       enabled: false
@@ -28,3 +28,11 @@ mybatis-plus:
 logging:
   level:
     root: debug
+
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: springfox swagger 3.0整合Demo
+  try-host: http://localhost:${server.port}

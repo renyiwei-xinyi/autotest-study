@@ -1,6 +1,6 @@
 package com.evie.autotest.util;
 
-import com.evie.autotest.exception.TestException;
+import com.evie.autotest.platform.exception.TestException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
