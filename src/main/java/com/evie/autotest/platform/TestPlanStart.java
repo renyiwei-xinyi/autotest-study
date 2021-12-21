@@ -14,7 +14,6 @@ public class TestPlanStart {
 
     public static void run(String className, String... methodName){
 
-        //todo：执行用例
         try (LauncherSession session = LauncherFactory.openSession()) {
             Launcher launcher = session.getLauncher();
 
