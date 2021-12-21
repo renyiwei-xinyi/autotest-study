@@ -23,39 +23,23 @@ import static org.junit.platform.engine.discovery.DiscoverySelectors.*;
 /**
  * @author evie
  */
-public class Discovery {
+public class DiscoveryStart {
 
-    public static void main(String[] args) {
-        //todo：筛选用例
+    private final String className;
+    private final String[] methodName;
 
-        LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder.request()
-                .selectors(
-                        getMethodByName(getClassByName("TestLife"),
-                                "test_17398","test_172389","test_12381"
-                        )
-                )
-                .filters(
-                        // 自己定义一个 过滤器
-                )
+    public DiscoveryStart(String className, String[] methodName){
+     this.className = className;
+     this.methodName = methodName;
+    }
+
+    public LauncherDiscoveryRequest request(){
+        //筛选用例
+        return LauncherDiscoveryRequestBuilder.request()
+                .selectors(getMethodByName(getClassByName(this.className), this.methodName))
+                // 自己定义一个 过滤器
+                .filters()
                 .build();
-        // 自己定义一个监听器
-        SummaryGeneratingListener listener = new SummaryGeneratingListener();
-        //todo：执行用例
-        try (LauncherSession session = LauncherFactory.openSession()) {
-            Launcher launcher = session.getLauncher();
-
-            launcher.registerTestExecutionListeners(listener);
-
-            TestPlan testPlan = launcher.discover(request);
-
-            launcher.execute(testPlan);
-
-//            launcher.execute(request);
-        }
-        //todo：监听器结果提取
-        TestExecutionSummary summary = listener.getSummary();
-        System.out.println(summary.getContainersStartedCount());
-
     }
 
     public static Class<?> getClassByName(String className) {
