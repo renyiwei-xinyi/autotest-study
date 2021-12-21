@@ -21,12 +21,24 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @GetMapping("/test")
-    @ApiOperation("测试接口")
+    @GetMapping("/test1")
+    @ApiOperation("测试接口1")
     @ApiModelProperty
     public Result test(@RequestParam("className")String className, @RequestParam("methodName")String... methodName){
 
         String test =  testService.run(className, methodName);
+        if(!StringUtils.isEmpty(test)){
+            return Result.success().codeAndMessage(ResultInfo.SUCCESS).data("data", test);
+        }
+        return Result.error().codeAndMessage(ResultInfo.NOT_FOUND);
+    }
+
+    @GetMapping("/test2")
+    @ApiOperation("测试接口2")
+    @ApiModelProperty
+    public Result test(@RequestParam("className")String className){
+
+        String test =  testService.run(className);
         if(!StringUtils.isEmpty(test)){
             return Result.success().codeAndMessage(ResultInfo.SUCCESS).data("data", test);
         }

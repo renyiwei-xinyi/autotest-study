@@ -28,13 +28,28 @@ public class DiscoveryStart {
      this.methodName = methodName;
     }
 
+    public DiscoveryStart(String className){
+        this.className = className;
+        this.methodName = new String[]{} ;
+    }
+
     public LauncherDiscoveryRequest request(){
         //筛选用例
-        return LauncherDiscoveryRequestBuilder.request()
-                .selectors(getMethodByName(getClassByName(this.className), this.methodName))
-                // 自己定义一个 过滤器
-                .filters()
-                .build();
+        LauncherDiscoveryRequestBuilder request = LauncherDiscoveryRequestBuilder.request();
+        if (methodName.length != 0){
+            return request
+                    .selectors(getMethodByName(getClassByName(this.className), this.methodName))
+                    // 自己定义一个 过滤器
+                    .filters()
+                    .build();
+        }else {
+            return request
+                    .selectors(selectClass(getClassByName(this.className)))
+                    // 自己定义一个 过滤器
+                    .filters()
+                    .build();
+        }
+
     }
 
     public static Class<?> getClassByName(String className) {

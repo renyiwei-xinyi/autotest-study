@@ -453,7 +453,7 @@ public class TestJunit5Example implements TestLifecycleLogger, TimeExecutionLogg
 
     @Test
     void test_1209809809(){
-        Object a = YamlUtils.readFile("src/test/resources/test/csv.csv");
+        Object a = YamlUtils.readFile("src/main/resources/test/csv.csv");
         LOGGER.info(a);
     }
 

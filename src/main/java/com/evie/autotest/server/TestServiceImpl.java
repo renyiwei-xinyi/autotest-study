@@ -2,30 +2,47 @@ package com.evie.autotest.server;
 
 
 import com.evie.autotest.api.TestService;
+import com.evie.autotest.listener.CreateListener;
 import com.evie.autotest.platform.DiscoveryStart;
-import org.junit.platform.launcher.Launcher;
-import org.junit.platform.launcher.LauncherDiscoveryRequest;
-import org.junit.platform.launcher.LauncherSession;
-import org.junit.platform.launcher.TestPlan;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.platform.launcher.*;
 import org.junit.platform.launcher.core.LauncherFactory;
+import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
+import org.junit.platform.reporting.legacy.xml.LegacyXmlReportGeneratingListener;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TestServiceImpl implements TestService {
 
+    private static final Logger LOGGER = LogManager.getLogger(TestServiceImpl.class);
 
     @Override
     public String run(String className, String... methodName) {
 
+        SummaryGeneratingListener summaryGeneratingListener = new SummaryGeneratingListener();
+        LegacyXmlReportGeneratingListener reportListener = CreateListener.getReportListener();
+
         try (LauncherSession session = LauncherFactory.openSession()) {
             Launcher launcher = session.getLauncher();
-
-            LauncherDiscoveryRequest request = new DiscoveryStart(className, methodName).request();
-            launcher.registerTestExecutionListeners();
-            TestPlan testPlan = launcher.discover(request);
-            launcher.execute(testPlan);
+            launcher.registerTestExecutionListeners(summaryGeneratingListener,reportListener);
+            launcher.execute(new DiscoveryStart(className, methodName).request());
         }
+        return "Hello Word";
+    }
 
+
+    @Override
+    public String run(String className) {
+
+        SummaryGeneratingListener summaryGeneratingListener = new SummaryGeneratingListener();
+        LegacyXmlReportGeneratingListener reportListener = CreateListener.getReportListener();
+
+        try (LauncherSession session = LauncherFactory.openSession()) {
+            Launcher launcher = session.getLauncher();
+            launcher.registerTestExecutionListeners(summaryGeneratingListener,reportListener);
+            launcher.execute(new DiscoveryStart(className).request());
+        }
         return "Hello Word";
     }
 
