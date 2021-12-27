@@ -1,6 +1,5 @@
 package com.evie.autotest.listener;
 
-import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.junit.platform.reporting.legacy.xml.LegacyXmlReportGeneratingListener;
 
 import java.io.File;

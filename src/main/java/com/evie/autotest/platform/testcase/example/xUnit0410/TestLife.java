@@ -28,7 +28,7 @@ public class TestLife {
 
     @Order(2)
     @Test
-    void test_12381(TestInfo testInfo) {
+    void pay(TestInfo testInfo) {
         Assertions.fail("报错了 怎么班");
         LOGGER.info("test 12381 " + testInfo);
     }
@@ -36,13 +36,13 @@ public class TestLife {
     @Order(1)
     @ParameterizedTest
     @NullSource
-    void test_172389(String s, TestInfo testInfo) {
+    void create(String s, TestInfo testInfo) {
         LOGGER.info("test 172389 " + testInfo);
     }
 
     @Order(3)
     @RepeatedTest(3)
-    void test_17398(RepetitionInfo repetitionInfo, TestInfo testInfo) {
+    void check(RepetitionInfo repetitionInfo, TestInfo testInfo) {
         LOGGER.info("test 17398 " + testInfo);
 
         LOGGER.info("test 17398 " + repetitionInfo);

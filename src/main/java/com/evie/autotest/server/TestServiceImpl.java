@@ -28,7 +28,7 @@ public class TestServiceImpl implements TestService {
             launcher.registerTestExecutionListeners(summaryGeneratingListener,reportListener);
             launcher.execute(new DiscoveryStart(className, methodName).request());
         }
-        return "Hello Word";
+        return "用例已经触发成功";
     }
 
 
@@ -43,7 +43,7 @@ public class TestServiceImpl implements TestService {
             launcher.registerTestExecutionListeners(summaryGeneratingListener,reportListener);
             launcher.execute(new DiscoveryStart(className).request());
         }
-        return "Hello Word";
+        return "用例已经触发成功";
     }
 
 }
