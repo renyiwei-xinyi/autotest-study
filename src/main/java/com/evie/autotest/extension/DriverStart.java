@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.edge.EdgeDriverService;
+
 
 public interface DriverStart {
 
@@ -15,7 +15,8 @@ public interface DriverStart {
     @BeforeAll
     static void Before() {
         LOGGER.info("================ Before all tests ================");
-        System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, "src/test/resources/msedgedriver.exe");
+        //todo: 需要本地配置
+        System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, "src/test/resources/chromedriver.exe");
     }
 
     @AfterAll

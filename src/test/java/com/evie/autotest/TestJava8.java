@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
@@ -153,6 +150,33 @@ public class TestJava8 implements TestLifecycleLogger, TimeExecutionLogger {
         String s1 = "runoob";
         String s2 = "runoob";
         System.out.println("s1 == s2 is:" + s1 == s2);
+    }
+
+    @Test
+    void test_for_delete(){
+
+        ArrayList<String> list1 = new ArrayList<>();
+
+        list1.add("0");
+        list1.add("1");
+        list1.add("2");
+        list1.add("3");
+        list1.add("4");
+        list1.add("5");
+
+        ArrayList<String> list2 = new ArrayList<>();
+
+        list2.add("0");
+        list2.add("1");
+        list2.add("5");
+        list2.add("6");
+        list2.add("7");
+        list2.add("8");
+
+        // 预期 list1 删除 2 3 4
+        list1.removeIf(s -> !list2.contains(s));
+
+        System.out.println(list1);
     }
 
 
