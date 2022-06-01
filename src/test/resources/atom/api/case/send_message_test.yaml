@@ -20,7 +20,7 @@ testDate:
   msgtype: 'text'
   agentid: 1000002
   text:
-    content: '再见了妈妈，腾讯是傻逼！'
+    content: '再见了妈妈，今晚我就要远航！'
   safe: 0
   enable_id_trans: 0
   enable_duplicate_check: 0
