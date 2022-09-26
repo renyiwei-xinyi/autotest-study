@@ -149,8 +149,4 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
                 .click(page.form_evie)
                 .click(page.fix);
     }
-
-
-
-
 }

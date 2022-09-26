@@ -1,9 +1,5 @@
 package com.evie.autotest.platform;
 
-import com.evie.autotest.example.xUnit0410.TestANest;
-import com.evie.autotest.example.xUnit0410.TestContext;
-import com.evie.autotest.example.xUnit0410.TestJunit5Example;
-import com.evie.autotest.example.xUnit0410.TestLife;
 import org.junit.platform.commons.util.Preconditions;
 import org.junit.platform.engine.discovery.ClassNameFilter;
 import org.junit.platform.engine.discovery.MethodSelector;
@@ -44,16 +40,7 @@ public class DiscoveryStart {
 
     public static Class<?> getClassByName(String className) {
 
-        switch (className) {
-            case "TestLife":
-                return TestLife.class;
-            case "TestANest":
-                return TestANest.class;
-            case "TestContext":
-                return TestContext.class;
-            case "TestJunit5Example":
-                return TestJunit5Example.class;
-        }
+
 
         return null;
 
