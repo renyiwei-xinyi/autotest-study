@@ -1,12 +1,18 @@
 package com.evie.autotest;
 
+import cn.hutool.core.date.DateUtil;
+import com.alibaba.fastjson.JSON;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ColorScheme;
+import lombok.Data;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.StringUtils;
 
-import java.util.Arrays;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestPlayWright {
 
@@ -58,9 +64,75 @@ public class TestPlayWright {
 
         ElementHandle id = page.querySelector("id=summary-tbl");
         String x = id.innerText();
+
+        // 先获取当前时间字段
+//        Pattern compile = Pattern.compile(regMainData);
+//        Matcher matcher = compile.matcher(x);
+//        String group = matcher.group();
+//        System.out.println(group + "\n");
+
+
         String[] split = x.split("币安：");
-        System.out.println(x);
+        ArrayList<Demo> demos = new ArrayList<>();
+        String dataTime = null;
+        for (String s : split) {
+            Demo demo = new Demo();
+            List<String> tabKeys = null;
+            ArrayList<LinkedHashMap<String, String>> objects = new ArrayList<>();
+            if (s.contains("当前时间:")){
+                dataTime = s.split("==================当前时间:")[1].split("==================")[0];
+                System.out.println("数据时间：" + dataTime);
+                demo.setDataTime(DateUtil.parse(dataTime));
+                continue;
+            }else {
+                demo.setDataTime(DateUtil.parse(dataTime));
+                System.out.println("数据表：\n" + s);
+                // 分割行
+                String[] strings = s.split("\n");
+                for (int i = 0; i < strings.length; i++) {
+                    String string = strings[i];
+                    System.out.println(MessageFormat.format("第{0}行:" , i)+ string);
+                    // 分析下来 一共 13行 第一行是 币种和报价 第二行是表头 从第三行开始是  不同k线周期的数据
+                    switch (i){
+                        case 0:
+                            //第一行是 币种比和报价 currency prices
+                            String[] split1 = string.split("，当前价： ");
+                            String currencies = split1[0];
+                            String prices = split1[1];
+                            // 截取纯报价
+                            String pricesValue = prices.split(currencies.split("_")[1])[0];
+                            demo.setCurrency(currencies);
+                            demo.setPrices(Double.valueOf(pricesValue));
+                            break;
+                        case 1:
+                            //第二行是表头 间隔是一个 tab 用\t 分割
+                            tabKeys = Arrays.asList(string.split("\t"));
+                            break;
+                        default:
+                            //数据内容
+                            LinkedHashMap<String, String> tabData = new LinkedHashMap<>();
+                            String[] tabValue = string.split("\t");
+                            for (int n = 0; n < tabValue.length; n++) {
+                                tabData.put(tabKeys.get(n), tabValue[n]);
+                            }
+                            objects.add(tabData);
+                            demo.setTabData(objects);
+                    }
+                }
+            }
+            demos.add(demo);
+        }
+
+        System.out.println("demos : \t" + demos);
+
+    }
 
 
+    @Data
+    static class Demo{
+        public Date DataTime;
+        public String currency;
+        public Double prices;
+        public ArrayList<LinkedHashMap<String, String>> tabData;
     }
 }
