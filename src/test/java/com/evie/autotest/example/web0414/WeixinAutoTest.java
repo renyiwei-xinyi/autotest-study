@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -41,7 +41,7 @@ public class WeixinAutoTest implements DriverStart, TimeExecutionLogger {
     @BeforeAll
     static void before_all() {
 
-        driver = new EdgeDriver();
+        driver = new ChromeDriver();
 
         driver.manage().window().maximize();
 

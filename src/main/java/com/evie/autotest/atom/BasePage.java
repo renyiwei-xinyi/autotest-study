@@ -3,7 +3,6 @@ package com.evie.autotest.atom;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -64,11 +63,6 @@ public class BasePage {
 
         return this;
 
-    }
-
-    public RemoteWebDriver getEdgeDriver(){
-
-        return new EdgeDriver();
     }
 
     public RemoteWebDriver getChromeDriver(){
